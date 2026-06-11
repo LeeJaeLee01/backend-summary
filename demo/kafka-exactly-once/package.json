@@ -1,0 +1,21 @@
+{
+  "name": "kafka-exactly-once-demo",
+  "version": "1.0.0",
+  "description": "Demo Kafka exactly-once: transactional consume → transform → produce",
+  "scripts": {
+    "build": "tsc",
+    "produce": "tsx src/1-produce.ts",
+    "process": "tsx src/2-eos-processor.ts",
+    "process:once": "tsx src/2-eos-processor.ts --once",
+    "verify": "tsx src/3-verify-output.ts",
+    "demo": "tsx src/run-demo.ts"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

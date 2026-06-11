@@ -1,0 +1,17 @@
+{
+  "name": "saga-choreography-demo",
+  "version": "1.0.0",
+  "description": "Demo Saga choreography + Outbox + Inbox — Order → Inventory → Payment",
+  "scripts": {
+    "demo": "tsx src/run-demo.ts",
+    "demo:success": "tsx src/run-demo.ts --scenario success",
+    "demo:fail": "tsx src/run-demo.ts --scenario fail",
+    "demo:inbox": "tsx src/run-demo.ts --scenario inbox",
+    "reset": "tsx src/reset.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

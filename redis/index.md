@@ -479,3 +479,12 @@ await redis.set(key, data, 'EX', baseTtl + jitter);
 5. Luôn có kế hoạch cho **invalidation**, **stampede**, và **monitoring hit rate**.
 
 > Thực tế: bắt đầu với **Cache-Aside + TTL + invalidate on write**. Khi traffic tăng, bổ sung **lock**, **refresh-ahead**, hoặc **write-behind** cho từng use case cụ thể.
+
+---
+
+## 9. Redis — chủ đề khác (không phải cache)
+
+| File | Nội dung |
+|------|----------|
+| [redis-stream.md](./redis-stream.md) | Stream — append-only log, consumer group, ack, ứng dụng |
+| [pub-sub.md](./pub-sub.md) | Pub/Sub — broadcast realtime |

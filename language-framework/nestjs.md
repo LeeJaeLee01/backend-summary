@@ -234,3 +234,7 @@ this.eventEmitter.emit('user.created', { userId });
 ```
 
 > **`forwardRef()`** là fix tạm khi bắt buộc; cách tốt là **thiết kế module một chiều**, tách **SharedModule**, hoặc dùng **event** để giảm coupling.
+
+IoC (Inversion of Control) là nguyên tắc đảo quyền điều khiển: thay vì class tự new dependency, container/framework lo tạo object và nối dependency.
+
+Trong NestJS, DI là cách triển khai IoC: IoC Container đọc metadata (@Injectable(), @Module(), @Controller()…), tạo instance, resolve dependency graph, inject qua constructor, và quản lý scope (singleton, request…).
