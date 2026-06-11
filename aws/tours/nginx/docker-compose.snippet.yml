@@ -1,0 +1,54 @@
+# Snippet tham chiếu — gắn nginx vào docker-compose.deploy.yml
+# Không chạy standalone; copy các service/volume/network cần thiết vào compose chính.
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: orch-nginx
+    ports:
+      - "8080:80"    # CI health check: GET http://localhost:8080/api/health/sqs
+      # - "443:443"  # Bật khi terminate SSL trong container
+    volumes:
+      # Chọn MỘT trong hai file config:
+      - ./nginx/host-based.conf:/etc/nginx/conf.d/default.conf:ro
+      # - ./nginx/path-based.conf:/etc/nginx/conf.d/default.conf:ro
+      # - ./nginx/certs:/etc/nginx/certs:ro
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+    networks:
+      - orch-net
+
+  frontend:
+    image: ${ECR_REGISTRY}/orch-frontend:${FRONTEND_TAG}
+    container_name: orch-frontend
+    expose:
+      - "5137"
+    # Không publish 5137 ra host — chỉ nginx gọi qua Docker network
+    environment:
+      # Host-based:
+      # VITE_API_BASE_URL: https://api.one-dev.atlanticpartnersasia.com/api
+      # Path-based:
+      # VITE_API_BASE_URL: /api
+    networks:
+      - orch-net
+
+  backend:
+    image: ${ECR_REGISTRY}/orch-backend:${BACKEND_TAG}
+    container_name: orch-backend
+    expose:
+      - "3000"
+    environment:
+      PORT: "3000"
+      # CORS_ORIGIN: https://one-dev.atlanticpartnersasia.com
+    networks:
+      - orch-net
+
+networks:
+  orch-net:
+    driver: bridge
+
+# Khi dùng Docker network, sửa upstream trong nginx config:
+#   server frontend:5137;
+#   server backend:3000;

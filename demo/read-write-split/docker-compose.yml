@@ -1,0 +1,78 @@
+services:
+  postgres-primary:
+    image: postgres:16-alpine
+    container_name: rw-demo-primary
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: demo
+    ports:
+      - "5434:5432"
+    volumes:
+      - primary_data:/var/lib/postgresql/data
+      - ./docker/primary/init:/docker-entrypoint-initdb.d:ro
+      - ./docker/primary/pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+    command: >
+      postgres
+      -c wal_level=replica
+      -c hot_standby=on
+      -c max_wal_senders=10
+      -c max_replication_slots=10
+      -c hba_file=/etc/postgresql/pg_hba.conf
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d demo"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+
+  postgres-replica:
+    build:
+      context: ./docker/replica
+    container_name: rw-demo-replica
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: demo
+      PRIMARY_HOST: postgres-primary
+      REPLICATOR_USER: replicator
+      REPLICATOR_PASSWORD: replicator
+    ports:
+      - "5435:5432"
+    volumes:
+      - replica_data:/var/lib/postgresql/data
+    depends_on:
+      postgres-primary:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d demo && psql -U postgres -d demo -tAc \"SELECT pg_is_in_recovery()\" | grep -q t"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 90s
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rw-demo-api
+    environment:
+      PORT: 3000
+      DB_PRIMARY_HOST: postgres-primary
+      DB_REPLICA_HOST: postgres-replica
+      DB_PORT: 5432
+      DB_REPLICA_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: demo
+    ports:
+      - "3001:3000"
+    depends_on:
+      postgres-primary:
+        condition: service_healthy
+      postgres-replica:
+        condition: service_healthy
+    restart: on-failure
+
+volumes:
+  primary_data:
+  replica_data:
