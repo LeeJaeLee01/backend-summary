@@ -44,46 +44,53 @@
 
 ## 2. Câu hỏi kỹ thuật
 
+> **Ghi chú:** Vị trí Golang — tập trung lý thuyết và kinh nghiệm thực tế.
+
+### Database & query
+
 1. Xử lý đa luồng, tranh chấp dữ liệu — race condition trong Go → [race-condition.md](./race-condition.md)
-2. Luồng đang xử lý bị chết thì có các cách xử lý như nào? (deadlock)
-3. Sự khác biệt giữa indexing và partitioning trong DB
-4. Đánh index với những dữ liệu như nào?
-5. Tối ưu câu SQL như nào (các bước)? Làm cách nào để biết câu SQL đó có tối ưu hay không?
-6. Kiến trúc microservice — làm thế nào để toàn vẹn thống nhất dữ liệu giữa các service?
-7. Sự khác biệt, ưu điểm, nhược điểm giữa monolithic và microservice
-8. Khi nhận 1 yêu cầu, em sẽ làm gì đầu tiên?
-9. Hỏi về business dự án
-10. Những task khó đã làm, tối ưu
-11. Bài toán giải quyết vấn đề:
-    - Khi nhiều người dùng access thì hàng đợi sẽ cứ mở rộng mãi, em xử lý như thế nào?
-    - Khi muốn export data hàng triệu bản ghi thì làm thế nào?
-12. Dự án nào em thấy tâm đắc nhất?
-13. Một số câu hỏi lý thuyết: JWT, cache, OOP, Dockerfile, SOLID, design pattern, clean code
-14. Vị trí này sẽ vào làm Golang nên sẽ tập trung hỏi nhiều về lý thuyết và kinh nghiệm
-15. Chỉ ra vài bài toán thực tế → một vài tình huống giả định, những điều gì học được rồi cần cải thiện cái gì?
-16. Bạn biết gì về công ty chúng tôi? (đọc trong profile công ty và JD)
-17. Quy trình DevOps — hỏi nhiều về Docker
-18. Hỏi khá sâu về index
-19. `defer` trong goroutine
-20. Channel
-21. Bài toán xử lý bất đồng bộ
-22. So sánh RESTful với gRPC — tại sao gRPC lại nhanh hơn?
-23. Connection pool
-24. Bài toán về thuật toán
-25. Các loại cache, sử dụng như nào?
-26. Các nguyên tắc lập trình an toàn
-27. Tối ưu query, database
-28. Đảm bảo thứ tự xử lý một luồng nghiệp vụ (trong môi trường microservice và bất đồng bộ)
-29. Hiểu biết code C
-30. Kiến thức về K8s (hiểu biết về các resource)
-31. Deadlock
-32. Cách tối ưu thời gian, dung lượng và bảo mật khi viết Dockerfile
-33. Các loại index — index nào phù hợp trong trường hợp nào, ưu và nhược điểm. Đưa example cho tất cả các loại
-34. NoSQL và SQL khác nhau như thế nào? Đưa ra ví dụ trong case cụ thể tại sao dùng loại này mà không phải loại kia
-35. Mock code tình huống (mô tả cách giữ tối đa 5 tasks chạy đồng thời trong một thời điểm với NodeJS) và một bài thuật toán (khoảng < Medium LeetCode)
-36. Bất đồng bộ trong NodeJS (MicroTask Queue, Event Queue, Event Loop, Thread pool, thread, Call Stack)
-37. Một luồng CI/CD với stack của bạn (GitLab → Jenkins → Git Helm Manager → ArgoCD → K8S)
-38. Cách tối ưu query — mô tả chi tiết từng bước và đánh giá thế nào là một query hiệu quả
-39. Mô tả luồng đăng nhập (với JWT — đến đoạn verify access_token thì được hỏi verify thế nào; nói sử dụng crypto thì hỏi tiếp thuật toán gì, cấu trúc thế nào)
-40. Redis Caching triển khai thế nào? Thuật toán là gì? Chiến lược là gì?
-41. Redis Queue khác gì loại queue khác (RabbitMQ)? Trường hợp nào dùng loại queue nào và tại sao?
+2. Luồng đang xử lý bị chết / deadlock — cách xử lý → [deadlock.md](./deadlock.md)
+3. Sự khác biệt giữa indexing và partitioning trong DB → [indexing-vs-partitioning.md](./indexing-vs-partitioning.md)
+4. Đánh index với những dữ liệu như nào? Các loại index phù hợp từng case → [when-to-index.md](./when-to-index.md)
+5. Tối ưu câu SQL (các bước) & đánh giá query hiệu quả → [sql-optimization.md](./sql-optimization.md)
+
+### Kiến trúc hệ thống
+
+6. Toàn vẹn dữ liệu giữa các microservice (+ thứ tự xử lý luồng nghiệp vụ bất đồng bộ) → [microservice-data-consistency.md](./microservice-data-consistency.md)
+7. Monolithic vs microservice — khác biệt, ưu nhược → [monolith-vs-microservice.md](./monolith-vs-microservice.md)
+
+### Go — concurrency & runtime
+
+8. `defer` trong goroutine · Channel · Worker pool (giới hạn concurrency) → [go-defer-channel.md](./go-defer-channel.md)
+9. Các nguyên tắc lập trình an toàn → [safe-programming.md](./safe-programming.md)
+
+### API, network & data store
+
+10. So sánh RESTful với gRPC — tại sao gRPC nhanh hơn? → [rest-vs-grpc.md](./rest-vs-grpc.md)
+11. Connection pool → [connection-pool.md](./connection-pool.md)
+12. NoSQL vs SQL — case cụ thể chọn loại nào → [nosql-vs-sql.md](./nosql-vs-sql.md)
+13. Cache — các loại, Redis (thuật toán, chiến lược, triển khai) → [cache-redis.md](./cache-redis.md)
+14. JWT — luồng đăng nhập, verify access_token → [jwt-auth.md](./jwt-auth.md)
+15. Redis Queue vs RabbitMQ — khi nào dùng loại nào → [message-queue.md](./message-queue.md)
+
+### DevOps & hạ tầng
+
+16. Docker — Dockerfile (tối ưu thời gian, dung lượng, bảo mật) → [docker.md](./docker.md)
+17. CI/CD — luồng triển khai (GitLab → Jenkins → Helm → ArgoCD → K8s) → [cicd.md](./cicd.md)
+18. Kubernetes — các resource cơ bản → [kubernetes.md](./kubernetes.md)
+
+### Lý thuyết & thuật toán
+
+19. OOP, SOLID, design pattern, clean code → [oop-solid-patterns.md](./oop-solid-patterns.md)
+20. Bài toán thuật toán (~< Medium LeetCode) → [algorithms-interview.md](./algorithms-interview.md)
+21. Hiểu biết code C → [c-for-go-devs.md](./c-for-go-devs.md)
+22. Bất đồng bộ NodeJS *(nếu JD/stack có Node)* → [nodejs-async.md](./nodejs-async.md)
+
+### Hành vi & kinh nghiệm dự án
+
+23–26. Yêu cầu mới, business, task khó, công ty → [behavioral-interview.md](./behavioral-interview.md) · [star-method.md](./star-method.md)
+
+### Bài toán tình huống
+
+27. Hàng đợi cứ mở rộng khi nhiều user access → [scenario-queue-backpressure.md](./scenario-queue-backpressure.md)
+28. Export data hàng triệu bản ghi → [scenario-export-data.md](./scenario-export-data.md)
