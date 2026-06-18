@@ -1,0 +1,36 @@
+---
+description: Gợi ý tier model phù hợp để tiết kiệm chi phí AI khi chuyển phase workflow
+alwaysApply: true
+---
+
+# Model routing — tiết kiệm chi phí
+
+Khi user chạy workflow dự án (start-feature / execute / complete), gợi ý model tier phù hợp **trước khi** làm việc lớn.
+
+## Tier (Cursor)
+
+- **Tier 1 (Fast)**: Composer Fast — lint, format, PR/Jira comment, tóm tắt ngắn
+- **Tier 2 (Balanced)**: Sonnet / GPT medium / Codex — implement theo plan, test, SQL thường
+- **Tier 3 (Heavy)**: Opus / Sonnet Thinking — design, trade-off kiến trúc, RCA debug khó, security
+
+## Map phase → tier
+
+| Phase | Tier |
+|-------|------|
+| Brainstorm / design spec | 3 |
+| Writing plan | 2 (3 nếu multi-service) |
+| Execute task trong plan | 2 (1 nếu task trivial) |
+| Complete feature / comment | 1 |
+| Debug sau 2 lần fail | 3 |
+
+## Hành vi agent
+
+1. Nếu user chưa nói rõ phase: hỏi ngắn hoặc suy từ prompt (design vs implement vs trivial).
+2. Task **đã có spec/plan commit** → ưu tiên Tier 1–2; nhắc user mở **chat mới** nếu context design còn dài.
+3. **Không** dùng thinking sâu cho rename, typo, boilerplate.
+4. Escalate Tier 3 chỉ khi: scope mở rộng, auth/payment, distributed bug, hoặc fail lặp.
+5. Tham chiếu chi tiết: `ai/claude-workflow-model-switch.md`, `ai/model-routing-cost.md`.
+
+## Chuyển model trong Cursor
+
+User đổi dropdown model trước message tiếp theo — không cần chat mới (nhưng nên chat mới khi chuyển execute sau design).
