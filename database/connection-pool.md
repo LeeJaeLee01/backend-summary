@@ -193,6 +193,8 @@ GROUP BY 1, 2 ORDER BY 3 DESC;
 
 Lambda **không giống** ECS/K8s — container có thể mới mỗi invocation, concurrent cao → **connection storm**.
 
+→ Chi tiết đầy đủ (nhiều Lambda + ECS cùng 1 DB, RDS Proxy, code mẫu): [`../aws/lambda-tours/db-connections.md`](../aws/lambda-tours/db-connections.md)
+
 ```
 1000 Lambda concurrent × 1 conn = 1000 → vượt max_connections 100
 ```

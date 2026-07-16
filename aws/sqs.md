@@ -2,7 +2,7 @@
 
 > **SQS** là dịch vụ **message queue** managed của AWS: **producer** gửi message vào **Queue**, **consumer** **poll** (kéo) message ra xử lý — decouple, buffer, retry, scale worker độc lập.
 
-Liên quan: [sns.md](./sns.md) · [lambda.md](./lambda.md) · [Observer / Pub/Sub](../design-sys/patterns/observer.md) · [realtime-observer-transport.md](../design-sys/realtime-observer-transport.md).
+Liên quan: [sns.md](./sns.md) · [lambda-tours/lambda.md](./lambda-tours/lambda.md) · [Observer / Pub/Sub](../design-sys/patterns/observer.md) · [realtime-observer-transport.md](../design-sys/realtime-observer-transport.md).
 
 ---
 
@@ -290,7 +290,7 @@ export const handler = async (event) => {
 | **ReportBatchItemFailures** | Bật — tránh retry cả batch khi 1 msg lỗi |
 | **DLQ** | Gắn DLQ trên queue (không chỉ Lambda DLQ async) |
 
-> Chi tiết deploy Lambda: [lambda.md](./lambda.md).
+> Chi tiết deploy Lambda: [lambda-tours/lambda.md](./lambda-tours/lambda.md).
 
 ---
 
@@ -574,7 +574,7 @@ DB commit + gửi event an toàn              →  Outbox → SQS
 | File | Nội dung |
 |------|----------|
 | [sns.md](./sns.md) | Fan-out Pub/Sub — thường kết hợp SQS |
-| [lambda.md](./lambda.md) | Lambda consumer SQS, partial batch failure |
+| [lambda-tours/lambda.md](./lambda-tours/lambda.md) | Lambda consumer SQS, partial batch failure |
 | [Observer](../design-sys/patterns/observer.md) | Pattern Pub/Sub trong code |
 | [mono-micro.md](../design-sys/mono-micro.md) | Tách service — event qua queue |
 
