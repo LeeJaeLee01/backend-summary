@@ -1,0 +1,29 @@
+{
+  "name": "ssa-c03",
+  "version": "1.0.0",
+  "description": "SAA-C03 exam question bank — Express + MongoDB import pipeline",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "import": "node scripts/import.js",
+    "import:status": "node scripts/import-status.js",
+    "db:reset": "node scripts/reset-db.js",
+    "enrich:status": "node scripts/enrich-answers.js status",
+    "enrich:markdown": "node scripts/enrich-answers.js markdown",
+    "enrich:ai": "node scripts/enrich-answers.js ai",
+    "agent:apply": "node scripts/apply-agent-answers.js",
+    "db:backup": "bash scripts/backup-db.sh",
+    "db:restore": "bash scripts/restore-db.sh",
+    "agent:apply-all": "node scripts/apply-all-batches.js",
+    "vi:status": "node scripts/vi-status.js",
+    "vi:apply-all": "node scripts/apply-all-options-vi.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mammoth": "^1.9.0",
+    "mongodb": "^6.12.0",
+    "pdf-parse": "^1.1.1"
+  }
+}

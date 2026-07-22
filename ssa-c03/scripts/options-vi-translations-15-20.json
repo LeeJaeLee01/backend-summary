@@ -1,0 +1,1371 @@
+{
+  "387": {
+    "questionVi": "Một nhân viên mới gia nhập công ty với vai trò deployment engineer, sử dụng mẫu AWS CloudFormation để tạo nhiều tài nguyên AWS. Solutions architect muốn deployment engineer thực hiện công việc theo nguyên tắc least privilege. Nên kết hợp những hành động nào? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Cho deployment engineer dùng thông tin đăng nhập root user của tài khoản AWS để thực hiện các thao tác CloudFormation stack.",
+      "B": "Tạo IAM user mới cho deployment engineer và thêm user vào group có gắn policy PowerUsers.",
+      "C": "Tạo IAM user mới cho deployment engineer và thêm user vào group có gắn policy AdministratorAccess.",
+      "D": "Tạo IAM user mới cho deployment engineer và thêm user vào group có IAM policy chỉ cho phép các hành động AWS CloudFormation.",
+      "E": "Tạo IAM role cho deployment engineer để định nghĩa rõ quyền cụ thể cho CloudFormation stack và launch stack bằng role đó."
+    }
+  },
+  "388": {
+    "questionVi": "Công ty triển khai ứng dụng web hai tầng trong VPC. Tầng web dùng Amazon EC2 Auto Scaling group ở public subnet trên nhiều AZ. Tầng database là Amazon RDS for MySQL ở private subnet. Web tier cần truy cập database để lấy thông tin sản phẩm. Ứng dụng báo không kết nối được database; database đang chạy bình thường. NACL, security group và route table đều ở trạng thái mặc định. Solutions architect nên khuyến nghị gì?",
+    "optionsVi": {
+      "A": "Thêm rule rõ ràng vào network ACL của private subnet để cho phép traffic từ EC2 tầng web.",
+      "B": "Thêm route trong route table VPC để cho phép traffic giữa EC2 tầng web và tầng database.",
+      "C": "Triển khai EC2 tầng web và RDS vào hai VPC riêng và cấu hình VPC peering.",
+      "D": "Thêm inbound rule vào security group của RDS để cho phép traffic từ security group của tầng web."
+    }
+  },
+  "389": {
+    "questionVi": "Công ty lưu dataset lớn cho quảng cáo trực tuyến trên Amazon RDS for MySQL single-AZ. Công ty muốn chạy truy vấn báo cáo kinh doanh mà không ảnh hưởng thao tác ghi trên DB production. Giải pháp nào phù hợp?",
+    "optionsVi": {
+      "A": "Triển khai RDS read replica để xử lý truy vấn báo cáo.",
+      "B": "Scale out DB instance theo chiều ngang bằng cách đặt sau Elastic Load Balancer.",
+      "C": "Scale up DB instance lên loại lớn hơn để xử lý cả write và query.",
+      "D": "Triển khai DB instance trên nhiều AZ để xử lý truy vấn báo cáo."
+    }
+  },
+  "390": {
+    "questionVi": "Công ty vận hành ứng dụng ecommerce ba tầng trên EC2 trong Auto Scaling group sau ALB. Dữ liệu ecommerce lưu trên Amazon RDS for MariaDB Multi-AZ. Công ty muốn tối ưu quản lý session khách hàng trong giao dịch; session phải được lưu bền vững. Giải pháp nào đáp ứng? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Bật sticky sessions (session affinity) trên ALB.",
+      "B": "Dùng bảng Amazon DynamoDB để lưu thông tin session khách hàng.",
+      "C": "Triển khai Amazon Cognito user pool để quản lý session.",
+      "D": "Triển khai Amazon ElastiCache for Redis cluster để lưu session khách hàng.",
+      "E": "Dùng AWS Systems Manager Application Manager trong ứng dụng để quản lý session."
+    }
+  },
+  "391": {
+    "questionVi": "Công ty cần chiến lược backup cho ứng dụng web stateless ba tầng trên EC2 Auto Scaling với policy scale theo sự kiện. Tầng database dùng Amazon RDS for PostgreSQL. Web không cần local storage tạm trên EC2. RPO là 2 giờ. Chiến lược backup phải tối đa khả năng mở rộng và tối ưu tài nguyên. Giải pháp nào phù hợp?",
+    "optionsVi": {
+      "A": "Chụp snapshot EBS của EC2 và database mỗi 2 giờ để đáp ứng RPO.",
+      "B": "Cấu hình snapshot lifecycle policy cho EBS. Bật automated backup RDS để đáp ứng RPO.",
+      "C": "Giữ AMI mới nhất của tầng web và application. Bật automated backup RDS và dùng point-in-time recovery để đáp ứng RPO.",
+      "D": "Chụp snapshot EBS của EC2 mỗi 2 giờ. Bật automated backup RDS và dùng point-in-time recovery để đáp ứng RPO."
+    }
+  },
+  "392": {
+    "questionVi": "Công ty muốn triển khai ứng dụng web public mới trên AWS: tầng web trên EC2, database là Amazon RDS for MySQL. Ứng dụng phải an toàn và truy cập được từ khách hàng toàn cầu có IP động. Solutions architect nên cấu hình security groups thế nào?",
+    "optionsVi": {
+      "A": "Security group web server cho phép inbound port 443 từ 0.0.0.0/0. Security group DB cho phép inbound port 3306 từ security group của web server.",
+      "B": "Security group web server cho phép inbound port 443 từ IP khách hàng. Security group DB cho phép inbound port 3306 từ security group web server.",
+      "C": "Security group web server cho phép inbound port 443 từ IP khách hàng. Security group DB cho phép inbound port 3306 từ IP khách hàng.",
+      "D": "Security group web server cho phép inbound port 443 từ 0.0.0.0/0. Security group DB cho phép inbound port 3306 từ 0.0.0.0/0."
+    }
+  },
+  "393": {
+    "questionVi": "Công ty xử lý thanh toán ghi âm mọi cuộc gọi với khách hàng và lưu file audio trong S3 bucket. Công ty cần chuyển audio thành văn bản và loại bỏ PII của khách hàng khỏi transcript. Solutions architect nên làm gì?",
+    "optionsVi": {
+      "A": "Xử lý file audio bằng Amazon Kinesis Video Streams. Dùng Lambda quét các mẫu PII đã biết.",
+      "B": "Khi file audio upload lên S3, invoke Lambda để chạy tác vụ Amazon Textract phân tích bản ghi.",
+      "C": "Cấu hình Amazon Transcribe với PII redaction. Khi file upload S3, invoke Lambda bắt đầu transcription job. Lưu kết quả vào S3 bucket khác.",
+      "D": "Tạo Amazon Connect contact flow với transcription, nhúng Lambda quét PII. Dùng EventBridge kích hoạt contact flow khi file upload S3."
+    }
+  },
+  "394": {
+    "questionVi": "Ứng dụng ecommerce multi-tier trên EC2 với Amazon RDS for MySQL Multi-AZ, gp3 2000 GB. Hiệu năng database ảnh hưởng ứng dụng khi nhu cầu cao. CloudWatch Logs cho thấy hiệu năng giảm khi read/write IOPS vượt 20.000. Solutions architect nên làm gì?",
+    "optionsVi": {
+      "A": "Thay volume bằng magnetic volume.",
+      "B": "Tăng số IOPS trên volume gp3.",
+      "C": "Thay volume bằng Provisioned IOPS SSD (io2).",
+      "D": "Thay volume gp3 2000 GB bằng hai volume gp3 1000 GB."
+    }
+  },
+  "395": {
+    "questionVi": "IAM user đã thay đổi cấu hình tài nguyên AWS trong tài khoản công ty khi deploy production tuần trước. Solutions architect phát hiện vài rule security group chưa đúng và cần xác định IAM user nào thực hiện thay đổi. Nên dùng dịch vụ nào?",
+    "optionsVi": {
+      "A": "Amazon GuardDuty",
+      "B": "Amazon Inspector",
+      "C": "AWS CloudTrail",
+      "D": "AWS Config"
+    }
+  },
+  "396": {
+    "questionVi": "Công ty vận hành DNS tự quản trên AWS gồm EC2 ở nhiều Region và endpoint AWS Global Accelerator standard. Công ty muốn bảo vệ giải pháp khỏi tấn công DDoS. Solutions architect nên làm gì?",
+    "optionsVi": {
+      "A": "Đăng ký AWS Shield Advanced. Thêm accelerator làm tài nguyên được bảo vệ.",
+      "B": "Đăng ký AWS Shield Advanced. Thêm EC2 instances làm tài nguyên được bảo vệ.",
+      "C": "Tạo AWS WAF web ACL có rate-based rule. Gắn web ACL với accelerator.",
+      "D": "Tạo AWS WAF web ACL có rate-based rule. Gắn web ACL với EC2 instances."
+    }
+  },
+  "397": {
+    "questionVi": "Công ty ecommerce cần job hàng ngày tổng hợp và lọc bản ghi bán hàng để phân tích. Dữ liệu lưu trong S3, mỗi object tối đa 10 GB. Job có thể chạy tới một giờ; CPU và memory ổn định, đã biết trước. Solutions architect cần giảm thiểu công vận hành. Giải pháp nào phù hợp?",
+    "optionsVi": {
+      "A": "Tạo Lambda function với thông báo EventBridge, lên lịch chạy mỗi ngày.",
+      "B": "Tạo Lambda function, API Gateway HTTP API tích hợp function. Tạo EventBridge scheduled event gọi API và invoke function.",
+      "C": "Tạo ECS cluster Fargate. Tạo EventBridge scheduled event launch ECS task chạy job.",
+      "D": "Tạo ECS cluster EC2 với Auto Scaling group ít nhất một instance. Tạo EventBridge scheduled event launch ECS task chạy job."
+    }
+  },
+  "398": {
+    "questionVi": "Công ty cần chuyển 600 TB dữ liệu từ NAS on-premises lên AWS trong 2 tuần. Dữ liệu nhạy cảm, phải mã hóa khi truyền. Kết nối internet upload 100 Mbps. Giải pháp nào tiết kiệm chi phí nhất?",
+    "optionsVi": {
+      "A": "Dùng S3 multipart upload qua HTTPS.",
+      "B": "Tạo VPN tới Region gần nhất và chuyển dữ liệu qua VPN.",
+      "C": "Đặt nhiều AWS Snowball Edge Storage Optimized, chuyển dữ liệu lên S3.",
+      "D": "Thiết lập Direct Connect 10 Gbps và chuyển dữ liệu qua VPN vào Region, lưu S3."
+    }
+  },
+  "399": {
+    "questionVi": "Công ty tài chính host ứng dụng web trên AWS, dùng API Gateway Regional endpoint để lấy giá cổ phiếu. Security team thấy số request API tăng, lo ngại HTTP flood làm sập ứng dụng. Solutions architect cần giải pháp chống tấn công với overhead vận hành thấp nhất.",
+    "optionsVi": {
+      "A": "Tạo CloudFront distribution trước API Gateway Regional endpoint với TTL tối đa 24 giờ.",
+      "B": "Tạo Regional AWS WAF web ACL với rate-based rule. Gắn web ACL với API Gateway stage.",
+      "C": "Dùng CloudWatch metric Count và cảnh báo security team khi vượt ngưỡng.",
+      "D": "Tạo CloudFront với Lambda@Edge trước API Gateway. Lambda chặn request từ IP vượt ngưỡng."
+    }
+  },
+  "400": {
+    "questionVi": "Startup khí tượng dùng DynamoDB lưu dữ liệu và muốn dịch vụ mới gửi cảnh báo cho bốn team nội bộ mỗi khi có sự kiện thời tiết mới, không ảnh hưởng hiệu năng ứng dụng hiện tại, với overhead vận hành thấp nhất.",
+    "optionsVi": {
+      "A": "Dùng DynamoDB transactions ghi sự kiện mới và cấu hình transaction thông báo team nội bộ.",
+      "B": "Ứng dụng hiện tại publish message lên bốn SNS topic; mỗi team subscribe một topic.",
+      "C": "Bật DynamoDB Streams, dùng trigger ghi vào một SNS topic để các team subscribe.",
+      "D": "Thêm custom attribute đánh dấu item mới. Cron job quét bảng mỗi phút và gửi SQS để team subscribe."
+    }
+  },
+  "401": {
+    "questionVi": "Công ty muốn đưa ứng dụng on-premises lên AWS với HA và khả năng scale. Phiên bản hiện tại ở data center; server database từng crash mất điện gây mất dữ liệu. Cần tránh single point of failure và cho phép scale theo nhu cầu người dùng.",
+    "optionsVi": {
+      "A": "Triển khai EC2 trong Auto Scaling group trên nhiều AZ. Dùng Amazon RDS Multi-AZ.",
+      "B": "Triển khai EC2 Auto Scaling trong một AZ. Database trên EC2 với EC2 Auto Recovery.",
+      "C": "Triển khai EC2 Auto Scaling trên nhiều AZ. RDS với read replica single-AZ, promote khi primary fail.",
+      "D": "Triển khai EC2 Auto Scaling trên nhiều AZ. Database primary/secondary trên EC2 nhiều AZ với EBS Multi-Attach shared storage."
+    }
+  },
+  "402": {
+    "questionVi": "Ứng dụng gửi streaming data từ EC2 lên Kinesis Data Streams (cấu hình mặc định). Mỗi hai ngày ứng dụng consume và ghi S3 cho BI. Công ty thấy S3 không nhận hết dữ liệu từ Kinesis. Solutions architect nên làm gì?",
+    "optionsVi": {
+      "A": "Cập nhật cấu hình mặc định Kinesis Data Streams bằng cách tăng data retention period.",
+      "B": "Cập nhật ứng dụng dùng Kinesis Producer Library (KPL) gửi dữ liệu lên Kinesis.",
+      "C": "Tăng số shard Kinesis để xử lý throughput dữ liệu gửi lên stream.",
+      "D": "Bật S3 Versioning trong bucket để giữ mọi phiên bản object ingest."
+    }
+  },
+  "403": {
+    "questionVi": "Developer có Lambda upload file lên S3 và cần quyền phù hợp. Developer đã có IAM user với credential hợp lệ cho S3. Solutions architect nên cấp quyền thế nào?",
+    "optionsVi": {
+      "A": "Thêm quyền IAM cần thiết vào resource policy của Lambda function.",
+      "B": "Tạo signed request bằng IAM credential hiện có trong Lambda function.",
+      "C": "Tạo IAM user mới và dùng credential hiện có trong Lambda function.",
+      "D": "Tạo IAM execution role với quyền cần thiết và gắn role vào Lambda function."
+    }
+  },
+  "404": {
+    "questionVi": "Ứng dụng serverless invoke Lambda khi upload document mới lên S3. Sau chiến dịch marketing, nhiều document không được xử lý. Solutions architect nên cải thiện kiến trúc thế nào?",
+    "optionsVi": {
+      "A": "Đặt runtime timeout Lambda là 15 phút.",
+      "B": "Cấu hình S3 bucket replication policy, stage document để xử lý sau.",
+      "C": "Triển khai thêm Lambda function, load balance xử lý document giữa hai function.",
+      "D": "Tạo SQS queue, gửi request vào queue và cấu hình queue làm event source cho Lambda."
+    }
+  },
+  "405": {
+    "questionVi": "Solutions architect thiết kế môi trường demo: EC2 Auto Scaling sau ALB. Hệ thống traffic tăng mạnh giờ làm việc, không cần chạy cuối tuần. Nên kết hợp hành động nào để scale theo nhu cầu? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Dùng AWS Auto Scaling điều chỉnh capacity ALB theo request rate.",
+      "B": "Dùng AWS Auto Scaling scale capacity internet gateway của VPC.",
+      "C": "Launch EC2 ở nhiều Region để phân tải.",
+      "D": "Dùng target tracking scaling policy scale Auto Scaling group theo CPU utilization.",
+      "E": "Dùng scheduled scaling đặt min/max/desired capacity Auto Scaling group về 0 cuối tuần, khôi phục đầu tuần."
+    }
+  },
+  "406": {
+    "questionVi": "Solutions architect thiết kế kiến trúc hai tầng: public subnet và database subnet. Web server public phải mở internet port 443. RDS MySQL trong database subnet chỉ accessible từ web server port 3306. Nên kết hợp bước nào? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Tạo network ACL cho public subnet, thêm rule deny outbound tới 0.0.0.0/0 port 3306.",
+      "B": "Tạo security group cho DB instance, cho phép traffic từ CIDR public subnet port 3306.",
+      "C": "Tạo security group cho web server public subnet, cho phép traffic từ 0.0.0.0/0 port 443.",
+      "D": "Tạo security group cho DB instance, cho phép traffic từ security group web server port 3306.",
+      "E": "Tạo security group cho DB instance, deny mọi traffic trừ từ security group web server port 3306."
+    }
+  },
+  "407": {
+    "questionVi": "Công ty cần shared storage cho ứng dụng gaming trên AWS Cloud, cho phép Lustre clients truy cập dữ liệu. Giải pháp phải fully managed.",
+    "optionsVi": {
+      "A": "Tạo AWS DataSync task chia sẻ dữ liệu dạng mountable file system và mount lên application server.",
+      "B": "Tạo AWS Storage Gateway file gateway, tạo file share với protocol client cần thiết và kết nối application server.",
+      "C": "Tạo Amazon EFS cấu hình hỗ trợ Lustre, gắn origin server và kết nối application server.",
+      "D": "Tạo Amazon FSx for Lustre, gắn origin server và kết nối application server."
+    }
+  },
+  "408": {
+    "questionVi": "Ứng dụng nhận dữ liệu UDP từ hàng nghìn thiết bị remote, xử lý ngay và phản hồi thiết bị nếu cần, không lưu dữ liệu. Cần latency thấp và failover nhanh sang Region khác.",
+    "optionsVi": {
+      "A": "Cấu hình Route 53 failover routing. Tạo NLB ở hai Region, NLB invoke Lambda xử lý dữ liệu.",
+      "B": "Dùng AWS Global Accelerator, NLB ở hai Region làm endpoint. ECS Fargate cluster, ECS service làm target NLB, xử lý dữ liệu trên ECS.",
+      "C": "Dùng Global Accelerator, ALB ở hai Region làm endpoint. ECS Fargate, ECS service làm target ALB, xử lý trên ECS.",
+      "D": "Cấu hình Route 53 failover routing. ALB ở hai Region, ECS Fargate cluster, ECS service làm target ALB, xử lý trên ECS."
+    }
+  },
+  "409": {
+    "questionVi": "Solutions architect migrate ứng dụng Windows IIS lên AWS. Ứng dụng dùng file share trên NAS on-premises. Đề xuất EC2 nhiều AZ kết nối storage và ELB. Thay thế file share on-premises nào resilient và durable nhất?",
+    "optionsVi": {
+      "A": "Migrate file share lên Amazon RDS.",
+      "B": "Migrate file share lên AWS Storage Gateway.",
+      "C": "Migrate file share lên Amazon FSx for Windows File Server.",
+      "D": "Migrate file share lên Amazon EFS."
+    }
+  },
+  "410": {
+    "questionVi": "Công ty triển khai ứng dụng mới trên EC2, ghi dữ liệu lên EBS volumes. Cần đảm bảo mọi dữ liệu ghi EBS được mã hóa at rest.",
+    "optionsVi": {
+      "A": "Tạo IAM role chỉ định EBS encryption và gắn role vào EC2 instances.",
+      "B": "Tạo EBS volumes dạng encrypted và gắn vào EC2 instances.",
+      "C": "Tạo EC2 tag Encrypt=True cho mọi instance cần mã hóa EBS.",
+      "D": "Tạo KMS key policy bắt buộc EBS encryption trong tài khoản và kích hoạt key policy."
+    }
+  },
+  "411": {
+    "questionVi": "Công ty có ứng dụng web usage thất thường: đầu tháng nặng, đầu tuần vừa, trong tuần không dự đoán được. Web server và MySQL chạy on-premises. Công ty muốn migrate lên AWS, chọn database cost-effective, không sửa schema.",
+    "optionsVi": {
+      "A": "Amazon DynamoDB",
+      "B": "Amazon RDS for MySQL",
+      "C": "Amazon Aurora Serverless tương thích MySQL",
+      "D": "MySQL trên EC2 trong Auto Scaling group"
+    }
+  },
+  "412": {
+    "questionVi": "Công ty lưu ảnh trong S3 buckets và muốn tránh vô tình public object. Mọi S3 object trong toàn tài khoản AWS phải private. Giải pháp nào phù hợp?",
+    "optionsVi": {
+      "A": "Dùng GuardDuty giám sát bucket policy. Tạo rule remediation tự động dùng Lambda sửa thay đổi làm object public.",
+      "B": "Dùng Trusted Advisor tìm bucket public. Cấu hình email khi phát hiện thay đổi và sửa bucket policy thủ công.",
+      "C": "Dùng RAM tìm bucket public. SNS invoke Lambda remediation khi phát hiện thay đổi.",
+      "D": "Bật S3 Block Public Access ở cấp tài khoản. Dùng Organizations SCP ngăn IAM user thay đổi cài đặt."
+    }
+  },
+  "413": {
+    "questionVi": "Công ty ecommerce traffic tăng; kiến trúc hai tầng EC2 gây trễ email marketing và xác nhận đơn hàng. Công ty muốn giảm thời gian xử lý sự cố email và overhead vận hành.",
+    "optionsVi": {
+      "A": "Tạo tầng application riêng bằng EC2 chuyên xử lý email.",
+      "B": "Cấu hình web instance gửi email qua Amazon SES.",
+      "C": "Cấu hình web instance gửi email qua Amazon SNS.",
+      "D": "Tạo tầng application EC2 chuyên email trong Auto Scaling group."
+    }
+  },
+  "414": {
+    "questionVi": "Hệ thống kinh doanh tạo hàng trăm báo cáo CSV mỗi ngày lên network share. Công ty cần lưu dữ liệu lên AWS gần real-time để phân tích, với overhead quản trị thấp nhất.",
+    "optionsVi": {
+      "A": "Dùng AWS DataSync chuyển file lên S3, tạo scheduled task chạy cuối ngày.",
+      "B": "Tạo S3 File Gateway, cập nhật hệ thống dùng network share mới từ gateway.",
+      "C": "Dùng DataSync chuyển file lên S3, tạo ứng dụng dùng DataSync API trong workflow tự động.",
+      "D": "Triển khai Transfer Family SFTP endpoint, script kiểm tra file mới và upload qua SFTP."
+    }
+  },
+  "415": {
+    "questionVi": "Công ty lưu petabyte dữ liệu S3 Standard ở nhiều bucket, tần suất truy cập khác nhau và không rõ pattern. Cần tối ưu chi phí từng bucket với hiệu quả vận hành cao nhất.",
+    "optionsVi": {
+      "A": "Tạo S3 Lifecycle chuyển object sang S3 Intelligent-Tiering.",
+      "B": "Dùng storage class analysis xác định tier phù hợp và di chuyển từng object.",
+      "C": "Tạo Lifecycle chuyển object sang Glacier Instant Retrieval.",
+      "D": "Tạo Lifecycle chuyển object sang S3 One Zone-IA."
+    }
+  },
+  "416": {
+    "questionVi": "Ecommerce global trên AWS: nội dung tĩnh và động, OLTP trên RDS. Người dùng phàn nàn trang tải chậm. Nên kết hợp hành động nào? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Cấu hình Amazon Redshift cluster.",
+      "B": "Thiết lập CloudFront distribution.",
+      "C": "Host nội dung web động trên S3.",
+      "D": "Tạo read replica cho RDS DB instance.",
+      "E": "Cấu hình RDS Multi-AZ deployment."
+    }
+  },
+  "417": {
+    "questionVi": "Công ty dùng EC2 và Lambda trong VPC public/private. EC2 ở private subnet; Lambda cần truy cập mạng trực tiếp EC2 ít nhất 1 năm, số Lambda tăng. Cần tối đa tiết kiệm và latency thấp.",
+    "optionsVi": {
+      "A": "Mua EC2 Instance Savings Plan, tối ưu Lambda, kết nối Lambda vào private subnet chứa EC2.",
+      "B": "Mua EC2 Instance Savings Plan, tối ưu Lambda và data transfer, kết nối Lambda public subnet cùng VPC.",
+      "C": "Mua Compute Savings Plan, tối ưu Lambda và data transfer, kết nối Lambda private subnet chứa EC2.",
+      "D": "Mua Compute Savings Plan, tối ưu Lambda và data transfer, giữ Lambda trong service VPC."
+    }
+  },
+  "418": {
+    "questionVi": "Team cần truy cập S3 ở tài khoản dev và production. Dev dùng IAM group; production có IAM role với policy truy cập S3. Giải pháp nào đáp ứng least privilege?",
+    "optionsVi": {
+      "A": "Gắn policy Administrator Access cho user tài khoản dev.",
+      "B": "Thêm tài khoản dev làm principal trong trust policy role ở tài khoản production.",
+      "C": "Tắt S3 Block Public Access trên bucket production.",
+      "D": "Tạo user production với credential riêng cho từng thành viên team."
+    }
+  },
+  "419": {
+    "questionVi": "Organizations all features, EC2 ở ap-southeast-2. SCP chặn tạo tài nguyên Region khác. Yêu cầu mã hóa at rest; audit phát hiện EBS không mã hóa. Mọi EC2 mới phải dùng EBS encrypted, tác động tối thiểu lên nhân viên. (Chọn hai.)",
+    "optionsVi": {
+      "A": "Trong EC2 console, chọn EBS encryption account attribute và định nghĩa default encryption key.",
+      "B": "Tạo IAM permission boundary gắn root OU, deny ec2:CreateVolume khi ec2:Encrypted=false.",
+      "C": "Tạo SCP gắn root OU, deny ec2:CreateVolume khi ec2:Encrypted=false.",
+      "D": "Cập nhật IAM policy từng tài khoản deny ec2:CreateVolume khi ec2:Encrypted=false.",
+      "E": "Trong management account Organizations, bật Default EBS volume encryption."
+    }
+  },
+  "420": {
+    "questionVi": "Công ty dùng RDS PostgreSQL cluster cho production, cần HA với failover <40 giây, offload read và chi phí thấp.",
+    "optionsVi": {
+      "A": "RDS Multi-AZ DB instance, một read replica, điều hướng read workload tới replica.",
+      "B": "RDS Multi-AZ DB cluster, hai read replica, điều hướng read workload tới replica.",
+      "C": "RDS Multi-AZ DB instance, điều hướng read workload tới secondary trong cặp Multi-AZ.",
+      "D": "RDS Multi-AZ DB cluster, điều hướng read workload tới reader endpoint."
+    }
+  },
+  "421": {
+    "questionVi": "Công ty vận hành SFTP HA trên EC2 Linux với elastic IP, shared storage, quản lý user Linux local. Cần serverless, IOPS cao, bảo mật cấu hình linh hoạt, vẫn kiểm soát quyền user.",
+    "optionsVi": {
+      "A": "EBS encrypted, Transfer Family SFTP public endpoint chỉ IP tin cậy, gắn EBS vào endpoint.",
+      "B": "EFS encrypted, Transfer Family SFTP với elastic IP và VPC endpoint internet-facing, SG chỉ IP tin cậy, gắn EFS.",
+      "C": "S3 bucket mã hóa mặc định, Transfer Family SFTP public endpoint chỉ IP tin cậy, gắn S3.",
+      "D": "S3 bucket mã hóa mặc định, Transfer Family SFTP VPC endpoint internal private subnet, SG chỉ IP tin cậy, gắn S3."
+    }
+  },
+  "422": {
+    "questionVi": "ML microservices tải ~1 GB model từ S3 khi khởi động, API bất đồng bộ, hàng trăm user, usage không đều — có thể idle ngày/tuần hoặc hàng nghìn request batch.",
+    "optionsVi": {
+      "A": "API tới NLB, model là Lambda function do NLB invoke.",
+      "B": "API tới ALB, model là ECS service đọc SQS, App Mesh scale ECS theo queue size.",
+      "C": "API tới SQS, model là Lambda do SQS invoke, Auto Scaling tăng vCPU Lambda theo queue.",
+      "D": "API tới SQS, model là ECS service đọc queue, Auto Scaling cluster và service theo queue size."
+    }
+  },
+  "423": {
+    "questionVi": "Solutions architect muốn dùng JSON policy identity-based với quyền cụ thể. Policy này có thể gắn cho IAM principal nào? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Role",
+      "B": "Group",
+      "C": "Organization",
+      "D": "Amazon ECS resource",
+      "E": "Amazon EC2 resource"
+    }
+  },
+  "424": {
+    "questionVi": "Ứng dụng EC2 On-Demand: frontend chạy 24/7, backend chạy ngắn theo workload, số instance backend thay đổi trong ngày. Cần scale cost-effective nhất.",
+    "optionsVi": {
+      "A": "Reserved Instances cho frontend, Fargate cho backend.",
+      "B": "Reserved Instances cho frontend, Spot Instances cho backend.",
+      "C": "Spot Instances cho frontend, Reserved Instances cho backend.",
+      "D": "Spot Instances cho frontend, Fargate cho backend."
+    }
+  },
+  "425": {
+    "questionVi": "Công ty peak IOPS không quá 15.000, cần migrate workload lên EC2 và provision hiệu năng disk độc lập capacity. Loại EBS nào tiết kiệm nhất?",
+    "optionsVi": {
+      "A": "GP2",
+      "B": "io2",
+      "C": "GP3",
+      "D": "io1"
+    }
+  },
+  "426": {
+    "questionVi": "Ứng dụng healthcare on-premises hết dung lượng; dữ liệu thay đổi thường xuyên. Quy định yêu cầu audit access mọi cấp dữ liệu đã lưu. Cần migrate an toàn lên AWS.",
+    "optionsVi": {
+      "A": "DataSync chuyển dữ liệu lên S3, CloudTrail log data events.",
+      "B": "Snowcone chuyển dữ liệu lên S3, CloudTrail log management events.",
+      "C": "S3 Transfer Acceleration chuyển dữ liệu, CloudTrail log data events.",
+      "D": "Storage Gateway chuyển dữ liệu, CloudTrail log management events."
+    }
+  },
+  "427": {
+    "questionVi": "Solutions architect triển khai ứng dụng Java phức tạp với MySQL, phải chạy Apache Tomcat và highly available.",
+    "optionsVi": {
+      "A": "Deploy trên Lambda, API Gateway kết nối Lambda.",
+      "B": "Deploy bằng Elastic Beanstalk, môi trường load-balanced và rolling deployment.",
+      "C": "Migrate database sang ElastiCache, cấu hình SG cho phép ứng dụng truy cập.",
+      "D": "Launch EC2 cài MySQL và ứng dụng, tạo AMI, launch template và Auto Scaling group."
+    }
+  },
+  "428": {
+    "questionVi": "Ứng dụng serverless dùng API Gateway, Lambda, DynamoDB. Lambda cần quyền đọc/ghi DynamoDB. Cách cấp quyền an toàn nhất?",
+    "optionsVi": {
+      "A": "IAM user programmatic, policy DynamoDB, lưu access key trong env var Lambda.",
+      "B": "IAM role với Lambda trusted service, policy DynamoDB, cập nhật execution role Lambda.",
+      "C": "IAM user programmatic, lưu key trong SSM Parameter Store secure string, Lambda đọc khi kết nối DB.",
+      "D": "IAM role với DynamoDB trusted service, policy cho phép Lambda đọc/ghi, gắn role execution."
+    }
+  },
+  "429": {
+    "questionVi": "IAM policy sau gắn vào IAM group và là policy duy nhất. Quyền hiệu lực của policy đối với thành viên group là gì?",
+    "optionsVi": {
+      "A": "Thành viên được phép mọi hành động EC2 trong Region us-east-1; statement sau Allow không áp dụng.",
+      "B": "Thành viên bị deny mọi quyền EC2 us-east-1 trừ khi đăng nhập bằng MFA.",
+      "C": "Thành viên được ec2:StopInstances và ec2:TerminateInstances mọi Region khi dùng MFA; mọi hành động EC2 khác được phép.",
+      "D": "Thành viên được ec2:StopInstances và ec2:TerminateInstances Region us-east-1 khi dùng MFA; mọi hành động EC2 khác trong us-east-1 được phép."
+    }
+  },
+  "430": {
+    "questionVi": "Sensor máy upload CSV lên S3, cần chuyển thành ảnh ASAP cho báo cáo. Ảnh hết hạn sau 1 tháng; CSV giữ lại cho ML training hai lần/năm. (Chọn hai.)",
+    "optionsVi": {
+      "A": "EC2 Spot tải CSV mỗi giờ, tạo ảnh và upload S3.",
+      "B": "Lambda chuyển CSV thành ảnh lưu S3 khi file CSV upload.",
+      "C": "Lifecycle: CSV chuyển Standard→Glacier sau 1 ngày; expire ảnh sau 30 ngày.",
+      "D": "Lifecycle: CSV chuyển Standard→One Zone-IA sau 1 ngày; expire ảnh sau 30 ngày.",
+      "E": "Lifecycle: CSV chuyển Standard→Standard-IA sau 1 ngày; ảnh giữ ở RRS."
+    }
+  },
+  "431": {
+    "questionVi": "Game web ba tầng VPC, RDS MySQL. Cần bảng top-10 điểm near-real-time và khả năng dừng/khôi phục game giữ nguyên điểm.",
+    "optionsVi": {
+      "A": "ElastiCache Memcached cache điểm cho web app.",
+      "B": "ElastiCache Redis tính và cache điểm cho web app.",
+      "C": "CloudFront cache phần scoreboard của ứng dụng.",
+      "D": "RDS read replica chạy query tính scoreboard phục vụ read traffic."
+    }
+  },
+  "432": {
+    "questionVi": "Công ty ecommerce muốn dùng ML phân tích xu hướng dữ liệu khách hàng, tích hợp reporting platform và BI dashboard, overhead vận hành thấp nhất.",
+    "optionsVi": {
+      "A": "Glue ML transform build/train model, OpenSearch visualize.",
+      "B": "SageMaker build/train model, QuickSight visualize.",
+      "C": "ML AMI Marketplace build/train model, OpenSearch visualize.",
+      "D": "QuickSight build/train model bằng calculated fields và visualize."
+    }
+  },
+  "433": {
+    "questionVi": "Công ty dùng Organizations, workload production và non-production ở nhiều tài khoản. Cần thiết kế giải pháp ngăn sửa cost usage tags.",
+    "optionsVi": {
+      "A": "Custom Config rule ngăn sửa tag trừ principal được ủy quyền.",
+      "B": "Custom CloudTrail trail ngăn sửa tag.",
+      "C": "SCP ngăn sửa tag trừ principal được ủy quyền.",
+      "D": "CloudWatch logs ngăn sửa tag."
+    }
+  },
+  "434": {
+    "questionVi": "Ứng dụng trên EC2 sau ELB Auto Scaling với DynamoDB. Công ty muốn có thể đưa ứng dụng sang Region khác với downtime tối thiểu.",
+    "optionsVi": {
+      "A": "Tạo ASG và LB DR Region, DynamoDB global table, DNS failover tới LB DR.",
+      "B": "CloudFormation template tạo EC2, LB, DynamoDB khi cần, DNS failover tới LB DR.",
+      "C": "CloudFormation template EC2 và LB khi cần, DynamoDB global table, DNS failover LB DR.",
+      "D": "ASG và LB DR Region, DynamoDB global table, CloudWatch alarm trigger Lambda cập nhật Route 53 tới LB DR."
+    }
+  },
+  "435": {
+    "questionVi": "Công ty cần migrate MySQL 20 TB on-premises lên AWS trong 2 tuần, downtime tối thiểu, tiết kiệm chi phí nhất.",
+    "optionsVi": {
+      "A": "Snowball Edge Storage Optimized, DMS+SCT migrate với ongoing replication, gửi thiết bị AWS hoàn tất migration.",
+      "B": "Snowmobile, DMS+SCT với ongoing replication, gửi Snowmobile hoàn tất migration.",
+      "C": "Snowball Edge Compute Optimized GPU, DMS+SCT ongoing replication, gửi thiết bị hoàn tất migration.",
+      "D": "Direct Connect 1 Gbps, DMS+SCT với ongoing replication."
+    }
+  },
+  "436": {
+    "questionVi": "Công ty chuyển PostgreSQL on-premises lên RDS for PostgreSQL. Sau launch sản phẩm mới workload DB tăng. Cần đáp ứng workload lớn hơn mà không thêm infrastructure, tiết kiệm nhất.",
+    "optionsVi": {
+      "A": "Mua Reserved DB instances, scale up RDS instance lớn hơn.",
+      "B": "Chuyển RDS sang Multi-AZ DB instance.",
+      "C": "Mua Reserved DB instances, thêm RDS instance thứ hai.",
+      "D": "Chuyển RDS sang on-demand DB instance."
+    }
+  },
+  "437": {
+    "questionVi": "Ecommerce trên EC2 sau ALB Auto Scaling. Traffic cao từ hệ thống bên ngoài không hợp lệ với IP thay đổi. Security lo DDoS. Cần chặn request không hợp lệ với tác động tối thiểu lên user hợp lệ.",
+    "optionsVi": {
+      "A": "Triển khai Amazon Inspector và gắn với ALB.",
+      "B": "Triển khai AWS WAF, gắn ALB, cấu hình rate-limiting rule.",
+      "C": "Thêm rule NACL gắn ALB để chặn incoming traffic.",
+      "D": "Triển khai GuardDuty và bật rate-limiting protection."
+    }
+  },
+  "438": {
+    "questionVi": "Công ty cần chia sẻ dữ liệu kế toán với auditor bên ngoài. Dữ liệu trên RDS private subnet. Auditor có tài khoản AWS riêng và cần bản sao database. Cách chia sẻ an toàn nhất?",
+    "optionsVi": {
+      "A": "Tạo read replica, cấu hình IAM standard database authentication cho auditor.",
+      "B": "Export DB ra file text, lưu S3, tạo IAM user auditor truy cập bucket.",
+      "C": "Copy snapshot DB lên S3, tạo IAM user, chia sẻ key cho auditor.",
+      "D": "Tạo encrypted snapshot, chia sẻ snapshot với auditor, cho phép truy cập KMS key."
+    }
+  },
+  "439": {
+    "questionVi": "VPC có dải IP nhỏ, số EC2 tăng, không đủ IP cho workload tương lai. Giải pháp nào xử lý với overhead vận hành thấp nhất?",
+    "optionsVi": {
+      "A": "Thêm IPv4 CIDR block, tạo subnet mới, tạo tài nguyên mới trong subnet mới.",
+      "B": "Tạo VPC thứ hai với subnet bổ sung, VPC peering, cập nhật route và tạo tài nguyên VPC thứ hai.",
+      "C": "Dùng Transit Gateway kết nối VPC thứ hai, cập nhật route, tạo tài nguyên subnet VPC thứ hai.",
+      "D": "Tạo VPC thứ hai, Site-to-Site VPN giữa hai VPC qua EC2 VPN và VGW, cập nhật route."
+    }
+  },
+  "440": {
+    "questionVi": "Công ty test RDS MySQL, tạo backup bằng mysqldump và final snapshot khi terminate. Công ty chọn Aurora MySQL-compatible cho test mới. Giải pháp nào tạo DB instance mới? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Import RDS snapshot trực tiếp vào Aurora.",
+      "B": "Upload RDS snapshot lên S3 rồi import vào Aurora.",
+      "C": "Upload database dump lên S3 rồi import vào Aurora.",
+      "D": "Dùng DMS import RDS snapshot vào Aurora.",
+      "E": "Upload dump lên S3, DMS import dump vào Aurora."
+    }
+  },
+  "441": {
+    "questionVi": "Web multi-tier Linux EC2 sau ALB Auto Scaling nhiều AZ. ASG launch thêm On-Demand khi user truy cập nhiều static content. Cần redesign cost-effective nhất.",
+    "optionsVi": {
+      "A": "Cập nhật ASG dùng Reserved Instances thay On-Demand.",
+      "B": "Cập nhật ASG scale bằng Spot Instances thay On-Demand.",
+      "C": "Tạo CloudFront phục vụ static content từ S3 bucket.",
+      "D": "Tạo Lambda sau API Gateway host static website."
+    }
+  },
+  "442": {
+    "questionVi": "Công ty lưu petabyte dữ liệu nhiều tài khoản, quản lý data lake bằng Lake Formation. Data science muốn chia sẻ dữ liệu chọn lọc với engineering team phân tích, overhead thấp nhất.",
+    "optionsVi": {
+      "A": "Copy dữ liệu sang tài khoản chung, IAM role, policy trust user engineering.",
+      "B": "Dùng Lake Formation Grant command từng tài khoản cho user engineering.",
+      "C": "Dùng AWS Data Exchange publish dữ liệu cho tài khoản engineering.",
+      "D": "Dùng Lake Formation tag-based access control cấp quyền cross-account."
+    }
+  },
+  "443": {
+    "questionVi": "Công ty cần web app scalable cho user toàn cầu, upload/download dữ liệu unique tới gigabyte. Dev team muốn giảm latency upload/download và tối đa hiệu năng.",
+    "optionsVi": {
+      "A": "S3 với Transfer Acceleration host ứng dụng.",
+      "B": "S3 với CacheControl headers host ứng dụng.",
+      "C": "EC2 Auto Scaling và CloudFront host ứng dụng.",
+      "D": "EC2 Auto Scaling và ElastiCache host ứng dụng."
+    }
+  },
+  "444": {
+    "questionVi": "Hai EC2 single AZ và RDS; nhân viên xóa nhầm DB instance gây downtime 24 giờ. Cần tối đa độ tin cậy hạ tầng.",
+    "optionsVi": {
+      "A": "Xóa một EC2, bật termination protection EC2 còn lại, RDS Multi-AZ và deletion protection.",
+      "B": "RDS Multi-AZ và deletion protection; EC2 sau ALB trong ASG nhiều AZ.",
+      "C": "Thêm DB instance, API Gateway và Lambda; Lambda ghi hai DB.",
+      "D": "EC2 ASG nhiều subnet nhiều AZ dùng Spot; RDS Multi-AZ và deletion protection."
+    }
+  },
+  "445": {
+    "questionVi": "Công ty có 700 TB trên NAS on-premises, hybrid với Direct Connect 10 Gbps. Regulator yêu cầu chuyển cloud trong 90 ngày, hiệu quả, không gián đoạn, vẫn truy cập/cập nhật trong thời gian chuyển.",
+    "optionsVi": {
+      "A": "Tạo DataSync agent on-premises, tạo transfer task sang S3.",
+      "B": "Backup lên Snowball Edge, ship AWS, mount S3 bucket on-premises.",
+      "C": "Dùng rsync copy trực tiếp lên S3 qua Direct Connect.",
+      "D": "Backup tape, ship AWS, mount S3 bucket on-premises."
+    }
+  },
+  "446": {
+    "questionVi": "Công ty lưu PDF trong S3, quy định pháp lý yêu cầu giữ mọi dữ liệu mới và hiện có 7 năm, overhead vận hành thấp nhất.",
+    "optionsVi": {
+      "A": "Bật S3 Versioning, Lifecycle xóa sau 7 năm, MFA delete cho mọi object.",
+      "B": "S3 Object Lock governance retention 7 năm, recopy object hiện có.",
+      "C": "S3 Object Lock compliance retention 7 năm, recopy object hiện có.",
+      "D": "S3 Object Lock compliance retention 7 năm, S3 Batch Operations đưa dữ liệu hiện có tuân thủ."
+    }
+  },
+  "447": {
+    "questionVi": "Ứng dụng stateless Lambda qua API Gateway cần deploy nhiều Region để failover. Làm sao route traffic tới nhiều Region?",
+    "optionsVi": {
+      "A": "Route 53 health check từng Region, active-active failover.",
+      "B": "CloudFront với origin mỗi Region, CloudFront health check route traffic.",
+      "C": "Transit Gateway gắn API Gateway endpoint mỗi Region và route request.",
+      "D": "ALB Region chính, target group trỏ hostname API Gateway mỗi Region."
+    }
+  },
+  "448": {
+    "questionVi": "Hai VPC Management và Production. Management VPN qua customer gateway tới một thiết bị data center. Production dùng VGW với hai Direct Connect. Hai VPC peering với nhau. Làm sao giảm single point of failure?",
+    "optionsVi": {
+      "A": "Thêm VPN giữa Management và Production VPC.",
+      "B": "Thêm VGW thứ hai gắn Management VPC.",
+      "C": "Thêm bộ VPN Management VPC từ customer gateway thứ hai.",
+      "D": "Thêm VPC peering thứ hai giữa Management và Production."
+    }
+  },
+  "449": {
+    "questionVi": "Công ty chạy Oracle, migrate AWS nhanh vì thiếu tài nguyên DB/backup/data center. Ứng dụng dùng tính năng third-party cần privileged access. Giải pháp migrate cost-effective nhất?",
+    "optionsVi": {
+      "A": "Migrate sang RDS for Oracle, thay third-party bằng cloud services.",
+      "B": "Migrate sang RDS Custom for Oracle, tùy chỉnh DB hỗ trợ third-party.",
+      "C": "Migrate sang EC2 AMI Oracle, tùy chỉnh DB hỗ trợ third-party.",
+      "D": "Migrate sang RDS PostgreSQL bằng cách viết lại code bỏ Oracle APEX."
+    }
+  },
+  "450": {
+    "questionVi": "Ứng dụng three-tier trên một server, migrate AWS theo Well-Architected: security, scalability, resiliency. (Chọn ba.)",
+    "optionsVi": {
+      "A": "VPC hai AZ, giữ kiến trúc cũ trên EC2 private subnet mỗi AZ với ASG, SG và NACL.",
+      "B": "SG và NACL kiểm soát DB layer, một RDS single-AZ private subnet.",
+      "C": "VPC hai AZ, refactor web/app/DB tier riêng private subnet, ASG cho web và app.",
+      "D": "Một RDS, chỉ cho phép truy cập từ SG application tier.",
+      "E": "ELB trước web tier, SG tham chiếu SG từng layer.",
+      "F": "RDS Multi-AZ cluster private subnet, chỉ SG application tier truy cập."
+    }
+  },
+  "451": {
+    "questionVi": "Công ty migrate lên AWS dùng ECS, Direct Connect và RDS. Hoạt động nào do operational team quản lý? (Chọn ba.)",
+    "optionsVi": {
+      "A": "Quản lý infrastructure layer, OS và platform của RDS",
+      "B": "Tạo RDS DB instance và cấu hình maintenance window",
+      "C": "Cấu hình thêm software trên ECS cho monitoring, patch, log, host IDS",
+      "D": "Cài patch mọi phiên bản minor/major RDS",
+      "E": "Đảm bảo physical security infrastructure RDS trong data center",
+      "F": "Mã hóa dữ liệu truyền qua Direct Connect"
+    }
+  },
+  "452": {
+    "questionVi": "Job Java trên EC2 chạy mỗi giờ, 10 giây, 1 GB RAM, CPU thấp trừ surge ngắn. Cần tối ưu chi phí.",
+    "optionsVi": {
+      "A": "App2Container containerize job, chạy ECS Fargate task 0.5 vCPU 1 GB.",
+      "B": "Chuyển code sang Lambda 1 GB memory, EventBridge schedule mỗi giờ.",
+      "C": "App2Container, cài container AMI hiện tại, schedule dừng container khi job xong.",
+      "D": "Cấu hình schedule dừng EC2 khi job xong và khởi động lại khi job tiếp theo."
+    }
+  },
+  "453": {
+    "questionVi": "Công ty cần backup EC2 và nhiều S3 bucket theo quy định retention; file backup không được sửa trong thời gian retention.",
+    "optionsVi": {
+      "A": "AWS Backup vault lock governance mode và backup plan.",
+      "B": "Data Lifecycle Manager tạo automated snapshot policy.",
+      "C": "S3 File Gateway backup, S3 Lifecycle phù hợp.",
+      "D": "AWS Backup vault lock compliance mode và backup plan."
+    }
+  },
+  "454": {
+    "questionVi": "Tài nguyên trải nhiều Region và tài khoản; cần inventory và map quan hệ workload, cách hiệu quả vận hành nhất.",
+    "optionsVi": {
+      "A": "Systems Manager Inventory tạo map view từ detailed view report.",
+      "B": "Step Functions thu thập chi tiết workload, vẽ sơ đồ thủ công.",
+      "C": "Workload Discovery on AWS tạo architecture diagram workload.",
+      "D": "X-Ray xem chi tiết workload, vẽ sơ đồ quan hệ."
+    }
+  },
+  "455": {
+    "questionVi": "Organizations vận hành tài khoản với budget khác nhau. Cần cảnh báo và tự động ngăn provision thêm tài nguyên khi đạt ngưỡng budget trong kỳ. (Chọn ba.)",
+    "optionsVi": {
+      "A": "AWS Budgets, đặt budget trong Cost and Usage Reports tài khoản.",
+      "B": "AWS Budgets, đặt budget trong Billing dashboard tài khoản.",
+      "C": "Tạo IAM user cho Budgets chạy budget actions.",
+      "D": "Tạo IAM role cho Budgets chạy budget actions.",
+      "E": "Alert khi đạt ngưỡng, budget action chọn IAM identity với Config rule ngăn provision.",
+      "F": "Alert khi đạt ngưỡng, budget action chọn IAM identity với SCP ngăn provision."
+    }
+  },
+  "456": {
+    "questionVi": "EC2 một Region, cần backup sang Region thứ hai, provision EC2 Region thứ hai và quản lý tập trung từ một tài khoản, cost-effective nhất.",
+    "optionsVi": {
+      "A": "DR plan với số EC2 tương tự Region thứ hai và data replication.",
+      "B": "Snapshot EBS point-in-time, copy snapshot sang Region thứ hai định kỳ.",
+      "C": "Backup plan AWS Backup với cross-Region backup EC2.",
+      "D": "Deploy EC2 tương tự Region thứ hai, DataSync chuyển dữ liệu."
+    }
+  },
+  "457": {
+    "questionVi": "Công ty xây ứng dụng chuyển dữ liệu tới nhà sản xuất, xác thực user qua IdP riêng, bắt buộc dùng giao thức AS2.",
+    "optionsVi": {
+      "A": "DataSync chuyển dữ liệu, Lambda xác thực IdP.",
+      "B": "AppFlow chuyển dữ liệu, ECS task xác thực IdP.",
+      "C": "Transfer Family chuyển dữ liệu, Lambda xác thực IdP.",
+      "D": "Storage Gateway chuyển dữ liệu, Cognito identity pool xác thực IdP."
+    }
+  },
+  "458": {
+    "questionVi": "REST API cash payback trên API Gateway cần 1 GB memory, 2 GB storage, dữ liệu quan hệ. Dịch vụ AWS nào bổ sung với effort quản trị thấp nhất? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Amazon EC2",
+      "B": "AWS Lambda",
+      "C": "Amazon RDS",
+      "D": "Amazon DynamoDB",
+      "E": "Amazon EKS"
+    }
+  },
+  "459": {
+    "questionVi": "Organizations tagging policy gắn department tag khi tạo tag. Accounting cần chi phí EC2 theo department bất kể tài khoản, dùng Cost Explorer mọi tài khoản org.",
+    "optionsVi": {
+      "A": "Management account billing, kích hoạt user-defined cost allocation tag department, Cost Explorer group theo tag lọc EC2.",
+      "B": "Management account billing, kích hoạt AWS-defined tag department, Cost Explorer group theo tag lọc EC2.",
+      "C": "Member account billing, kích hoạt user-defined tag department, Cost Explorer group theo tag lọc EC2.",
+      "D": "Member account billing, kích hoạt AWS-defined tag department, Cost Explorer group theo tag lọc EC2."
+    }
+  },
+  "460": {
+    "questionVi": "Công ty cần trao đổi dữ liệu an toàn giữa Salesforce SaaS và S3, mã hóa at rest bằng KMS CMK và mã hóa in transit. Đã bật API access Salesforce.",
+    "optionsVi": {
+      "A": "Lambda function chuyển dữ liệu từ Salesforce lên S3.",
+      "B": "Step Functions workflow chuyển dữ liệu từ Salesforce lên S3.",
+      "C": "Amazon AppFlow chuyển dữ liệu từ Salesforce lên S3.",
+      "D": "Custom connector Salesforce chuyển dữ liệu lên S3."
+    }
+  },
+  "461": {
+    "questionVi": "Game mobile một Region: EC2 ASG, DynamoDB, giao tiếp TCP và UDP global, cần latency thấp nhất.",
+    "optionsVi": {
+      "A": "Global Accelerator, ALB endpoint TCP/UDP, ASG register ALB.",
+      "B": "Global Accelerator, NLB endpoint TCP/UDP, ASG register NLB.",
+      "C": "CloudFront endpoint, NLB TCP/UDP, ASG register NLB, CloudFront origin NLB.",
+      "D": "CloudFront endpoint, ALB TCP/UDP, ASG register ALB, CloudFront origin ALB."
+    }
+  },
+  "462": {
+    "questionVi": "Ứng dụng xử lý đơn hàng trên EC2, lưu Aurora. Khi traffic cao, ghi DB chậm. Cần ghi đơn hàng đáng tin cậy và nhanh nhất có thể.",
+    "optionsVi": {
+      "A": "Scale up EC2 khi traffic cao. Ghi đơn hàng SNS, subscribe endpoint database vào topic.",
+      "B": "Ghi đơn hàng vào SQS. EC2 ASG sau ALB đọc SQS và ghi database.",
+      "C": "Ghi đơn hàng SNS, subscribe endpoint database. EC2 ASG sau ALB đọc SNS.",
+      "D": "Ghi SQS khi EC2 đạt ngưỡng CPU. Scheduled scaling EC2 ASG sau ALB đọc SQS ghi DB."
+    }
+  },
+  "463": {
+    "questionVi": "Nệm IoT gửi ~2 MB dữ liệu/đêm/nệm lên S3. Cần xử lý và tổng hợp nhanh nhất, job 1 GB RAM, hoàn thành trong 30 giây, cost-effective nhất.",
+    "optionsVi": {
+      "A": "AWS Glue với Scala job",
+      "B": "Amazon EMR với Apache Spark script",
+      "C": "AWS Lambda với Python script",
+      "D": "AWS Glue với PySpark job"
+    }
+  },
+  "464": {
+    "questionVi": "Ứng dụng mua sắm online dùng RDS PostgreSQL Single-AZ. Cần loại bỏ SPOF, giảm downtime DB tối thiểu, không sửa application code.",
+    "optionsVi": {
+      "A": "Chuyển DB instance hiện tại sang Multi-AZ bằng modify instance.",
+      "B": "Tạo RDS Multi-AZ mới, snapshot instance hiện tại và restore Multi-AZ.",
+      "C": "Tạo read replica PostgreSQL AZ khác, Route 53 weighted routing phân tải.",
+      "D": "Đặt RDS trong EC2 ASG tối thiểu 2 instance, Route 53 weighted routing."
+    }
+  },
+  "465": {
+    "questionVi": "Ứng dụng trên nhiều EC2 Nitro cùng AZ cần ghi đồng thời nhiều EBS volume để tăng availability.",
+    "optionsVi": {
+      "A": "gp3 EBS với EBS Multi-Attach",
+      "B": "st1 EBS với EBS Multi-Attach",
+      "C": "io2 EBS với EBS Multi-Attach",
+      "D": "gp2 EBS với EBS Multi-Attach"
+    }
+  },
+  "466": {
+    "questionVi": "Ứng dụng stateless hai tầng: EC2 single AZ và RDS Multi-AZ. Ban lãnh đạo mới yêu cầu ứng dụng highly available.",
+    "optionsVi": {
+      "A": "Cấu hình Multi-AZ EC2 Auto Scaling và Application Load Balancer.",
+      "B": "Snapshot EC2 và gửi sang Region AWS khác.",
+      "C": "Route 53 latency-based routing tới ứng dụng.",
+      "D": "Route 53 rules và Multi-AZ Application Load Balancer."
+    }
+  },
+  "467": {
+    "questionVi": "Organizations: tài khoản member mua Compute Savings Plan nhưng chỉ dùng <50% compute power sau thay đổi workload.",
+    "optionsVi": {
+      "A": "Bật discount sharing từ Billing Preferences tài khoản member mua Savings Plan.",
+      "B": "Bật discount sharing từ Billing Preferences management account Organizations.",
+      "C": "Migrate thêm workload từ tài khoản khác vào tài khoản có Savings Plan.",
+      "D": "Bán phần commitment Savings Plan dư trên Reserved Instance Marketplace."
+    }
+  },
+  "468": {
+    "questionVi": "Microservices search catalog: REST API frontend, backend containers trong private VPC subnet.",
+    "optionsVi": {
+      "A": "WebSocket API API Gateway, ECS private subnet, private VPC link tới ECS.",
+      "B": "REST API API Gateway, ECS private subnet, private VPC link tới ECS.",
+      "C": "WebSocket API API Gateway, ECS private subnet, security group API Gateway truy cập ECS.",
+      "D": "REST API API Gateway, ECS private subnet, security group API Gateway truy cập ECS."
+    }
+  },
+  "469": {
+    "questionVi": "Dữ liệu thô S3 dùng analytics với access pattern không dự đoán được. Công ty muốn giảm chi phí S3.",
+    "optionsVi": {
+      "A": "S3 replication chuyển object ít truy cập sang Standard-IA.",
+      "B": "S3 Lifecycle chuyển Standard sang Standard-IA.",
+      "C": "S3 Lifecycle chuyển Standard sang Intelligent-Tiering.",
+      "D": "S3 Inventory xác định object không truy cập, chuyển sang Intelligent-Tiering."
+    }
+  },
+  "470": {
+    "questionVi": "EC2 IPv6 cần initiate communication ra internet; chính sách bảo mật cấm dịch vụ bên ngoài initiate kết nối tới EC2.",
+    "optionsVi": {
+      "A": "Tạo NAT gateway làm destination route table subnet.",
+      "B": "Tạo internet gateway làm destination route table subnet.",
+      "C": "Tạo virtual private gateway làm destination route table subnet.",
+      "D": "Tạo egress-only internet gateway làm destination route table subnet."
+    }
+  },
+  "471": {
+    "questionVi": "Ứng dụng container VPC truy cập S3 ~1 TB/ngày trong development. Giảm chi phí và tránh traffic đi internet khi có thể.",
+    "optionsVi": {
+      "A": "Bật S3 Intelligent-Tiering cho bucket.",
+      "B": "Bật S3 Transfer Acceleration cho bucket.",
+      "C": "Tạo gateway VPC endpoint S3, gắn mọi route table VPC.",
+      "D": "Tạo interface endpoint S3 VPC, gắn mọi route table VPC."
+    }
+  },
+  "472": {
+    "questionVi": "Chat mobile DynamoDB, tin nhắn mới cần latency thấp nhất, thay đổi ứng dụng tối thiểu.",
+    "optionsVi": {
+      "A": "Cấu hình DAX cho bảng tin nhắn mới, cập nhật code dùng DAX endpoint.",
+      "B": "Thêm DynamoDB read replica, ứng dụng đọc từ read endpoint.",
+      "C": "Tăng gấp đôi read capacity units bảng tin nhắn mới.",
+      "D": "Thêm ElastiCache Redis, ứng dụng trỏ Redis thay DynamoDB."
+    }
+  },
+  "473": {
+    "questionVi": "Website static EC2 sau ALB, traffic tăng, lo ngại chi phí tăng.",
+    "optionsVi": {
+      "A": "CloudFront distribution cache static files tại edge.",
+      "B": "ElastiCache cluster, ALB kết nối ElastiCache phục vụ file cache.",
+      "C": "AWS WAF web ACL gắn ALB, rule cache static files.",
+      "D": "ALB thứ hai Region khác, route user tới Region gần nhất."
+    }
+  },
+  "474": {
+    "questionVi": "Nhiều VPC nhiều Region cô lập workload phải giao tiếp tất cả VPC mọi Region, effort quản trị thấp nhất.",
+    "optionsVi": {
+      "A": "VPC peering trong Region và cross-Region peering.",
+      "B": "Direct Connect gateway mọi Region kết nối VPC cross-Region.",
+      "C": "Transit Gateway mỗi Region và Transit Gateway peering cross-Region.",
+      "D": "PrivateLink mọi Region kết nối VPC cross-Region."
+    }
+  },
+  "475": {
+    "questionVi": "ECS cần shared file system durable, mount target mỗi AZ, RPO 8 giờ cross-Region, dùng AWS Backup replication.",
+    "optionsVi": {
+      "A": "Amazon FSx for Windows File Server Multi-AZ",
+      "B": "Amazon FSx for NetApp ONTAP Multi-AZ",
+      "C": "Amazon EFS storage class Standard",
+      "D": "Amazon FSx for OpenZFS"
+    }
+  },
+  "476": {
+    "questionVi": "Công ty tạo IAM groups theo phòng ban cho user mới. Cách cấp quyền an toàn nhất cho user mới?",
+    "optionsVi": {
+      "A": "Áp dụng SCP quản lý quyền truy cập.",
+      "B": "Tạo IAM role least privilege, gắn role vào IAM groups.",
+      "C": "Tạo IAM policy least privilege, gắn policy vào IAM groups.",
+      "D": "Tạo IAM role với permissions boundary định nghĩa quyền tối đa."
+    }
+  },
+  "478": {
+    "questionVi": "Công ty luật cần chia sẻ hàng trăm file công khai; cấm sửa/xóa file trước ngày quy định. Giải pháp an toàn nhất?",
+    "optionsVi": {
+      "A": "Upload S3 static website hosting, IAM read-only tới khi hết ngày.",
+      "B": "S3 bucket Versioning, Object Lock retention theo ngày, static hosting, bucket policy read-only.",
+      "C": "S3 Versioning, event trigger Lambda khôi phục object bị sửa/xóa từ bucket private.",
+      "D": "Upload S3 static hosting, Object Lock retention folder, IAM read-only."
+    }
+  },
+  "479": {
+    "questionVi": "Prototype ASG+ALB+RDS đã validate, cần deploy tự động dev/production hai AZ.",
+    "optionsVi": {
+      "A": "Systems Manager replicate và provision prototype hai AZ.",
+      "B": "Định nghĩa infrastructure template từ prototype, deploy bằng CloudFormation.",
+      "C": "Config inventory prototype, Config deploy prototype hai AZ.",
+      "D": "Elastic Beanstalk tham chiếu prototype, deploy môi trường mới hai AZ."
+    }
+  },
+  "480": {
+    "questionVi": "Ứng dụng EC2 và S3 mã hóa; CISO yêu cầu traffic giữa hai dịch vụ không đi public internet.",
+    "optionsVi": {
+      "A": "AWS KMS",
+      "B": "VPC endpoint",
+      "C": "Private subnet",
+      "D": "Virtual private gateway"
+    }
+  },
+  "481": {
+    "questionVi": "Web ba tầng: RDS MySQL Multi-AZ và ElastiCache. Khi khách thêm item, cache phải luôn khớp database.",
+    "optionsVi": {
+      "A": "Chiến lược lazy loading caching",
+      "B": "Chiến lược write-through caching",
+      "C": "Chiến lược adding TTL caching",
+      "D": "Chiến lược AWS AppConfig caching"
+    }
+  },
+  "482": {
+    "questionVi": "Migrate 100 GB dữ liệu lịch sử on-premises lên S3, mã hóa in transit, lưu dữ liệu mới trực tiếp S3, overhead thấp nhất.",
+    "optionsVi": {
+      "A": "Lệnh s3 sync AWS CLI chuyển trực tiếp lên S3 bucket.",
+      "B": "AWS DataSync migrate từ on-premises lên S3 bucket.",
+      "C": "AWS Snowball chuyển dữ liệu lên S3 bucket.",
+      "D": "IPsec VPN on-premises tới AWS, s3 cp CLI chuyển dữ liệu lên S3."
+    }
+  },
+  "483": {
+    "questionVi": "Job Windows container .NET 6 chạy mỗi 10 phút, runtime 1-3 phút. Cần chạy trên AWS cost-effective nhất.",
+    "optionsVi": {
+      "A": "Lambda từ container image, EventBridge invoke mỗi 10 phút.",
+      "B": "AWS Batch job Fargate, schedule mỗi 10 phút.",
+      "C": "ECS Fargate scheduled task container image mỗi 10 phút.",
+      "D": "ECS Fargate standalone task, Windows Task Scheduler mỗi 10 phút."
+    }
+  },
+  "484": {
+    "questionVi": "Công ty consolidate nhiều tài khoản AWS, tạo tài khoản business unit mới, xác thực qua corporate directory tập trung. (Chọn hai.)",
+    "optionsVi": {
+      "A": "Organizations all features, tạo tài khoản mới trong organization.",
+      "B": "Cognito identity pool, IAM Identity Center chấp nhận Cognito auth.",
+      "C": "SCP quản lý tài khoản, IAM Identity Center thêm Directory Service.",
+      "D": "Organizations mới, authentication dùng Directory Service trực tiếp.",
+      "E": "IAM Identity Center trong organization, tích hợp corporate directory."
+    }
+  },
+  "485": {
+    "questionVi": "Lưu trữ video archive tin tức cũ trên AWS, hiếm khi restore, khi cần phải sẵn sàng trong tối đa 5 phút, cost-effective nhất.",
+    "optionsVi": {
+      "A": "S3 Glacier với Expedited retrievals.",
+      "B": "S3 Glacier với Standard retrievals.",
+      "C": "S3 Standard-IA.",
+      "D": "S3 One Zone-IA."
+    }
+  },
+  "486": {
+    "questionVi": "Ứng dụng ba tầng AWS: presentation static website, logic tier containerized, relational database. Cần đơn giản hóa deploy và giảm ops.",
+    "optionsVi": {
+      "A": "S3 static content, ECS Fargate compute, managed RDS cluster.",
+      "B": "CloudFront static content, ECS EC2 compute, managed RDS cluster.",
+      "C": "S3 static content, EKS Fargate compute, managed RDS cluster.",
+      "D": "EC2 Reserved Instances static content, EKS EC2 compute, managed RDS cluster."
+    }
+  },
+  "487": {
+    "questionVi": "Công ty cần storage HA, scalable, mount được bằng Linux on-prem và AWS qua native protocol qua Site-to-Site VPN, không yêu cầu kích thước tối thiểu.",
+    "optionsVi": {
+      "A": "Amazon FSx Multi-AZ deployments",
+      "B": "Amazon EBS Multi-Attach volumes",
+      "C": "Amazon EFS với nhiều mount targets",
+      "D": "Amazon EFS một mount target và nhiều access points"
+    }
+  },
+  "488": {
+    "questionVi": "Organizations all features; thông tin billing member account không được truy cập kể cả root user member account.",
+    "optionsVi": {
+      "A": "Thêm finance team vào IAM group với AWS managed policy Billing.",
+      "B": "Identity-based policy deny billing cho mọi user kể cả root.",
+      "C": "SCP deny truy cập billing, gắn SCP root OU.",
+      "D": "Chuyển từ all features sang consolidated billing feature set."
+    }
+  },
+  "489": {
+    "questionVi": "SNS gửi order message tới HTTPS endpoint on-prem warehouse; một số message không nhận được. Cần giữ message không deliver và phân tích tới 14 ngày, effort phát triển thấp nhất.",
+    "optionsVi": {
+      "A": "SNS dead letter queue với Kinesis Data Stream target retention 14 ngày.",
+      "B": "SQS queue retention 14 ngày giữa application và SNS.",
+      "C": "SNS dead letter queue với SQS target retention 14 ngày.",
+      "D": "SNS dead letter queue với DynamoDB target TTL retention 14 ngày."
+    }
+  },
+  "490": {
+    "questionVi": "DynamoDB lưu thông tin game user, cần continuous backup S3 với coding tối thiểu, không ảnh hưởng availability và RCU.",
+    "optionsVi": {
+      "A": "EMR cluster, Hive job backup lên S3.",
+      "B": "Export DynamoDB lên S3 continuous backup, bật point-in-time recovery.",
+      "C": "DynamoDB Streams, Lambda export stream lên S3.",
+      "D": "Lambda export định kỳ lên S3, bật point-in-time recovery."
+    }
+  },
+  "491": {
+    "questionVi": "Ứng dụng async xác thực thẻ tín dụng ngân hàng: bảo mật, xử lý at-least-once, cost-effective nhất.",
+    "optionsVi": {
+      "A": "Lambda event source mapping SQS standard, SSE-KMS, kms:Decrypt cho execution role.",
+      "B": "Lambda event source mapping SQS FIFO, SSE-SQS, encryption key invocation permission.",
+      "C": "Lambda event source mapping SQS FIFO, SSE-KMS, kms:Decrypt cho execution role.",
+      "D": "Lambda event source mapping SQS standard, SSE-KMS, encryption key invocation permission."
+    }
+  },
+  "492": {
+    "questionVi": "Nhiều tài khoản dev dùng EC2 oversized vượt budget. Cần hạn chế tạo tài nguyên tập trung, effort phát triển thấp nhất.",
+    "optionsVi": {
+      "A": "Systems Manager templates quy trình EC2 được phép.",
+      "B": "Organizations OU, SCP kiểm soát loại EC2 instance.",
+      "C": "EventBridge invoke Lambda dừng EC2 instance type không cho phép.",
+      "D": "Service Catalog products chỉ cho phép EC2 instance type được phép."
+    }
+  },
+  "493": {
+    "questionVi": "AI đánh giá chất lượng cuộc gọi CS đa ngôn ngữ, báo cáo sentiment tiếng Anh, không tài nguyên maintain ML models. (Chọn ba.)",
+    "optionsVi": {
+      "A": "Amazon Comprehend dịch audio sang tiếng Anh.",
+      "B": "Amazon Lex tạo báo cáo sentiment.",
+      "C": "Amazon Polly chuyển audio thành text.",
+      "D": "Amazon Transcribe chuyển audio mọi ngôn ngữ thành text.",
+      "E": "Amazon Translate dịch text sang tiếng Anh.",
+      "F": "Amazon Comprehend tạo báo cáo sentiment."
+    }
+  },
+  "494": {
+    "questionVi": "Admin dùng IAM role terminate EC2 nhận 403 Access Denied. Policy role có IP condition. Nguyên nhân?",
+    "optionsVi": {
+      "A": "EC2 instance có resource-based policy Deny.",
+      "B": "Principal chưa được chỉ định trong policy statement.",
+      "C": "Action không grant quyền terminate EC2 instance.",
+      "D": "Request terminate không đến từ CIDR 192.0.2.0/24 hoặc 203.0.113.0/24."
+    }
+  },
+  "495": {
+    "questionVi": "Audit S3 bucket Lake Formation, phát hiện PII/tài chính như passport và credit card.",
+    "optionsVi": {
+      "A": "AWS Audit Manager audit PCI DSS.",
+      "B": "S3 Inventory, Athena query inventory.",
+      "C": "Amazon Macie data discovery job với managed identifiers.",
+      "D": "S3 Select report trên bucket."
+    }
+  },
+  "496": {
+    "questionVi": "On-premises hết storage, app dùng block và NFS, cần hiệu năng cao và local caching không re-architect. (Chọn hai.)",
+    "optionsVi": {
+      "A": "Mount S3 làm file system on-premises.",
+      "B": "Storage Gateway file gateway thay NFS storage.",
+      "C": "Snowball Edge cung cấp NFS mount on-premises.",
+      "D": "Storage Gateway volume gateway thay block storage.",
+      "E": "EFS volumes mount on-premises."
+    }
+  },
+  "497": {
+    "questionVi": "EC2 private subnet đọc/ghi S3 cùng Region qua NAT gateway, muốn giảm data transfer cost cost-effective nhất.",
+    "optionsVi": {
+      "A": "EC2 NAT instance public subnet, route private subnet tới ENI instance cho S3 traffic.",
+      "B": "EC2 NAT instance private subnet, route public subnet tới ENI instance cho S3 traffic.",
+      "C": "VPC gateway endpoint S3, route private subnet qua gateway endpoint cho S3 traffic.",
+      "D": "NAT gateway thứ hai, route private subnet qua NAT gateway cho S3 traffic."
+    }
+  },
+  "498": {
+    "questionVi": "S3 versioning ảnh độ phân giải cao, chỉ giữ hai version mới nhất, giảm chi phí S3 với overhead thấp nhất.",
+    "optionsVi": {
+      "A": "S3 Lifecycle xóa noncurrent versions, giữ hai version mới nhất.",
+      "B": "Lambda kiểm tra versions cũ, xóa tất cả trừ hai mới nhất.",
+      "C": "S3 Batch Operations xóa noncurrent versions, giữ hai mới nhất.",
+      "D": "Tắt versioning bucket, giữ hai version mới nhất."
+    }
+  },
+  "499": {
+    "questionVi": "Giảm chi phí Direct Connect 1 Gbps (utilization trung bình <10%) mà không ảnh hưởng bảo mật.",
+    "optionsVi": {
+      "A": "Direct Connect 1 Gbps mới, share connection tài khoản AWS khác.",
+      "B": "Direct Connect 200 Mbps mới trong Management Console.",
+      "C": "Đặt connection 1 Gbps qua Direct Connect Partner, share tài khoản khác.",
+      "D": "Đặt hosted connection 200 Mbps qua Direct Connect Partner cho tài khoản hiện có."
+    }
+  },
+  "500": {
+    "questionVi": "Migrate nhiều Windows file server on-premises vào FSx for Windows File Server, giữ nguyên file permissions. (Chọn hai.)",
+    "optionsVi": {
+      "A": "DataSync agents on-premises, schedule task chuyển dữ liệu FSx.",
+      "B": "Copy share lên S3 bằng CLI, DataSync chuyển sang FSx.",
+      "C": "Tháo ổ, ship AWS import S3, DataSync chuyển sang FSx.",
+      "D": "Snowcone, DataSync agents trên thiết bị, schedule task sang FSx.",
+      "E": "Snowball Edge, copy CLI, ship AWS import S3, DataSync sang FSx."
+    }
+  },
+  "501": {
+    "questionVi": "Payment data ingest data lake S3 mỗi phút, phân tích real-time rồi ingest, hiệu quả vận hành cao nhất.",
+    "optionsVi": {
+      "A": "Kinesis Data Streams ingest, Lambda phân tích real-time.",
+      "B": "Glue ingest, Kinesis Data Analytics phân tích real-time.",
+      "C": "Kinesis Data Firehose ingest, Kinesis Data Analytics phân tích real-time.",
+      "D": "API Gateway ingest, Lambda phân tích real-time."
+    }
+  },
+  "502": {
+    "questionVi": "CMS trên EC2 single instance, Aurora MySQL Multi-AZ, ảnh website trên EBS mount instance. Cải thiện performance và resilience. (Chọn hai.)",
+    "optionsVi": {
+      "A": "Chuyển ảnh S3 bucket mount mọi EC2 instance.",
+      "B": "NFS share từ EC2 primary, mount các EC2 khác.",
+      "C": "Chuyển ảnh EFS mount mọi EC2 instance.",
+      "D": "AMI từ EC2, ASG min 2 sau ALB, Global Accelerator cho website.",
+      "E": "AMI từ EC2, ASG min 2 sau ALB, CloudFront distribution cho website."
+    }
+  },
+  "503": {
+    "questionVi": "Dịch vụ monitoring cần gọi AWS API trong tài khoản khách hàng để describe EC2 và đọc CloudWatch metrics. Cách truy cập an toàn nhất?",
+    "optionsVi": {
+      "A": "Khách tạo IAM role read-only EC2/CloudWatch, trust policy tới tài khoản công ty.",
+      "B": "Serverless API token vending machine cấp credential tạm role read-only.",
+      "C": "Khách tạo IAM user read-only EC2/CloudWatch, lưu key trong secrets management.",
+      "D": "Khách tạo Cognito user IAM role read-only, lưu credential trong secrets management."
+    }
+  },
+  "504": {
+    "questionVi": "Cần kết nối hàng trăm VPC us-east-1 trên hàng trăm tài khoản; networking team có tài khoản AWS riêng quản lý cloud network.",
+    "optionsVi": {
+      "A": "VPC peering giữa mỗi VPC, cập nhật route table subnet.",
+      "B": "NAT gateway và internet gateway mỗi VPC, kết nối qua internet.",
+      "C": "Transit Gateway tài khoản networking team, static route từ mỗi VPC.",
+      "D": "VPN gateway mỗi VPC, transit VPC networking team kết nối mỗi VPC."
+    }
+  },
+  "505": {
+    "questionVi": "Batch job EC2 ASG On-Demand 12AM-6AM local, job fail thì instance khác reprocess. Giải pháp cost-effective nhất?",
+    "optionsVi": {
+      "A": "Savings Plan 1 năm EC2 cover instance family ASG batch job.",
+      "B": "Reserved Instance 1 năm đúng instance type và OS ASG batch job.",
+      "C": "Launch template Spot Instances ASG, scale out theo CPU.",
+      "D": "Launch template tăng instance size, scale out theo CPU."
+    }
+  },
+  "506": {
+    "questionVi": "Social media feature upload ảnh, traffic upload tăng mạnh sự kiện lớn. Cần website chịu tải upload, scalable nhất.",
+    "optionsVi": {
+      "A": "Browser upload tới app server, server chuyển S3 bucket.",
+      "B": "Storage Gateway file gateway, browser upload trực tiếp file gateway.",
+      "C": "S3 presigned URLs, browser upload trực tiếp S3 bucket.",
+      "D": "EFS file system, browser upload trực tiếp EFS."
+    }
+  },
+  "507": {
+    "questionVi": "Ứng dụng đặt vé du lịch single data center, mở rộng global, latency update reservation DB <1 giây, deploy web riêng mỗi Region nhưng một primary reservation DB globally consistent.",
+    "optionsVi": {
+      "A": "Chuyển DynamoDB global table reservation, dùng Regional endpoint mỗi Region.",
+      "B": "Aurora MySQL, Aurora Read Replicas mỗi Region, Regional endpoint truy cập DB.",
+      "C": "RDS MySQL, read replicas mỗi Region, Regional endpoint truy cập DB.",
+      "D": "Aurora Serverless mỗi Region, Lambda đồng bộ event streams giữa Region."
+    }
+  },
+  "508": {
+    "questionVi": "Windows EC2 us-west-1, backup us-west-2 tự động, RPO tối đa 24 giờ, effort quản trị thấp nhất. (Chọn hai.)",
+    "optionsVi": {
+      "A": "AMI lifecycle policy tag, backup 2 lần/ngày, copy image on demand.",
+      "B": "AMI lifecycle policy tag, backup 2 lần/ngày, copy tới us-west-2.",
+      "C": "Backup vault us-west-1 và us-west-2, backup plan tag EC2, Lambda copy sang us-west-2.",
+      "D": "Backup vault, backup plan tag EC2, destination copy us-west-2, schedule 2 lần/ngày.",
+      "E": "Backup vault, backup plan tag EC2, schedule 2 lần/ngày, copy on demand us-west-2."
+    }
+  },
+  "509": {
+    "questionVi": "ALB web tier public, EC2 app private, hàng triệu request bất hợp pháp từ vài IP làm chậm app. Cần fix ngay trong khi tìm giải pháp lâu dài.",
+    "optionsVi": {
+      "A": "Sửa inbound SG web tier, thêm deny rule IP tiêu thụ tài nguyên.",
+      "B": "Sửa NACL subnet web tier, thêm inbound deny rule IP tiêu thụ tài nguyên.",
+      "C": "Sửa inbound SG application tier, thêm deny rule IP.",
+      "D": "Sửa NACL subnet application tier, thêm inbound deny rule IP."
+    }
+  },
+  "510": {
+    "questionVi": "App eu-west-1 VPC cần giao tiếp an toàn với database ap-southeast-2 VPC.",
+    "optionsVi": {
+      "A": "VPC peering eu-west-1 và ap-southeast-2, inbound rule SG app cho phép IP DB ap-southeast-2.",
+      "B": "VPC peering ap-southeast-2 và eu-west-1, cập nhật route table, inbound rule SG DB tham chiếu SG app eu-west-1.",
+      "C": "VPC peering hai VPC, cập nhật route table, inbound rule SG DB cho phép IP app eu-west-1.",
+      "D": "Transit Gateway peering hai VPC, inbound rule SG DB tham chiếu SG app eu-west-1."
+    }
+  },
+  "511": {
+    "questionVi": "Nhiều môi trường dev PostgreSQL schema, mỗi môi trường dùng trung bình 4 giờ/ngày (8 giờ làm việc). Giải pháp cost-effective nhất?",
+    "optionsVi": {
+      "A": "Mỗi môi trường dev Aurora PostgreSQL database riêng.",
+      "B": "Mỗi môi trường dev RDS PostgreSQL Single-AZ riêng.",
+      "C": "Mỗi môi trường dev Aurora On-Demand PostgreSQL-Compatible riêng.",
+      "D": "Mỗi môi trường dev S3 bucket dùng S3 Object Select."
+    }
+  },
+  "512": {
+    "questionVi": "Organizations tag tài khoản, AWS Backup backup infrastructure. Cần backup mọi tài nguyên AWS với overhead vận hành thấp nhất.",
+    "optionsVi": {
+      "A": "Config xác định resource chưa tag, tag programmatically, dùng tag trong backup plan.",
+      "B": "Config xác định resource không chạy, thêm vào backup vault.",
+      "C": "Yêu cầu owner tài khoản review resource cần backup.",
+      "D": "Inspector xác định resource noncompliant."
+    }
+  },
+  "513": {
+    "questionVi": "Social media app upload ảnh, tự động resize multi-device, traffic không dự đoán, HA và scale tối đa.",
+    "optionsVi": {
+      "A": "Static website S3 invoke Lambda resize ảnh, lưu S3 bucket.",
+      "B": "Static website CloudFront invoke Step Functions resize, lưu RDS.",
+      "C": "Dynamic website EC2 resize ảnh, lưu S3 bucket.",
+      "D": "ECS cluster auto scaling, SQS resize job, EC2 xử lý resize."
+    }
+  },
+  "514": {
+    "questionVi": "Migrate microservices EC2 lên EKS, control plane private access true public false, data plane private subnet. Node không join cluster.",
+    "optionsVi": {
+      "A": "Cấp quyền IAM cho AmazonEKSNodeRole.",
+      "B": "Tạo interface VPC endpoints để node truy cập control plane.",
+      "C": "Tạo lại node public subnet, hạn chế SG EC2 node.",
+      "D": "Cho phép outbound traffic SG của node."
+    }
+  },
+  "515": {
+    "questionVi": "Migrate on-prem application, dùng Amazon Redshift. Use case nào phù hợp? (Chọn ba.)",
+    "optionsVi": {
+      "A": "Data APIs cho traditional, containerized và event-driven applications",
+      "B": "Client-side và server-side encryption",
+      "C": "Analytics workload giờ chỉ định khi application không active",
+      "D": "Cache data giảm áp lực backend database",
+      "E": "Scale global petabyte data và hàng chục triệu request/phút",
+      "F": "Tạo secondary replica cluster qua Management Console"
+    }
+  },
+  "516": {
+    "questionVi": "API cung cấp thông tin tài chính khách hàng, request peak cao, API phản hồi nhất quán latency thấp, compute host API với overhead thấp nhất.",
+    "optionsVi": {
+      "A": "ALB và ECS.",
+      "B": "API Gateway và Lambda với provisioned concurrency.",
+      "C": "ALB và EKS cluster.",
+      "D": "API Gateway và Lambda với reserved concurrency."
+    }
+  },
+  "517": {
+    "questionVi": "Gửi mọi Systems Manager Session Manager log tới S3 archive, hiệu quả vận hành cao nhất.",
+    "optionsVi": {
+      "A": "Bật S3 logging trong Systems Manager console, chọn bucket đích.",
+      "B": "Cài CloudWatch agent, push log group, export S3 archive.",
+      "C": "Systems Manager document upload log central S3, EventBridge chạy document hàng ngày.",
+      "D": "CloudWatch agent push log group, subscription Firehose destination S3."
+    }
+  },
+  "518": {
+    "questionVi": "RDS MySQL hết disk space. Cần tăng disk không downtime, effort thấp nhất.",
+    "optionsVi": {
+      "A": "Bật storage autoscaling RDS.",
+      "B": "Tăng kích thước RDS database instance.",
+      "C": "Đổi storage type RDS sang Provisioned IOPS.",
+      "D": "Backup RDS, tăng storage capacity, restore, dừng instance cũ."
+    }
+  },
+  "519": {
+    "questionVi": "Công ty tư vấn cần quản lý và triển khai tập trung bộ giải pháp/công cụ self-service cho khách hàng.",
+    "optionsVi": {
+      "A": "Tạo CloudFormation templates cho khách hàng.",
+      "B": "Tạo AWS Service Catalog products cho khách hàng.",
+      "C": "Tạo Systems Manager templates cho khách hàng.",
+      "D": "Tạo Config items cho khách hàng."
+    }
+  },
+  "520": {
+    "questionVi": "EC2 app DynamoDB, traffic không dự đoán, read/write moderate-high, cần scale, cost-effective nhất.",
+    "optionsVi": {
+      "A": "DynamoDB provisioned read/write Standard class, auto scaling max capacity.",
+      "B": "DynamoDB on-demand mode Standard class.",
+      "C": "DynamoDB provisioned read/write Standard-IA class, auto scaling max capacity.",
+      "D": "DynamoDB on-demand mode Standard-IA class."
+    }
+  },
+  "521": {
+    "questionVi": "Nhiều business unit AWS account riêng, mỗi team DynamoDB inventory. Ứng dụng inventory tập trung cần đọc mọi bảng DynamoDB. Xác thực an toàn nhất?",
+    "optionsVi": {
+      "A": "DynamoDB tích hợp Secrets Manager, app đọc secret authenticate DynamoDB, rotate 30 ngày.",
+      "B": "Mỗi business account IAM user programmatic, app dùng access key, rotate thủ công 30 ngày.",
+      "C": "Mỗi business account IAM role BU_ROLE trust APP_ROLE inventory account, app assume BU_ROLE cross-account.",
+      "D": "DynamoDB tích hợp ACM certificate authenticate đọc DynamoDB."
+    }
+  },
+  "522": {
+    "questionVi": "EKS workload không đều trong ngày, cần scale in/out theo workload, overhead thấp nhất. (Chọn hai.)",
+    "optionsVi": {
+      "A": "Lambda function resize EKS cluster.",
+      "B": "Kubernetes Metrics Server kích hoạt horizontal pod autoscaling.",
+      "C": "Kubernetes Cluster Autoscaler quản lý số node cluster.",
+      "D": "API Gateway kết nối EKS.",
+      "E": "App Mesh quan sát network activity."
+    }
+  },
+  "523": {
+    "questionVi": "Serverless web app microservices đọc nhiều bảng DynamoDB không ảnh hưởng baseline performance, hiệu quả vận hành nhất.",
+    "optionsVi": {
+      "A": "AWS AppSync pipeline resolvers",
+      "B": "CloudFront với Lambda@Edge functions",
+      "C": "Edge-optimized API Gateway với Lambda functions",
+      "D": "Athena Federated Query với DynamoDB connector"
+    }
+  },
+  "524": {
+    "questionVi": "Phân tích và troubleshoot Access Denied/Unauthorized IAM permissions, CloudTrail đã bật, effort thấp nhất.",
+    "optionsVi": {
+      "A": "Glue script custom query CloudTrail logs.",
+      "B": "Batch script custom query CloudTrail logs.",
+      "C": "Athena query CloudTrail logs xác định lỗi.",
+      "D": "QuickSight dashboard tìm lỗi CloudTrail logs."
+    }
+  },
+  "525": {
+    "questionVi": "Thêm chi phí AWS usage vào operation cost dashboard programmatically, dữ liệu năm hiện tại và forecast 12 tháng, overhead thấp nhất.",
+    "optionsVi": {
+      "A": "Cost Explorer API với pagination.",
+      "B": "Download Cost Explorer report CSV.",
+      "C": "Budgets actions gửi cost data qua FTP.",
+      "D": "Budgets reports gửi cost data qua SMTP."
+    }
+  },
+  "526": {
+    "questionVi": "Aurora PostgreSQL manual failover scaling exercise gây downtime 3 phút. Giảm downtime với overhead thấp nhất.",
+    "optionsVi": {
+      "A": "Thêm Aurora PostgreSQL read replicas cluster xử lý load failover.",
+      "B": "Aurora PostgreSQL cluster secondary cùng Region, failover cập nhật app endpoint.",
+      "C": "ElastiCache Memcached xử lý load failover.",
+      "D": "RDS Proxy cho database, app dùng proxy endpoint."
+    }
+  },
+  "527": {
+    "questionVi": "Streaming regional EC2 ASG+ELB, Aurora global multi-AZ, mở rộng global minimal downtime, fault tolerance cao nhất.",
+    "optionsVi": {
+      "A": "Mở rộng ASG web/app AZ Region thứ hai, Aurora global hai Region, Route 53 failover Region thứ hai.",
+      "B": "Deploy web/app Region thứ hai, Aurora cross-Region replica, Route 53 failover, promote khi cần.",
+      "C": "Deploy web/app Region thứ hai, Aurora DB Region thứ hai, DMS replicate, Route 53 failover.",
+      "D": "Deploy web/app Region thứ hai, Aurora global hai Region, Route 53 failover, promote secondary khi cần."
+    }
+  },
+  "528": {
+    "questionVi": "FTP file nhỏ định kỳ, xử lý ngay khi nhận 3-8 phút/file, xóa sau xử lý thành công, thay đổi FTP client tối thiểu, hiệu quả vận hành nhất.",
+    "optionsVi": {
+      "A": "EC2 FTP server lưu S3 Glacier Flexible Retrieval, Batch job EventBridge xử lý nightly, xóa object sau job.",
+      "B": "EC2 FTP server lưu EBS, Batch job EventBridge xử lý nightly từ EBS, xóa file sau job.",
+      "C": "Transfer Family FTP lưu EBS, S3 event invoke Batch khi file đến, xóa file sau job.",
+      "D": "Transfer Family FTP lưu S3 Standard, Lambda xử lý và xóa file, S3 event invoke Lambda."
+    }
+  },
+  "529": {
+    "questionVi": "Migrate workload databases transactional nhạy cảm lên AWS, tăng bảo mật và giảm ops databases.",
+    "optionsVi": {
+      "A": "Migrate database EC2, KMS AWS managed key encryption.",
+      "B": "Migrate database RDS, cấu hình encryption at rest.",
+      "C": "Migrate data S3, Macie bảo vệ data.",
+      "D": "Migrate database RDS, CloudWatch Logs bảo vệ data."
+    }
+  },
+  "530": {
+    "questionVi": "Game online TCP/UDP, Route 53 trỏ NLB nhiều Region. Cải thiện performance và giảm latency trước user growth.",
+    "optionsVi": {
+      "A": "CloudFront trước NLB, tăng Cache-Control max-age.",
+      "B": "Thay NLB bằng ALB, Route 53 latency-based routing.",
+      "C": "Global Accelerator trước NLB, endpoint đúng listener ports.",
+      "D": "API Gateway sau NLB, bật API caching override method caching."
+    }
+  },
+  "531": {
+    "questionVi": "Tích hợp third-party data feed webhook; Lambda retrieve data khi callback. Làm Lambda available cho third party gọi, hiệu quả vận hành nhất.",
+    "optionsVi": {
+      "A": "Tạo function URL Lambda, cung cấp URL cho third party webhook.",
+      "B": "Deploy ALB trước Lambda, cung cấp ALB URL cho third party.",
+      "C": "SNS topic gắn Lambda, cung cấp hostname SNS cho third party.",
+      "D": "SQS queue gắn Lambda, cung cấp hostname SQS cho third party."
+    }
+  },
+  "532": {
+    "questionVi": "API Gateway REST API Region, Route 53 DNS, cần URL riêng an toàn cho từng khách hàng. (Chọn ba.)",
+    "optionsVi": {
+      "A": "Đăng ký domain registrar, wildcard custom domain Route 53 hosted zone trỏ API Gateway endpoint.",
+      "B": "Wildcard certificate ACM Region khác khớp domain.",
+      "C": "Hosted zone Route 53 mỗi khách hàng, zone record trỏ API Gateway endpoint.",
+      "D": "Wildcard certificate ACM cùng Region khớp custom domain.",
+      "E": "Nhiều API endpoint mỗi khách hàng trong API Gateway.",
+      "F": "Custom domain API Gateway REST API, import certificate từ ACM."
+    }
+  },
+  "533": {
+    "questionVi": "S3 không được chứa PII; phát hiện bucket có PII. Cần tự động phát hiện và thông báo security team.",
+    "optionsVi": {
+      "A": "Macie, EventBridge filter SensitiveData Macie findings, SNS notify security team.",
+      "B": "GuardDuty, EventBridge filter CRITICAL GuardDuty findings, SNS notify security team.",
+      "C": "Macie, EventBridge filter SensitiveData:S3Object/Personal, SQS notify security team.",
+      "D": "GuardDuty, EventBridge filter CRITICAL, SQS notify security team."
+    }
+  },
+  "534": {
+    "questionVi": "Logging tập trung S3: VPC flow logs và CloudTrail, HA 30 ngày phân tích thường xuyên, backup thêm 60 ngày, xóa sau 90 ngày, cost-effective nhất.",
+    "optionsVi": {
+      "A": "Transition S3 Standard sau 30 ngày, expiration xóa sau 90 ngày.",
+      "B": "Transition Standard-IA sau 30 ngày, Glacier Flexible Retrieval sau 90 ngày, expiration xóa sau 90 ngày.",
+      "C": "Transition Glacier Flexible Retrieval sau 30 ngày, expiration xóa sau 90 ngày.",
+      "D": "Transition One Zone-IA sau 30 ngày, Glacier Flexible Retrieval sau 90 ngày, expiration xóa sau 90 ngày."
+    }
+  },
+  "535": {
+    "questionVi": "EKS cluster, mọi secret lưu EKS phải mã hóa trong Kubernetes etcd key-value store.",
+    "optionsVi": {
+      "A": "KMS key mới, Secrets Manager quản lý/rotate/lưu secret EKS.",
+      "B": "KMS key mới, bật EKS KMS secrets encryption trên cluster.",
+      "C": "Tạo cluster default options, EBS CSI driver add-on.",
+      "D": "KMS key alias/aws/ebs, bật default EBS volume encryption account."
+    }
+  },
+  "536": {
+    "questionVi": "RDS PostgreSQL Single-AZ production, data scientists cần read-only near real-time, query phức tạp không ảnh hưởng production, HA, cost-effective nhất.",
+    "optionsVi": {
+      "A": "Scale up production DB maintenance window cho data scientists.",
+      "B": "Single-AZ sang Multi-AZ với standby lớn hơn, data scientists truy cập standby.",
+      "C": "Single-AZ sang Multi-AZ, thêm hai read replica cho data scientists.",
+      "D": "Single-AZ sang Multi-AZ cluster hai readable standby, read endpoints cho data scientists."
+    }
+  }
+}

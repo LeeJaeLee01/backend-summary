@@ -1,0 +1,232 @@
+{
+  "512": {
+    "questionVi": "Organizations tag tài khoản, AWS Backup backup infrastructure. Cần backup mọi tài nguyên AWS với overhead vận hành thấp nhất.",
+    "optionsVi": {
+      "A": "Config xác định resource chưa tag, tag programmatically, dùng tag trong backup plan.",
+      "B": "Config xác định resource không chạy, thêm vào backup vault.",
+      "C": "Yêu cầu owner tài khoản review resource cần backup.",
+      "D": "Inspector xác định resource noncompliant."
+    }
+  },
+  "513": {
+    "questionVi": "Social media app upload ảnh, tự động resize multi-device, traffic không dự đoán, HA và scale tối đa.",
+    "optionsVi": {
+      "A": "Static website S3 invoke Lambda resize ảnh, lưu S3 bucket.",
+      "B": "Static website CloudFront invoke Step Functions resize, lưu RDS.",
+      "C": "Dynamic website EC2 resize ảnh, lưu S3 bucket.",
+      "D": "ECS cluster auto scaling, SQS resize job, EC2 xử lý resize."
+    }
+  },
+  "514": {
+    "questionVi": "Migrate microservices EC2 lên EKS, control plane private access true public false, data plane private subnet. Node không join cluster.",
+    "optionsVi": {
+      "A": "Cấp quyền IAM cho AmazonEKSNodeRole.",
+      "B": "Tạo interface VPC endpoints để node truy cập control plane.",
+      "C": "Tạo lại node public subnet, hạn chế SG EC2 node.",
+      "D": "Cho phép outbound traffic SG của node."
+    }
+  },
+  "515": {
+    "questionVi": "Migrate on-prem application, dùng Amazon Redshift. Use case nào phù hợp? (Chọn ba.)",
+    "optionsVi": {
+      "A": "Data APIs cho traditional, containerized và event-driven applications",
+      "B": "Client-side và server-side encryption",
+      "C": "Analytics workload giờ chỉ định khi application không active",
+      "D": "Cache data giảm áp lực backend database",
+      "E": "Scale global petabyte data và hàng chục triệu request/phút",
+      "F": "Tạo secondary replica cluster qua Management Console"
+    }
+  },
+  "516": {
+    "questionVi": "API cung cấp thông tin tài chính khách hàng, request peak cao, API phản hồi nhất quán latency thấp, compute host API với overhead thấp nhất.",
+    "optionsVi": {
+      "A": "ALB và ECS.",
+      "B": "API Gateway và Lambda với provisioned concurrency.",
+      "C": "ALB và EKS cluster.",
+      "D": "API Gateway và Lambda với reserved concurrency."
+    }
+  },
+  "517": {
+    "questionVi": "Gửi mọi Systems Manager Session Manager log tới S3 archive, hiệu quả vận hành cao nhất.",
+    "optionsVi": {
+      "A": "Bật S3 logging trong Systems Manager console, chọn bucket đích.",
+      "B": "Cài CloudWatch agent, push log group, export S3 archive.",
+      "C": "Systems Manager document upload log central S3, EventBridge chạy document hàng ngày.",
+      "D": "CloudWatch agent push log group, subscription Firehose destination S3."
+    }
+  },
+  "518": {
+    "questionVi": "RDS MySQL hết disk space. Cần tăng disk không downtime, effort thấp nhất.",
+    "optionsVi": {
+      "A": "Bật storage autoscaling RDS.",
+      "B": "Tăng kích thước RDS database instance.",
+      "C": "Đổi storage type RDS sang Provisioned IOPS.",
+      "D": "Backup RDS, tăng storage capacity, restore, dừng instance cũ."
+    }
+  },
+  "519": {
+    "questionVi": "Công ty tư vấn cần quản lý và triển khai tập trung bộ giải pháp/công cụ self-service cho khách hàng.",
+    "optionsVi": {
+      "A": "Tạo CloudFormation templates cho khách hàng.",
+      "B": "Tạo AWS Service Catalog products cho khách hàng.",
+      "C": "Tạo Systems Manager templates cho khách hàng.",
+      "D": "Tạo Config items cho khách hàng."
+    }
+  },
+  "520": {
+    "questionVi": "EC2 app DynamoDB, traffic không dự đoán, read/write moderate-high, cần scale, cost-effective nhất.",
+    "optionsVi": {
+      "A": "DynamoDB provisioned read/write Standard class, auto scaling max capacity.",
+      "B": "DynamoDB on-demand mode Standard class.",
+      "C": "DynamoDB provisioned read/write Standard-IA class, auto scaling max capacity.",
+      "D": "DynamoDB on-demand mode Standard-IA class."
+    }
+  },
+  "521": {
+    "questionVi": "Nhiều business unit AWS account riêng, mỗi team DynamoDB inventory. Ứng dụng inventory tập trung cần đọc mọi bảng DynamoDB. Xác thực an toàn nhất?",
+    "optionsVi": {
+      "A": "DynamoDB tích hợp Secrets Manager, app đọc secret authenticate DynamoDB, rotate 30 ngày.",
+      "B": "Mỗi business account IAM user programmatic, app dùng access key, rotate thủ công 30 ngày.",
+      "C": "Mỗi business account IAM role BU_ROLE trust APP_ROLE inventory account, app assume BU_ROLE cross-account.",
+      "D": "DynamoDB tích hợp ACM certificate authenticate đọc DynamoDB."
+    }
+  },
+  "522": {
+    "questionVi": "EKS workload không đều trong ngày, cần scale in/out theo workload, overhead thấp nhất. (Chọn hai.)",
+    "optionsVi": {
+      "A": "Lambda function resize EKS cluster.",
+      "B": "Kubernetes Metrics Server kích hoạt horizontal pod autoscaling.",
+      "C": "Kubernetes Cluster Autoscaler quản lý số node cluster.",
+      "D": "API Gateway kết nối EKS.",
+      "E": "App Mesh quan sát network activity."
+    }
+  },
+  "523": {
+    "questionVi": "Serverless web app microservices đọc nhiều bảng DynamoDB không ảnh hưởng baseline performance, hiệu quả vận hành nhất.",
+    "optionsVi": {
+      "A": "AWS AppSync pipeline resolvers",
+      "B": "CloudFront với Lambda@Edge functions",
+      "C": "Edge-optimized API Gateway với Lambda functions",
+      "D": "Athena Federated Query với DynamoDB connector"
+    }
+  },
+  "524": {
+    "questionVi": "Phân tích và troubleshoot Access Denied/Unauthorized IAM permissions, CloudTrail đã bật, effort thấp nhất.",
+    "optionsVi": {
+      "A": "Glue script custom query CloudTrail logs.",
+      "B": "Batch script custom query CloudTrail logs.",
+      "C": "Athena query CloudTrail logs xác định lỗi.",
+      "D": "QuickSight dashboard tìm lỗi CloudTrail logs."
+    }
+  },
+  "525": {
+    "questionVi": "Thêm chi phí AWS usage vào operation cost dashboard programmatically, dữ liệu năm hiện tại và forecast 12 tháng, overhead thấp nhất.",
+    "optionsVi": {
+      "A": "Cost Explorer API với pagination.",
+      "B": "Download Cost Explorer report CSV.",
+      "C": "Budgets actions gửi cost data qua FTP.",
+      "D": "Budgets reports gửi cost data qua SMTP."
+    }
+  },
+  "526": {
+    "questionVi": "Aurora PostgreSQL manual failover scaling exercise gây downtime 3 phút. Giảm downtime với overhead thấp nhất.",
+    "optionsVi": {
+      "A": "Thêm Aurora PostgreSQL read replicas cluster xử lý load failover.",
+      "B": "Aurora PostgreSQL cluster secondary cùng Region, failover cập nhật app endpoint.",
+      "C": "ElastiCache Memcached xử lý load failover.",
+      "D": "RDS Proxy cho database, app dùng proxy endpoint."
+    }
+  },
+  "527": {
+    "questionVi": "Streaming regional EC2 ASG+ELB, Aurora global multi-AZ, mở rộng global minimal downtime, fault tolerance cao nhất.",
+    "optionsVi": {
+      "A": "Mở rộng ASG web/app AZ Region thứ hai, Aurora global hai Region, Route 53 failover Region thứ hai.",
+      "B": "Deploy web/app Region thứ hai, Aurora cross-Region replica, Route 53 failover, promote khi cần.",
+      "C": "Deploy web/app Region thứ hai, Aurora DB Region thứ hai, DMS replicate, Route 53 failover.",
+      "D": "Deploy web/app Region thứ hai, Aurora global hai Region, Route 53 failover, promote secondary khi cần."
+    }
+  },
+  "528": {
+    "questionVi": "FTP file nhỏ định kỳ, xử lý ngay khi nhận 3-8 phút/file, xóa sau xử lý thành công, thay đổi FTP client tối thiểu, hiệu quả vận hành nhất.",
+    "optionsVi": {
+      "A": "EC2 FTP server lưu S3 Glacier Flexible Retrieval, Batch job EventBridge xử lý nightly, xóa object sau job.",
+      "B": "EC2 FTP server lưu EBS, Batch job EventBridge xử lý nightly từ EBS, xóa file sau job.",
+      "C": "Transfer Family FTP lưu EBS, S3 event invoke Batch khi file đến, xóa file sau job.",
+      "D": "Transfer Family FTP lưu S3 Standard, Lambda xử lý và xóa file, S3 event invoke Lambda."
+    }
+  },
+  "529": {
+    "questionVi": "Migrate workload databases transactional nhạy cảm lên AWS, tăng bảo mật và giảm ops databases.",
+    "optionsVi": {
+      "A": "Migrate database EC2, KMS AWS managed key encryption.",
+      "B": "Migrate database RDS, cấu hình encryption at rest.",
+      "C": "Migrate data S3, Macie bảo vệ data.",
+      "D": "Migrate database RDS, CloudWatch Logs bảo vệ data."
+    }
+  },
+  "530": {
+    "questionVi": "Game online TCP/UDP, Route 53 trỏ NLB nhiều Region. Cải thiện performance và giảm latency trước user growth.",
+    "optionsVi": {
+      "A": "CloudFront trước NLB, tăng Cache-Control max-age.",
+      "B": "Thay NLB bằng ALB, Route 53 latency-based routing.",
+      "C": "Global Accelerator trước NLB, endpoint đúng listener ports.",
+      "D": "API Gateway sau NLB, bật API caching override method caching."
+    }
+  },
+  "531": {
+    "questionVi": "Tích hợp third-party data feed webhook; Lambda retrieve data khi callback. Làm Lambda available cho third party gọi, hiệu quả vận hành nhất.",
+    "optionsVi": {
+      "A": "Tạo function URL Lambda, cung cấp URL cho third party webhook.",
+      "B": "Deploy ALB trước Lambda, cung cấp ALB URL cho third party.",
+      "C": "SNS topic gắn Lambda, cung cấp hostname SNS cho third party.",
+      "D": "SQS queue gắn Lambda, cung cấp hostname SQS cho third party."
+    }
+  },
+  "532": {
+    "questionVi": "API Gateway REST API Region, Route 53 DNS, cần URL riêng an toàn cho từng khách hàng. (Chọn ba.)",
+    "optionsVi": {
+      "A": "Đăng ký domain registrar, wildcard custom domain Route 53 hosted zone trỏ API Gateway endpoint.",
+      "B": "Wildcard certificate ACM Region khác khớp domain.",
+      "C": "Hosted zone Route 53 mỗi khách hàng, zone record trỏ API Gateway endpoint.",
+      "D": "Wildcard certificate ACM cùng Region khớp custom domain.",
+      "E": "Nhiều API endpoint mỗi khách hàng trong API Gateway.",
+      "F": "Custom domain API Gateway REST API, import certificate từ ACM."
+    }
+  },
+  "533": {
+    "questionVi": "S3 không được chứa PII; phát hiện bucket có PII. Cần tự động phát hiện và thông báo security team.",
+    "optionsVi": {
+      "A": "Macie, EventBridge filter SensitiveData Macie findings, SNS notify security team.",
+      "B": "GuardDuty, EventBridge filter CRITICAL GuardDuty findings, SNS notify security team.",
+      "C": "Macie, EventBridge filter SensitiveData:S3Object/Personal, SQS notify security team.",
+      "D": "GuardDuty, EventBridge filter CRITICAL, SQS notify security team."
+    }
+  },
+  "534": {
+    "questionVi": "Logging tập trung S3: VPC flow logs và CloudTrail, HA 30 ngày phân tích thường xuyên, backup thêm 60 ngày, xóa sau 90 ngày, cost-effective nhất.",
+    "optionsVi": {
+      "A": "Transition S3 Standard sau 30 ngày, expiration xóa sau 90 ngày.",
+      "B": "Transition Standard-IA sau 30 ngày, Glacier Flexible Retrieval sau 90 ngày, expiration xóa sau 90 ngày.",
+      "C": "Transition Glacier Flexible Retrieval sau 30 ngày, expiration xóa sau 90 ngày.",
+      "D": "Transition One Zone-IA sau 30 ngày, Glacier Flexible Retrieval sau 90 ngày, expiration xóa sau 90 ngày."
+    }
+  },
+  "535": {
+    "questionVi": "EKS cluster, mọi secret lưu EKS phải mã hóa trong Kubernetes etcd key-value store.",
+    "optionsVi": {
+      "A": "KMS key mới, Secrets Manager quản lý/rotate/lưu secret EKS.",
+      "B": "KMS key mới, bật EKS KMS secrets encryption trên cluster.",
+      "C": "Tạo cluster default options, EBS CSI driver add-on.",
+      "D": "KMS key alias/aws/ebs, bật default EBS volume encryption account."
+    }
+  },
+  "536": {
+    "questionVi": "RDS PostgreSQL Single-AZ production, data scientists cần read-only near real-time, query phức tạp không ảnh hưởng production, HA, cost-effective nhất.",
+    "optionsVi": {
+      "A": "Scale up production DB maintenance window cho data scientists.",
+      "B": "Single-AZ sang Multi-AZ với standby lớn hơn, data scientists truy cập standby.",
+      "C": "Single-AZ sang Multi-AZ, thêm hai read replica cho data scientists.",
+      "D": "Single-AZ sang Multi-AZ cluster hai readable standby, read endpoints cho data scientists."
+    }
+  }
+}

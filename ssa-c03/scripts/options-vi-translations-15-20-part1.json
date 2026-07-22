@@ -1,0 +1,231 @@
+{
+  "387": {
+    "questionVi": "Một nhân viên mới gia nhập công ty với vai trò deployment engineer, sử dụng mẫu AWS CloudFormation để tạo nhiều tài nguyên AWS. Solutions architect muốn deployment engineer thực hiện công việc theo nguyên tắc least privilege. Nên kết hợp những hành động nào? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Cho deployment engineer dùng thông tin đăng nhập root user của tài khoản AWS để thực hiện các thao tác CloudFormation stack.",
+      "B": "Tạo IAM user mới cho deployment engineer và thêm user vào group có gắn policy PowerUsers.",
+      "C": "Tạo IAM user mới cho deployment engineer và thêm user vào group có gắn policy AdministratorAccess.",
+      "D": "Tạo IAM user mới cho deployment engineer và thêm user vào group có IAM policy chỉ cho phép các hành động AWS CloudFormation.",
+      "E": "Tạo IAM role cho deployment engineer để định nghĩa rõ quyền cụ thể cho CloudFormation stack và launch stack bằng role đó."
+    }
+  },
+  "388": {
+    "questionVi": "Công ty triển khai ứng dụng web hai tầng trong VPC. Tầng web dùng Amazon EC2 Auto Scaling group ở public subnet trên nhiều AZ. Tầng database là Amazon RDS for MySQL ở private subnet. Web tier cần truy cập database để lấy thông tin sản phẩm. Ứng dụng báo không kết nối được database; database đang chạy bình thường. NACL, security group và route table đều ở trạng thái mặc định. Solutions architect nên khuyến nghị gì?",
+    "optionsVi": {
+      "A": "Thêm rule rõ ràng vào network ACL của private subnet để cho phép traffic từ EC2 tầng web.",
+      "B": "Thêm route trong route table VPC để cho phép traffic giữa EC2 tầng web và tầng database.",
+      "C": "Triển khai EC2 tầng web và RDS vào hai VPC riêng và cấu hình VPC peering.",
+      "D": "Thêm inbound rule vào security group của RDS để cho phép traffic từ security group của tầng web."
+    }
+  },
+  "389": {
+    "questionVi": "Công ty lưu dataset lớn cho quảng cáo trực tuyến trên Amazon RDS for MySQL single-AZ. Công ty muốn chạy truy vấn báo cáo kinh doanh mà không ảnh hưởng thao tác ghi trên DB production. Giải pháp nào phù hợp?",
+    "optionsVi": {
+      "A": "Triển khai RDS read replica để xử lý truy vấn báo cáo.",
+      "B": "Scale out DB instance theo chiều ngang bằng cách đặt sau Elastic Load Balancer.",
+      "C": "Scale up DB instance lên loại lớn hơn để xử lý cả write và query.",
+      "D": "Triển khai DB instance trên nhiều AZ để xử lý truy vấn báo cáo."
+    }
+  },
+  "390": {
+    "questionVi": "Công ty vận hành ứng dụng ecommerce ba tầng trên EC2 trong Auto Scaling group sau ALB. Dữ liệu ecommerce lưu trên Amazon RDS for MariaDB Multi-AZ. Công ty muốn tối ưu quản lý session khách hàng trong giao dịch; session phải được lưu bền vững. Giải pháp nào đáp ứng? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Bật sticky sessions (session affinity) trên ALB.",
+      "B": "Dùng bảng Amazon DynamoDB để lưu thông tin session khách hàng.",
+      "C": "Triển khai Amazon Cognito user pool để quản lý session.",
+      "D": "Triển khai Amazon ElastiCache for Redis cluster để lưu session khách hàng.",
+      "E": "Dùng AWS Systems Manager Application Manager trong ứng dụng để quản lý session."
+    }
+  },
+  "391": {
+    "questionVi": "Công ty cần chiến lược backup cho ứng dụng web stateless ba tầng trên EC2 Auto Scaling với policy scale theo sự kiện. Tầng database dùng Amazon RDS for PostgreSQL. Web không cần local storage tạm trên EC2. RPO là 2 giờ. Chiến lược backup phải tối đa khả năng mở rộng và tối ưu tài nguyên. Giải pháp nào phù hợp?",
+    "optionsVi": {
+      "A": "Chụp snapshot EBS của EC2 và database mỗi 2 giờ để đáp ứng RPO.",
+      "B": "Cấu hình snapshot lifecycle policy cho EBS. Bật automated backup RDS để đáp ứng RPO.",
+      "C": "Giữ AMI mới nhất của tầng web và application. Bật automated backup RDS và dùng point-in-time recovery để đáp ứng RPO.",
+      "D": "Chụp snapshot EBS của EC2 mỗi 2 giờ. Bật automated backup RDS và dùng point-in-time recovery để đáp ứng RPO."
+    }
+  },
+  "392": {
+    "questionVi": "Công ty muốn triển khai ứng dụng web public mới trên AWS: tầng web trên EC2, database là Amazon RDS for MySQL. Ứng dụng phải an toàn và truy cập được từ khách hàng toàn cầu có IP động. Solutions architect nên cấu hình security groups thế nào?",
+    "optionsVi": {
+      "A": "Security group web server cho phép inbound port 443 từ 0.0.0.0/0. Security group DB cho phép inbound port 3306 từ security group của web server.",
+      "B": "Security group web server cho phép inbound port 443 từ IP khách hàng. Security group DB cho phép inbound port 3306 từ security group web server.",
+      "C": "Security group web server cho phép inbound port 443 từ IP khách hàng. Security group DB cho phép inbound port 3306 từ IP khách hàng.",
+      "D": "Security group web server cho phép inbound port 443 từ 0.0.0.0/0. Security group DB cho phép inbound port 3306 từ 0.0.0.0/0."
+    }
+  },
+  "393": {
+    "questionVi": "Công ty xử lý thanh toán ghi âm mọi cuộc gọi với khách hàng và lưu file audio trong S3 bucket. Công ty cần chuyển audio thành văn bản và loại bỏ PII của khách hàng khỏi transcript. Solutions architect nên làm gì?",
+    "optionsVi": {
+      "A": "Xử lý file audio bằng Amazon Kinesis Video Streams. Dùng Lambda quét các mẫu PII đã biết.",
+      "B": "Khi file audio upload lên S3, invoke Lambda để chạy tác vụ Amazon Textract phân tích bản ghi.",
+      "C": "Cấu hình Amazon Transcribe với PII redaction. Khi file upload S3, invoke Lambda bắt đầu transcription job. Lưu kết quả vào S3 bucket khác.",
+      "D": "Tạo Amazon Connect contact flow với transcription, nhúng Lambda quét PII. Dùng EventBridge kích hoạt contact flow khi file upload S3."
+    }
+  },
+  "394": {
+    "questionVi": "Ứng dụng ecommerce multi-tier trên EC2 với Amazon RDS for MySQL Multi-AZ, gp3 2000 GB. Hiệu năng database ảnh hưởng ứng dụng khi nhu cầu cao. CloudWatch Logs cho thấy hiệu năng giảm khi read/write IOPS vượt 20.000. Solutions architect nên làm gì?",
+    "optionsVi": {
+      "A": "Thay volume bằng magnetic volume.",
+      "B": "Tăng số IOPS trên volume gp3.",
+      "C": "Thay volume bằng Provisioned IOPS SSD (io2).",
+      "D": "Thay volume gp3 2000 GB bằng hai volume gp3 1000 GB."
+    }
+  },
+  "395": {
+    "questionVi": "IAM user đã thay đổi cấu hình tài nguyên AWS trong tài khoản công ty khi deploy production tuần trước. Solutions architect phát hiện vài rule security group chưa đúng và cần xác định IAM user nào thực hiện thay đổi. Nên dùng dịch vụ nào?",
+    "optionsVi": {
+      "A": "Amazon GuardDuty",
+      "B": "Amazon Inspector",
+      "C": "AWS CloudTrail",
+      "D": "AWS Config"
+    }
+  },
+  "396": {
+    "questionVi": "Công ty vận hành DNS tự quản trên AWS gồm EC2 ở nhiều Region và endpoint AWS Global Accelerator standard. Công ty muốn bảo vệ giải pháp khỏi tấn công DDoS. Solutions architect nên làm gì?",
+    "optionsVi": {
+      "A": "Đăng ký AWS Shield Advanced. Thêm accelerator làm tài nguyên được bảo vệ.",
+      "B": "Đăng ký AWS Shield Advanced. Thêm EC2 instances làm tài nguyên được bảo vệ.",
+      "C": "Tạo AWS WAF web ACL có rate-based rule. Gắn web ACL với accelerator.",
+      "D": "Tạo AWS WAF web ACL có rate-based rule. Gắn web ACL với EC2 instances."
+    }
+  },
+  "397": {
+    "questionVi": "Công ty ecommerce cần job hàng ngày tổng hợp và lọc bản ghi bán hàng để phân tích. Dữ liệu lưu trong S3, mỗi object tối đa 10 GB. Job có thể chạy tới một giờ; CPU và memory ổn định, đã biết trước. Solutions architect cần giảm thiểu công vận hành. Giải pháp nào phù hợp?",
+    "optionsVi": {
+      "A": "Tạo Lambda function với thông báo EventBridge, lên lịch chạy mỗi ngày.",
+      "B": "Tạo Lambda function, API Gateway HTTP API tích hợp function. Tạo EventBridge scheduled event gọi API và invoke function.",
+      "C": "Tạo ECS cluster Fargate. Tạo EventBridge scheduled event launch ECS task chạy job.",
+      "D": "Tạo ECS cluster EC2 với Auto Scaling group ít nhất một instance. Tạo EventBridge scheduled event launch ECS task chạy job."
+    }
+  },
+  "398": {
+    "questionVi": "Công ty cần chuyển 600 TB dữ liệu từ NAS on-premises lên AWS trong 2 tuần. Dữ liệu nhạy cảm, phải mã hóa khi truyền. Kết nối internet upload 100 Mbps. Giải pháp nào tiết kiệm chi phí nhất?",
+    "optionsVi": {
+      "A": "Dùng S3 multipart upload qua HTTPS.",
+      "B": "Tạo VPN tới Region gần nhất và chuyển dữ liệu qua VPN.",
+      "C": "Đặt nhiều AWS Snowball Edge Storage Optimized, chuyển dữ liệu lên S3.",
+      "D": "Thiết lập Direct Connect 10 Gbps và chuyển dữ liệu qua VPN vào Region, lưu S3."
+    }
+  },
+  "399": {
+    "questionVi": "Công ty tài chính host ứng dụng web trên AWS, dùng API Gateway Regional endpoint để lấy giá cổ phiếu. Security team thấy số request API tăng, lo ngại HTTP flood làm sập ứng dụng. Solutions architect cần giải pháp chống tấn công với overhead vận hành thấp nhất.",
+    "optionsVi": {
+      "A": "Tạo CloudFront distribution trước API Gateway Regional endpoint với TTL tối đa 24 giờ.",
+      "B": "Tạo Regional AWS WAF web ACL với rate-based rule. Gắn web ACL với API Gateway stage.",
+      "C": "Dùng CloudWatch metric Count và cảnh báo security team khi vượt ngưỡng.",
+      "D": "Tạo CloudFront với Lambda@Edge trước API Gateway. Lambda chặn request từ IP vượt ngưỡng."
+    }
+  },
+  "400": {
+    "questionVi": "Startup khí tượng dùng DynamoDB lưu dữ liệu và muốn dịch vụ mới gửi cảnh báo cho bốn team nội bộ mỗi khi có sự kiện thời tiết mới, không ảnh hưởng hiệu năng ứng dụng hiện tại, với overhead vận hành thấp nhất.",
+    "optionsVi": {
+      "A": "Dùng DynamoDB transactions ghi sự kiện mới và cấu hình transaction thông báo team nội bộ.",
+      "B": "Ứng dụng hiện tại publish message lên bốn SNS topic; mỗi team subscribe một topic.",
+      "C": "Bật DynamoDB Streams, dùng trigger ghi vào một SNS topic để các team subscribe.",
+      "D": "Thêm custom attribute đánh dấu item mới. Cron job quét bảng mỗi phút và gửi SQS để team subscribe."
+    }
+  },
+  "401": {
+    "questionVi": "Công ty muốn đưa ứng dụng on-premises lên AWS với HA và khả năng scale. Phiên bản hiện tại ở data center; server database từng crash mất điện gây mất dữ liệu. Cần tránh single point of failure và cho phép scale theo nhu cầu người dùng.",
+    "optionsVi": {
+      "A": "Triển khai EC2 trong Auto Scaling group trên nhiều AZ. Dùng Amazon RDS Multi-AZ.",
+      "B": "Triển khai EC2 Auto Scaling trong một AZ. Database trên EC2 với EC2 Auto Recovery.",
+      "C": "Triển khai EC2 Auto Scaling trên nhiều AZ. RDS với read replica single-AZ, promote khi primary fail.",
+      "D": "Triển khai EC2 Auto Scaling trên nhiều AZ. Database primary/secondary trên EC2 nhiều AZ với EBS Multi-Attach shared storage."
+    }
+  },
+  "402": {
+    "questionVi": "Ứng dụng gửi streaming data từ EC2 lên Kinesis Data Streams (cấu hình mặc định). Mỗi hai ngày ứng dụng consume và ghi S3 cho BI. Công ty thấy S3 không nhận hết dữ liệu từ Kinesis. Solutions architect nên làm gì?",
+    "optionsVi": {
+      "A": "Cập nhật cấu hình mặc định Kinesis Data Streams bằng cách tăng data retention period.",
+      "B": "Cập nhật ứng dụng dùng Kinesis Producer Library (KPL) gửi dữ liệu lên Kinesis.",
+      "C": "Tăng số shard Kinesis để xử lý throughput dữ liệu gửi lên stream.",
+      "D": "Bật S3 Versioning trong bucket để giữ mọi phiên bản object ingest."
+    }
+  },
+  "403": {
+    "questionVi": "Developer có Lambda upload file lên S3 và cần quyền phù hợp. Developer đã có IAM user với credential hợp lệ cho S3. Solutions architect nên cấp quyền thế nào?",
+    "optionsVi": {
+      "A": "Thêm quyền IAM cần thiết vào resource policy của Lambda function.",
+      "B": "Tạo signed request bằng IAM credential hiện có trong Lambda function.",
+      "C": "Tạo IAM user mới và dùng credential hiện có trong Lambda function.",
+      "D": "Tạo IAM execution role với quyền cần thiết và gắn role vào Lambda function."
+    }
+  },
+  "404": {
+    "questionVi": "Ứng dụng serverless invoke Lambda khi upload document mới lên S3. Sau chiến dịch marketing, nhiều document không được xử lý. Solutions architect nên cải thiện kiến trúc thế nào?",
+    "optionsVi": {
+      "A": "Đặt runtime timeout Lambda là 15 phút.",
+      "B": "Cấu hình S3 bucket replication policy, stage document để xử lý sau.",
+      "C": "Triển khai thêm Lambda function, load balance xử lý document giữa hai function.",
+      "D": "Tạo SQS queue, gửi request vào queue và cấu hình queue làm event source cho Lambda."
+    }
+  },
+  "405": {
+    "questionVi": "Solutions architect thiết kế môi trường demo: EC2 Auto Scaling sau ALB. Hệ thống traffic tăng mạnh giờ làm việc, không cần chạy cuối tuần. Nên kết hợp hành động nào để scale theo nhu cầu? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Dùng AWS Auto Scaling điều chỉnh capacity ALB theo request rate.",
+      "B": "Dùng AWS Auto Scaling scale capacity internet gateway của VPC.",
+      "C": "Launch EC2 ở nhiều Region để phân tải.",
+      "D": "Dùng target tracking scaling policy scale Auto Scaling group theo CPU utilization.",
+      "E": "Dùng scheduled scaling đặt min/max/desired capacity Auto Scaling group về 0 cuối tuần, khôi phục đầu tuần."
+    }
+  },
+  "406": {
+    "questionVi": "Solutions architect thiết kế kiến trúc hai tầng: public subnet và database subnet. Web server public phải mở internet port 443. RDS MySQL trong database subnet chỉ accessible từ web server port 3306. Nên kết hợp bước nào? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Tạo network ACL cho public subnet, thêm rule deny outbound tới 0.0.0.0/0 port 3306.",
+      "B": "Tạo security group cho DB instance, cho phép traffic từ CIDR public subnet port 3306.",
+      "C": "Tạo security group cho web server public subnet, cho phép traffic từ 0.0.0.0/0 port 443.",
+      "D": "Tạo security group cho DB instance, cho phép traffic từ security group web server port 3306.",
+      "E": "Tạo security group cho DB instance, deny mọi traffic trừ từ security group web server port 3306."
+    }
+  },
+  "407": {
+    "questionVi": "Công ty cần shared storage cho ứng dụng gaming trên AWS Cloud, cho phép Lustre clients truy cập dữ liệu. Giải pháp phải fully managed.",
+    "optionsVi": {
+      "A": "Tạo AWS DataSync task chia sẻ dữ liệu dạng mountable file system và mount lên application server.",
+      "B": "Tạo AWS Storage Gateway file gateway, tạo file share với protocol client cần thiết và kết nối application server.",
+      "C": "Tạo Amazon EFS cấu hình hỗ trợ Lustre, gắn origin server và kết nối application server.",
+      "D": "Tạo Amazon FSx for Lustre, gắn origin server và kết nối application server."
+    }
+  },
+  "408": {
+    "questionVi": "Ứng dụng nhận dữ liệu UDP từ hàng nghìn thiết bị remote, xử lý ngay và phản hồi thiết bị nếu cần, không lưu dữ liệu. Cần latency thấp và failover nhanh sang Region khác.",
+    "optionsVi": {
+      "A": "Cấu hình Route 53 failover routing. Tạo NLB ở hai Region, NLB invoke Lambda xử lý dữ liệu.",
+      "B": "Dùng AWS Global Accelerator, NLB ở hai Region làm endpoint. ECS Fargate cluster, ECS service làm target NLB, xử lý dữ liệu trên ECS.",
+      "C": "Dùng Global Accelerator, ALB ở hai Region làm endpoint. ECS Fargate, ECS service làm target ALB, xử lý trên ECS.",
+      "D": "Cấu hình Route 53 failover routing. ALB ở hai Region, ECS Fargate cluster, ECS service làm target ALB, xử lý trên ECS."
+    }
+  },
+  "409": {
+    "questionVi": "Solutions architect migrate ứng dụng Windows IIS lên AWS. Ứng dụng dùng file share trên NAS on-premises. Đề xuất EC2 nhiều AZ kết nối storage và ELB. Thay thế file share on-premises nào resilient và durable nhất?",
+    "optionsVi": {
+      "A": "Migrate file share lên Amazon RDS.",
+      "B": "Migrate file share lên AWS Storage Gateway.",
+      "C": "Migrate file share lên Amazon FSx for Windows File Server.",
+      "D": "Migrate file share lên Amazon EFS."
+    }
+  },
+  "410": {
+    "questionVi": "Công ty triển khai ứng dụng mới trên EC2, ghi dữ liệu lên EBS volumes. Cần đảm bảo mọi dữ liệu ghi EBS được mã hóa at rest.",
+    "optionsVi": {
+      "A": "Tạo IAM role chỉ định EBS encryption và gắn role vào EC2 instances.",
+      "B": "Tạo EBS volumes dạng encrypted và gắn vào EC2 instances.",
+      "C": "Tạo EC2 tag Encrypt=True cho mọi instance cần mã hóa EBS.",
+      "D": "Tạo KMS key policy bắt buộc EBS encryption trong tài khoản và kích hoạt key policy."
+    }
+  },
+  "411": {
+    "questionVi": "Công ty có ứng dụng web usage thất thường: đầu tháng nặng, đầu tuần vừa, trong tuần không dự đoán được. Web server và MySQL chạy on-premises. Công ty muốn migrate lên AWS, chọn database cost-effective, không sửa schema.",
+    "optionsVi": {
+      "A": "Amazon DynamoDB",
+      "B": "Amazon RDS for MySQL",
+      "C": "Amazon Aurora Serverless tương thích MySQL",
+      "D": "MySQL trên EC2 trong Auto Scaling group"
+    }
+  }
+}

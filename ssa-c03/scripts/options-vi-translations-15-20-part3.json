@@ -1,0 +1,235 @@
+{
+  "437": {
+    "questionVi": "Ecommerce trên EC2 sau ALB Auto Scaling. Traffic cao từ hệ thống bên ngoài không hợp lệ với IP thay đổi. Security lo DDoS. Cần chặn request không hợp lệ với tác động tối thiểu lên user hợp lệ.",
+    "optionsVi": {
+      "A": "Triển khai Amazon Inspector và gắn với ALB.",
+      "B": "Triển khai AWS WAF, gắn ALB, cấu hình rate-limiting rule.",
+      "C": "Thêm rule NACL gắn ALB để chặn incoming traffic.",
+      "D": "Triển khai GuardDuty và bật rate-limiting protection."
+    }
+  },
+  "438": {
+    "questionVi": "Công ty cần chia sẻ dữ liệu kế toán với auditor bên ngoài. Dữ liệu trên RDS private subnet. Auditor có tài khoản AWS riêng và cần bản sao database. Cách chia sẻ an toàn nhất?",
+    "optionsVi": {
+      "A": "Tạo read replica, cấu hình IAM standard database authentication cho auditor.",
+      "B": "Export DB ra file text, lưu S3, tạo IAM user auditor truy cập bucket.",
+      "C": "Copy snapshot DB lên S3, tạo IAM user, chia sẻ key cho auditor.",
+      "D": "Tạo encrypted snapshot, chia sẻ snapshot với auditor, cho phép truy cập KMS key."
+    }
+  },
+  "439": {
+    "questionVi": "VPC có dải IP nhỏ, số EC2 tăng, không đủ IP cho workload tương lai. Giải pháp nào xử lý với overhead vận hành thấp nhất?",
+    "optionsVi": {
+      "A": "Thêm IPv4 CIDR block, tạo subnet mới, tạo tài nguyên mới trong subnet mới.",
+      "B": "Tạo VPC thứ hai với subnet bổ sung, VPC peering, cập nhật route và tạo tài nguyên VPC thứ hai.",
+      "C": "Dùng Transit Gateway kết nối VPC thứ hai, cập nhật route, tạo tài nguyên subnet VPC thứ hai.",
+      "D": "Tạo VPC thứ hai, Site-to-Site VPN giữa hai VPC qua EC2 VPN và VGW, cập nhật route."
+    }
+  },
+  "440": {
+    "questionVi": "Công ty test RDS MySQL, tạo backup bằng mysqldump và final snapshot khi terminate. Công ty chọn Aurora MySQL-compatible cho test mới. Giải pháp nào tạo DB instance mới? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Import RDS snapshot trực tiếp vào Aurora.",
+      "B": "Upload RDS snapshot lên S3 rồi import vào Aurora.",
+      "C": "Upload database dump lên S3 rồi import vào Aurora.",
+      "D": "Dùng DMS import RDS snapshot vào Aurora.",
+      "E": "Upload dump lên S3, DMS import dump vào Aurora."
+    }
+  },
+  "441": {
+    "questionVi": "Web multi-tier Linux EC2 sau ALB Auto Scaling nhiều AZ. ASG launch thêm On-Demand khi user truy cập nhiều static content. Cần redesign cost-effective nhất.",
+    "optionsVi": {
+      "A": "Cập nhật ASG dùng Reserved Instances thay On-Demand.",
+      "B": "Cập nhật ASG scale bằng Spot Instances thay On-Demand.",
+      "C": "Tạo CloudFront phục vụ static content từ S3 bucket.",
+      "D": "Tạo Lambda sau API Gateway host static website."
+    }
+  },
+  "442": {
+    "questionVi": "Công ty lưu petabyte dữ liệu nhiều tài khoản, quản lý data lake bằng Lake Formation. Data science muốn chia sẻ dữ liệu chọn lọc với engineering team phân tích, overhead thấp nhất.",
+    "optionsVi": {
+      "A": "Copy dữ liệu sang tài khoản chung, IAM role, policy trust user engineering.",
+      "B": "Dùng Lake Formation Grant command từng tài khoản cho user engineering.",
+      "C": "Dùng AWS Data Exchange publish dữ liệu cho tài khoản engineering.",
+      "D": "Dùng Lake Formation tag-based access control cấp quyền cross-account."
+    }
+  },
+  "443": {
+    "questionVi": "Công ty cần web app scalable cho user toàn cầu, upload/download dữ liệu unique tới gigabyte. Dev team muốn giảm latency upload/download và tối đa hiệu năng.",
+    "optionsVi": {
+      "A": "S3 với Transfer Acceleration host ứng dụng.",
+      "B": "S3 với CacheControl headers host ứng dụng.",
+      "C": "EC2 Auto Scaling và CloudFront host ứng dụng.",
+      "D": "EC2 Auto Scaling và ElastiCache host ứng dụng."
+    }
+  },
+  "444": {
+    "questionVi": "Hai EC2 single AZ và RDS; nhân viên xóa nhầm DB instance gây downtime 24 giờ. Cần tối đa độ tin cậy hạ tầng.",
+    "optionsVi": {
+      "A": "Xóa một EC2, bật termination protection EC2 còn lại, RDS Multi-AZ và deletion protection.",
+      "B": "RDS Multi-AZ và deletion protection; EC2 sau ALB trong ASG nhiều AZ.",
+      "C": "Thêm DB instance, API Gateway và Lambda; Lambda ghi hai DB.",
+      "D": "EC2 ASG nhiều subnet nhiều AZ dùng Spot; RDS Multi-AZ và deletion protection."
+    }
+  },
+  "445": {
+    "questionVi": "Công ty có 700 TB trên NAS on-premises, hybrid với Direct Connect 10 Gbps. Regulator yêu cầu chuyển cloud trong 90 ngày, hiệu quả, không gián đoạn, vẫn truy cập/cập nhật trong thời gian chuyển.",
+    "optionsVi": {
+      "A": "Tạo DataSync agent on-premises, tạo transfer task sang S3.",
+      "B": "Backup lên Snowball Edge, ship AWS, mount S3 bucket on-premises.",
+      "C": "Dùng rsync copy trực tiếp lên S3 qua Direct Connect.",
+      "D": "Backup tape, ship AWS, mount S3 bucket on-premises."
+    }
+  },
+  "446": {
+    "questionVi": "Công ty lưu PDF trong S3, quy định pháp lý yêu cầu giữ mọi dữ liệu mới và hiện có 7 năm, overhead vận hành thấp nhất.",
+    "optionsVi": {
+      "A": "Bật S3 Versioning, Lifecycle xóa sau 7 năm, MFA delete cho mọi object.",
+      "B": "S3 Object Lock governance retention 7 năm, recopy object hiện có.",
+      "C": "S3 Object Lock compliance retention 7 năm, recopy object hiện có.",
+      "D": "S3 Object Lock compliance retention 7 năm, S3 Batch Operations đưa dữ liệu hiện có tuân thủ."
+    }
+  },
+  "447": {
+    "questionVi": "Ứng dụng stateless Lambda qua API Gateway cần deploy nhiều Region để failover. Làm sao route traffic tới nhiều Region?",
+    "optionsVi": {
+      "A": "Route 53 health check từng Region, active-active failover.",
+      "B": "CloudFront với origin mỗi Region, CloudFront health check route traffic.",
+      "C": "Transit Gateway gắn API Gateway endpoint mỗi Region và route request.",
+      "D": "ALB Region chính, target group trỏ hostname API Gateway mỗi Region."
+    }
+  },
+  "448": {
+    "questionVi": "Hai VPC Management và Production. Management VPN qua customer gateway tới một thiết bị data center. Production dùng VGW với hai Direct Connect. Hai VPC peering với nhau. Làm sao giảm single point of failure?",
+    "optionsVi": {
+      "A": "Thêm VPN giữa Management và Production VPC.",
+      "B": "Thêm VGW thứ hai gắn Management VPC.",
+      "C": "Thêm bộ VPN Management VPC từ customer gateway thứ hai.",
+      "D": "Thêm VPC peering thứ hai giữa Management và Production."
+    }
+  },
+  "449": {
+    "questionVi": "Công ty chạy Oracle, migrate AWS nhanh vì thiếu tài nguyên DB/backup/data center. Ứng dụng dùng tính năng third-party cần privileged access. Giải pháp migrate cost-effective nhất?",
+    "optionsVi": {
+      "A": "Migrate sang RDS for Oracle, thay third-party bằng cloud services.",
+      "B": "Migrate sang RDS Custom for Oracle, tùy chỉnh DB hỗ trợ third-party.",
+      "C": "Migrate sang EC2 AMI Oracle, tùy chỉnh DB hỗ trợ third-party.",
+      "D": "Migrate sang RDS PostgreSQL bằng cách viết lại code bỏ Oracle APEX."
+    }
+  },
+  "450": {
+    "questionVi": "Ứng dụng three-tier trên một server, migrate AWS theo Well-Architected: security, scalability, resiliency. (Chọn ba.)",
+    "optionsVi": {
+      "A": "VPC hai AZ, giữ kiến trúc cũ trên EC2 private subnet mỗi AZ với ASG, SG và NACL.",
+      "B": "SG và NACL kiểm soát DB layer, một RDS single-AZ private subnet.",
+      "C": "VPC hai AZ, refactor web/app/DB tier riêng private subnet, ASG cho web và app.",
+      "D": "Một RDS, chỉ cho phép truy cập từ SG application tier.",
+      "E": "ELB trước web tier, SG tham chiếu SG từng layer.",
+      "F": "RDS Multi-AZ cluster private subnet, chỉ SG application tier truy cập."
+    }
+  },
+  "451": {
+    "questionVi": "Công ty migrate lên AWS dùng ECS, Direct Connect và RDS. Hoạt động nào do operational team quản lý? (Chọn ba.)",
+    "optionsVi": {
+      "A": "Quản lý infrastructure layer, OS và platform của RDS",
+      "B": "Tạo RDS DB instance và cấu hình maintenance window",
+      "C": "Cấu hình thêm software trên ECS cho monitoring, patch, log, host IDS",
+      "D": "Cài patch mọi phiên bản minor/major RDS",
+      "E": "Đảm bảo physical security infrastructure RDS trong data center",
+      "F": "Mã hóa dữ liệu truyền qua Direct Connect"
+    }
+  },
+  "452": {
+    "questionVi": "Job Java trên EC2 chạy mỗi giờ, 10 giây, 1 GB RAM, CPU thấp trừ surge ngắn. Cần tối ưu chi phí.",
+    "optionsVi": {
+      "A": "App2Container containerize job, chạy ECS Fargate task 0.5 vCPU 1 GB.",
+      "B": "Chuyển code sang Lambda 1 GB memory, EventBridge schedule mỗi giờ.",
+      "C": "App2Container, cài container AMI hiện tại, schedule dừng container khi job xong.",
+      "D": "Cấu hình schedule dừng EC2 khi job xong và khởi động lại khi job tiếp theo."
+    }
+  },
+  "453": {
+    "questionVi": "Công ty cần backup EC2 và nhiều S3 bucket theo quy định retention; file backup không được sửa trong thời gian retention.",
+    "optionsVi": {
+      "A": "AWS Backup vault lock governance mode và backup plan.",
+      "B": "Data Lifecycle Manager tạo automated snapshot policy.",
+      "C": "S3 File Gateway backup, S3 Lifecycle phù hợp.",
+      "D": "AWS Backup vault lock compliance mode và backup plan."
+    }
+  },
+  "454": {
+    "questionVi": "Tài nguyên trải nhiều Region và tài khoản; cần inventory và map quan hệ workload, cách hiệu quả vận hành nhất.",
+    "optionsVi": {
+      "A": "Systems Manager Inventory tạo map view từ detailed view report.",
+      "B": "Step Functions thu thập chi tiết workload, vẽ sơ đồ thủ công.",
+      "C": "Workload Discovery on AWS tạo architecture diagram workload.",
+      "D": "X-Ray xem chi tiết workload, vẽ sơ đồ quan hệ."
+    }
+  },
+  "455": {
+    "questionVi": "Organizations vận hành tài khoản với budget khác nhau. Cần cảnh báo và tự động ngăn provision thêm tài nguyên khi đạt ngưỡng budget trong kỳ. (Chọn ba.)",
+    "optionsVi": {
+      "A": "AWS Budgets, đặt budget trong Cost and Usage Reports tài khoản.",
+      "B": "AWS Budgets, đặt budget trong Billing dashboard tài khoản.",
+      "C": "Tạo IAM user cho Budgets chạy budget actions.",
+      "D": "Tạo IAM role cho Budgets chạy budget actions.",
+      "E": "Alert khi đạt ngưỡng, budget action chọn IAM identity với Config rule ngăn provision.",
+      "F": "Alert khi đạt ngưỡng, budget action chọn IAM identity với SCP ngăn provision."
+    }
+  },
+  "456": {
+    "questionVi": "EC2 một Region, cần backup sang Region thứ hai, provision EC2 Region thứ hai và quản lý tập trung từ một tài khoản, cost-effective nhất.",
+    "optionsVi": {
+      "A": "DR plan với số EC2 tương tự Region thứ hai và data replication.",
+      "B": "Snapshot EBS point-in-time, copy snapshot sang Region thứ hai định kỳ.",
+      "C": "Backup plan AWS Backup với cross-Region backup EC2.",
+      "D": "Deploy EC2 tương tự Region thứ hai, DataSync chuyển dữ liệu."
+    }
+  },
+  "457": {
+    "questionVi": "Công ty xây ứng dụng chuyển dữ liệu tới nhà sản xuất, xác thực user qua IdP riêng, bắt buộc dùng giao thức AS2.",
+    "optionsVi": {
+      "A": "DataSync chuyển dữ liệu, Lambda xác thực IdP.",
+      "B": "AppFlow chuyển dữ liệu, ECS task xác thực IdP.",
+      "C": "Transfer Family chuyển dữ liệu, Lambda xác thực IdP.",
+      "D": "Storage Gateway chuyển dữ liệu, Cognito identity pool xác thực IdP."
+    }
+  },
+  "458": {
+    "questionVi": "REST API cash payback trên API Gateway cần 1 GB memory, 2 GB storage, dữ liệu quan hệ. Dịch vụ AWS nào bổ sung với effort quản trị thấp nhất? (Chọn hai.)",
+    "optionsVi": {
+      "A": "Amazon EC2",
+      "B": "AWS Lambda",
+      "C": "Amazon RDS",
+      "D": "Amazon DynamoDB",
+      "E": "Amazon EKS"
+    }
+  },
+  "459": {
+    "questionVi": "Organizations tagging policy gắn department tag khi tạo tag. Accounting cần chi phí EC2 theo department bất kể tài khoản, dùng Cost Explorer mọi tài khoản org.",
+    "optionsVi": {
+      "A": "Management account billing, kích hoạt user-defined cost allocation tag department, Cost Explorer group theo tag lọc EC2.",
+      "B": "Management account billing, kích hoạt AWS-defined tag department, Cost Explorer group theo tag lọc EC2.",
+      "C": "Member account billing, kích hoạt user-defined tag department, Cost Explorer group theo tag lọc EC2.",
+      "D": "Member account billing, kích hoạt AWS-defined tag department, Cost Explorer group theo tag lọc EC2."
+    }
+  },
+  "460": {
+    "questionVi": "Công ty cần trao đổi dữ liệu an toàn giữa Salesforce SaaS và S3, mã hóa at rest bằng KMS CMK và mã hóa in transit. Đã bật API access Salesforce.",
+    "optionsVi": {
+      "A": "Lambda function chuyển dữ liệu từ Salesforce lên S3.",
+      "B": "Step Functions workflow chuyển dữ liệu từ Salesforce lên S3.",
+      "C": "Amazon AppFlow chuyển dữ liệu từ Salesforce lên S3.",
+      "D": "Custom connector Salesforce chuyển dữ liệu lên S3."
+    }
+  },
+  "461": {
+    "questionVi": "Game mobile một Region: EC2 ASG, DynamoDB, giao tiếp TCP và UDP global, cần latency thấp nhất.",
+    "optionsVi": {
+      "A": "Global Accelerator, ALB endpoint TCP/UDP, ASG register ALB.",
+      "B": "Global Accelerator, NLB endpoint TCP/UDP, ASG register NLB.",
+      "C": "CloudFront endpoint, NLB TCP/UDP, ASG register NLB, CloudFront origin NLB.",
+      "D": "CloudFront endpoint, ALB TCP/UDP, ASG register ALB, CloudFront origin ALB."
+    }
+  }
+}

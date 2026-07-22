@@ -1,0 +1,35 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: ssa-c03-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ssa-c03-api
+    environment:
+      PORT: 3010
+      MONGODB_URI: mongodb://mongodb:27017/ssa_c03
+      SOURCE_FILE: /data/source/exam.pdf
+      IMPORT_BATCH_SIZE: 25
+    ports:
+      - "3010:3010"
+    volumes:
+      - ../AWS Certified Solutions Architect Associate SAA-C03.pdf:/data/source/exam.pdf:ro
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    restart: on-failure
+
+volumes:
+  mongo_data:

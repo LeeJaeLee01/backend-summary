@@ -1,0 +1,233 @@
+{
+  "487": {
+    "questionVi": "Công ty cần storage HA, scalable, mount được bằng Linux on-prem và AWS qua native protocol qua Site-to-Site VPN, không yêu cầu kích thước tối thiểu.",
+    "optionsVi": {
+      "A": "Amazon FSx Multi-AZ deployments",
+      "B": "Amazon EBS Multi-Attach volumes",
+      "C": "Amazon EFS với nhiều mount targets",
+      "D": "Amazon EFS một mount target và nhiều access points"
+    }
+  },
+  "488": {
+    "questionVi": "Organizations all features; thông tin billing member account không được truy cập kể cả root user member account.",
+    "optionsVi": {
+      "A": "Thêm finance team vào IAM group với AWS managed policy Billing.",
+      "B": "Identity-based policy deny billing cho mọi user kể cả root.",
+      "C": "SCP deny truy cập billing, gắn SCP root OU.",
+      "D": "Chuyển từ all features sang consolidated billing feature set."
+    }
+  },
+  "489": {
+    "questionVi": "SNS gửi order message tới HTTPS endpoint on-prem warehouse; một số message không nhận được. Cần giữ message không deliver và phân tích tới 14 ngày, effort phát triển thấp nhất.",
+    "optionsVi": {
+      "A": "SNS dead letter queue với Kinesis Data Stream target retention 14 ngày.",
+      "B": "SQS queue retention 14 ngày giữa application và SNS.",
+      "C": "SNS dead letter queue với SQS target retention 14 ngày.",
+      "D": "SNS dead letter queue với DynamoDB target TTL retention 14 ngày."
+    }
+  },
+  "490": {
+    "questionVi": "DynamoDB lưu thông tin game user, cần continuous backup S3 với coding tối thiểu, không ảnh hưởng availability và RCU.",
+    "optionsVi": {
+      "A": "EMR cluster, Hive job backup lên S3.",
+      "B": "Export DynamoDB lên S3 continuous backup, bật point-in-time recovery.",
+      "C": "DynamoDB Streams, Lambda export stream lên S3.",
+      "D": "Lambda export định kỳ lên S3, bật point-in-time recovery."
+    }
+  },
+  "491": {
+    "questionVi": "Ứng dụng async xác thực thẻ tín dụng ngân hàng: bảo mật, xử lý at-least-once, cost-effective nhất.",
+    "optionsVi": {
+      "A": "Lambda event source mapping SQS standard, SSE-KMS, kms:Decrypt cho execution role.",
+      "B": "Lambda event source mapping SQS FIFO, SSE-SQS, encryption key invocation permission.",
+      "C": "Lambda event source mapping SQS FIFO, SSE-KMS, kms:Decrypt cho execution role.",
+      "D": "Lambda event source mapping SQS standard, SSE-KMS, encryption key invocation permission."
+    }
+  },
+  "492": {
+    "questionVi": "Nhiều tài khoản dev dùng EC2 oversized vượt budget. Cần hạn chế tạo tài nguyên tập trung, effort phát triển thấp nhất.",
+    "optionsVi": {
+      "A": "Systems Manager templates quy trình EC2 được phép.",
+      "B": "Organizations OU, SCP kiểm soát loại EC2 instance.",
+      "C": "EventBridge invoke Lambda dừng EC2 instance type không cho phép.",
+      "D": "Service Catalog products chỉ cho phép EC2 instance type được phép."
+    }
+  },
+  "493": {
+    "questionVi": "AI đánh giá chất lượng cuộc gọi CS đa ngôn ngữ, báo cáo sentiment tiếng Anh, không tài nguyên maintain ML models. (Chọn ba.)",
+    "optionsVi": {
+      "A": "Amazon Comprehend dịch audio sang tiếng Anh.",
+      "B": "Amazon Lex tạo báo cáo sentiment.",
+      "C": "Amazon Polly chuyển audio thành text.",
+      "D": "Amazon Transcribe chuyển audio mọi ngôn ngữ thành text.",
+      "E": "Amazon Translate dịch text sang tiếng Anh.",
+      "F": "Amazon Comprehend tạo báo cáo sentiment."
+    }
+  },
+  "494": {
+    "questionVi": "Admin dùng IAM role terminate EC2 nhận 403 Access Denied. Policy role có IP condition. Nguyên nhân?",
+    "optionsVi": {
+      "A": "EC2 instance có resource-based policy Deny.",
+      "B": "Principal chưa được chỉ định trong policy statement.",
+      "C": "Action không grant quyền terminate EC2 instance.",
+      "D": "Request terminate không đến từ CIDR 192.0.2.0/24 hoặc 203.0.113.0/24."
+    }
+  },
+  "495": {
+    "questionVi": "Audit S3 bucket Lake Formation, phát hiện PII/tài chính như passport và credit card.",
+    "optionsVi": {
+      "A": "AWS Audit Manager audit PCI DSS.",
+      "B": "S3 Inventory, Athena query inventory.",
+      "C": "Amazon Macie data discovery job với managed identifiers.",
+      "D": "S3 Select report trên bucket."
+    }
+  },
+  "496": {
+    "questionVi": "On-premises hết storage, app dùng block và NFS, cần hiệu năng cao và local caching không re-architect. (Chọn hai.)",
+    "optionsVi": {
+      "A": "Mount S3 làm file system on-premises.",
+      "B": "Storage Gateway file gateway thay NFS storage.",
+      "C": "Snowball Edge cung cấp NFS mount on-premises.",
+      "D": "Storage Gateway volume gateway thay block storage.",
+      "E": "EFS volumes mount on-premises."
+    }
+  },
+  "497": {
+    "questionVi": "EC2 private subnet đọc/ghi S3 cùng Region qua NAT gateway, muốn giảm data transfer cost cost-effective nhất.",
+    "optionsVi": {
+      "A": "EC2 NAT instance public subnet, route private subnet tới ENI instance cho S3 traffic.",
+      "B": "EC2 NAT instance private subnet, route public subnet tới ENI instance cho S3 traffic.",
+      "C": "VPC gateway endpoint S3, route private subnet qua gateway endpoint cho S3 traffic.",
+      "D": "NAT gateway thứ hai, route private subnet qua NAT gateway cho S3 traffic."
+    }
+  },
+  "498": {
+    "questionVi": "S3 versioning ảnh độ phân giải cao, chỉ giữ hai version mới nhất, giảm chi phí S3 với overhead thấp nhất.",
+    "optionsVi": {
+      "A": "S3 Lifecycle xóa noncurrent versions, giữ hai version mới nhất.",
+      "B": "Lambda kiểm tra versions cũ, xóa tất cả trừ hai mới nhất.",
+      "C": "S3 Batch Operations xóa noncurrent versions, giữ hai mới nhất.",
+      "D": "Tắt versioning bucket, giữ hai version mới nhất."
+    }
+  },
+  "499": {
+    "questionVi": "Giảm chi phí Direct Connect 1 Gbps (utilization trung bình <10%) mà không ảnh hưởng bảo mật.",
+    "optionsVi": {
+      "A": "Direct Connect 1 Gbps mới, share connection tài khoản AWS khác.",
+      "B": "Direct Connect 200 Mbps mới trong Management Console.",
+      "C": "Đặt connection 1 Gbps qua Direct Connect Partner, share tài khoản khác.",
+      "D": "Đặt hosted connection 200 Mbps qua Direct Connect Partner cho tài khoản hiện có."
+    }
+  },
+  "500": {
+    "questionVi": "Migrate nhiều Windows file server on-premises vào FSx for Windows File Server, giữ nguyên file permissions. (Chọn hai.)",
+    "optionsVi": {
+      "A": "DataSync agents on-premises, schedule task chuyển dữ liệu FSx.",
+      "B": "Copy share lên S3 bằng CLI, DataSync chuyển sang FSx.",
+      "C": "Tháo ổ, ship AWS import S3, DataSync chuyển sang FSx.",
+      "D": "Snowcone, DataSync agents trên thiết bị, schedule task sang FSx.",
+      "E": "Snowball Edge, copy CLI, ship AWS import S3, DataSync sang FSx."
+    }
+  },
+  "501": {
+    "questionVi": "Payment data ingest data lake S3 mỗi phút, phân tích real-time rồi ingest, hiệu quả vận hành cao nhất.",
+    "optionsVi": {
+      "A": "Kinesis Data Streams ingest, Lambda phân tích real-time.",
+      "B": "Glue ingest, Kinesis Data Analytics phân tích real-time.",
+      "C": "Kinesis Data Firehose ingest, Kinesis Data Analytics phân tích real-time.",
+      "D": "API Gateway ingest, Lambda phân tích real-time."
+    }
+  },
+  "502": {
+    "questionVi": "CMS trên EC2 single instance, Aurora MySQL Multi-AZ, ảnh website trên EBS mount instance. Cải thiện performance và resilience. (Chọn hai.)",
+    "optionsVi": {
+      "A": "Chuyển ảnh S3 bucket mount mọi EC2 instance.",
+      "B": "NFS share từ EC2 primary, mount các EC2 khác.",
+      "C": "Chuyển ảnh EFS mount mọi EC2 instance.",
+      "D": "AMI từ EC2, ASG min 2 sau ALB, Global Accelerator cho website.",
+      "E": "AMI từ EC2, ASG min 2 sau ALB, CloudFront distribution cho website."
+    }
+  },
+  "503": {
+    "questionVi": "Dịch vụ monitoring cần gọi AWS API trong tài khoản khách hàng để describe EC2 và đọc CloudWatch metrics. Cách truy cập an toàn nhất?",
+    "optionsVi": {
+      "A": "Khách tạo IAM role read-only EC2/CloudWatch, trust policy tới tài khoản công ty.",
+      "B": "Serverless API token vending machine cấp credential tạm role read-only.",
+      "C": "Khách tạo IAM user read-only EC2/CloudWatch, lưu key trong secrets management.",
+      "D": "Khách tạo Cognito user IAM role read-only, lưu credential trong secrets management."
+    }
+  },
+  "504": {
+    "questionVi": "Cần kết nối hàng trăm VPC us-east-1 trên hàng trăm tài khoản; networking team có tài khoản AWS riêng quản lý cloud network.",
+    "optionsVi": {
+      "A": "VPC peering giữa mỗi VPC, cập nhật route table subnet.",
+      "B": "NAT gateway và internet gateway mỗi VPC, kết nối qua internet.",
+      "C": "Transit Gateway tài khoản networking team, static route từ mỗi VPC.",
+      "D": "VPN gateway mỗi VPC, transit VPC networking team kết nối mỗi VPC."
+    }
+  },
+  "505": {
+    "questionVi": "Batch job EC2 ASG On-Demand 12AM-6AM local, job fail thì instance khác reprocess. Giải pháp cost-effective nhất?",
+    "optionsVi": {
+      "A": "Savings Plan 1 năm EC2 cover instance family ASG batch job.",
+      "B": "Reserved Instance 1 năm đúng instance type và OS ASG batch job.",
+      "C": "Launch template Spot Instances ASG, scale out theo CPU.",
+      "D": "Launch template tăng instance size, scale out theo CPU."
+    }
+  },
+  "506": {
+    "questionVi": "Social media feature upload ảnh, traffic upload tăng mạnh sự kiện lớn. Cần website chịu tải upload, scalable nhất.",
+    "optionsVi": {
+      "A": "Browser upload tới app server, server chuyển S3 bucket.",
+      "B": "Storage Gateway file gateway, browser upload trực tiếp file gateway.",
+      "C": "S3 presigned URLs, browser upload trực tiếp S3 bucket.",
+      "D": "EFS file system, browser upload trực tiếp EFS."
+    }
+  },
+  "507": {
+    "questionVi": "Ứng dụng đặt vé du lịch single data center, mở rộng global, latency update reservation DB <1 giây, deploy web riêng mỗi Region nhưng một primary reservation DB globally consistent.",
+    "optionsVi": {
+      "A": "Chuyển DynamoDB global table reservation, dùng Regional endpoint mỗi Region.",
+      "B": "Aurora MySQL, Aurora Read Replicas mỗi Region, Regional endpoint truy cập DB.",
+      "C": "RDS MySQL, read replicas mỗi Region, Regional endpoint truy cập DB.",
+      "D": "Aurora Serverless mỗi Region, Lambda đồng bộ event streams giữa Region."
+    }
+  },
+  "508": {
+    "questionVi": "Windows EC2 us-west-1, backup us-west-2 tự động, RPO tối đa 24 giờ, effort quản trị thấp nhất. (Chọn hai.)",
+    "optionsVi": {
+      "A": "AMI lifecycle policy tag, backup 2 lần/ngày, copy image on demand.",
+      "B": "AMI lifecycle policy tag, backup 2 lần/ngày, copy tới us-west-2.",
+      "C": "Backup vault us-west-1 và us-west-2, backup plan tag EC2, Lambda copy sang us-west-2.",
+      "D": "Backup vault, backup plan tag EC2, destination copy us-west-2, schedule 2 lần/ngày.",
+      "E": "Backup vault, backup plan tag EC2, schedule 2 lần/ngày, copy on demand us-west-2."
+    }
+  },
+  "509": {
+    "questionVi": "ALB web tier public, EC2 app private, hàng triệu request bất hợp pháp từ vài IP làm chậm app. Cần fix ngay trong khi tìm giải pháp lâu dài.",
+    "optionsVi": {
+      "A": "Sửa inbound SG web tier, thêm deny rule IP tiêu thụ tài nguyên.",
+      "B": "Sửa NACL subnet web tier, thêm inbound deny rule IP tiêu thụ tài nguyên.",
+      "C": "Sửa inbound SG application tier, thêm deny rule IP.",
+      "D": "Sửa NACL subnet application tier, thêm inbound deny rule IP."
+    }
+  },
+  "510": {
+    "questionVi": "App eu-west-1 VPC cần giao tiếp an toàn với database ap-southeast-2 VPC.",
+    "optionsVi": {
+      "A": "VPC peering eu-west-1 và ap-southeast-2, inbound rule SG app cho phép IP DB ap-southeast-2.",
+      "B": "VPC peering ap-southeast-2 và eu-west-1, cập nhật route table, inbound rule SG DB tham chiếu SG app eu-west-1.",
+      "C": "VPC peering hai VPC, cập nhật route table, inbound rule SG DB cho phép IP app eu-west-1.",
+      "D": "Transit Gateway peering hai VPC, inbound rule SG DB tham chiếu SG app eu-west-1."
+    }
+  },
+  "511": {
+    "questionVi": "Nhiều môi trường dev PostgreSQL schema, mỗi môi trường dùng trung bình 4 giờ/ngày (8 giờ làm việc). Giải pháp cost-effective nhất?",
+    "optionsVi": {
+      "A": "Mỗi môi trường dev Aurora PostgreSQL database riêng.",
+      "B": "Mỗi môi trường dev RDS PostgreSQL Single-AZ riêng.",
+      "C": "Mỗi môi trường dev Aurora On-Demand PostgreSQL-Compatible riêng.",
+      "D": "Mỗi môi trường dev S3 bucket dùng S3 Object Select."
+    }
+  }
+}
