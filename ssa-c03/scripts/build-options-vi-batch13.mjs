@@ -4,97 +4,97 @@ import { writeBatch } from './build-options-vi-batches.mjs';
 const T = {
   337: {
     questionVi:
-      'Một công ty đã triển khai ứng dụng web trên AWS. Backend database dùng Amazon RDS for MySQL với primary DB instance và năm read replica để scale. Read replica phải lag không quá 1 giây so với primary. Database thường chạy stored procedure theo lịch. Khi traffic website tăng, replica lag thêm trong peak load. Kiến trúc sư giải pháp phải giảm replication lag tối đa, tối thiểu thay đổi application code và operational overhead. Giải pháp nào đáp ứng?',
+      'Một công ty đã triển khai ứng dụng web trên AWS. Công ty host backend database trên Amazon RDS for MySQL với một DB instance chính và năm read replicas để hỗ trợ nhu cầu mở rộng. Read replicas không được lag quá 1 giây so với DB instance chính. Database thường xuyên chạy stored procedures theo lịch. Khi traffic website tăng, các replica gặp thêm lag trong giờ cao điểm. Kiến trúc sư giải pháp phải giảm replication lag càng nhiều càng tốt. Kiến trúc sư giải pháp phải giảm tối thiểu thay đổi mã ứng dụng và giảm tối thiểu công sức vận hành liên tục. Giải pháp nào đáp ứng các yêu cầu này?',
     optionsVi: {
-      A: 'Di chuyển database sang Amazon Aurora MySQL. Thay read replica bằng Aurora Replica, cấu hình Aurora Auto Scaling. Thay stored procedure bằng hàm native Aurora MySQL.',
-      B: 'Triển khai Amazon ElastiCache for Redis trước database. Sửa application kiểm tra cache trước khi query database. Thay stored procedure bằng AWS Lambda functions.',
-      C: 'Di chuyển database sang MySQL chạy trên Amazon EC2. Chọn EC2 compute optimized lớn cho tất cả replica node. Giữ stored procedure trên EC2.',
-      D: 'Di chuyển database sang Amazon DynamoDB. Cấp nhiều read capacity units (RCU) đáp ứng throughput, bật on-demand capacity scaling. Thay stored procedure bằng DynamoDB streams.',
+      A: 'Migrate database sang Amazon Aurora MySQL. Thay read replicas bằng Aurora Replicas, và cấu hình Aurora Auto Scaling. Thay stored procedures bằng các hàm native của Aurora MySQL.',
+      B: 'Triển khai Amazon ElastiCache for Redis cluster đặt trước database. Sửa ứng dụng để kiểm tra cache trước khi ứng dụng truy vấn database. Thay stored procedures bằng AWS Lambda functions.',
+      C: 'Migrate database sang MySQL database chạy trên Amazon EC2 instances. Chọn EC2 instances lớn, tối ưu compute cho tất cả replica node. Duy trì stored procedures trên EC2 instances.',
+      D: 'Migrate database sang Amazon DynamoDB. Cấp phát số lượng lớn read capacity units (RCUs) để hỗ trợ throughput cần thiết, và cấu hình on-demand capacity scaling. Thay stored procedures bằng DynamoDB streams.',
     },
   },
   338: {
     questionVi:
-      'Kiến trúc sư giải pháp phải tạo disaster recovery (DR) plan cho nền tảng SaaS high-volume. Toàn bộ dữ liệu lưu trong Amazon Aurora MySQL DB cluster. DR plan phải replicate dữ liệu sang AWS Region phụ. Giải pháp nào HIỆU QUẢ CHI PHÍ NHẤT?',
+      'Kiến trúc sư giải pháp phải tạo kế hoạch disaster recovery (DR) cho nền tảng software as a service (SaaS) khối lượng lớn. Toàn bộ dữ liệu của nền tảng được lưu trong Amazon Aurora MySQL DB cluster. Kế hoạch DR phải sao chép dữ liệu sang AWS Region phụ. Giải pháp nào đáp ứng các yêu cầu này TIẾT KIỆM CHI PHÍ NHẤT?',
     optionsVi: {
-      A: 'Dùng MySQL binary log replication sang Aurora cluster ở Region phụ. Cấp một DB instance cho Aurora cluster ở Region phụ.',
-      B: 'Thiết lập Aurora global database cho DB cluster. Sau khi hoàn tất, xóa DB instance khỏi Region phụ.',
-      C: 'Dùng AWS Database Migration Service (AWS DMS) replicate liên tục sang Aurora cluster ở Region phụ. Xóa DB instance khỏi Region phụ.',
+      A: 'Dùng MySQL binary log replication tới Aurora cluster ở Region phụ. Cấp phát một DB instance cho Aurora cluster ở Region phụ.',
+      B: 'Thiết lập Aurora global database cho DB cluster. Sau khi thiết lập hoàn tất, loại bỏ DB instance khỏi Region phụ.',
+      C: 'Dùng AWS Database Migration Service (AWS DMS) để liên tục sao chép dữ liệu tới Aurora cluster ở Region phụ. Loại bỏ DB instance khỏi Region phụ.',
       D: 'Thiết lập Aurora global database cho DB cluster. Chỉ định tối thiểu một DB instance ở Region phụ.',
     },
   },
   339: {
     questionVi:
-      'Một công ty có ứng dụng tùy chỉnh với embedded credentials lấy thông tin từ Amazon RDS MySQL DB instance. Ban quản lý yêu cầu ứng dụng bảo mật hơn với ít programming effort nhất. Kiến trúc sư giải pháp nên làm gì?',
+      'Một công ty có ứng dụng tùy chỉnh với thông tin đăng nhập được nhúng trực tiếp trong code để truy xuất thông tin từ Amazon RDS MySQL DB instance. Ban quản lý yêu cầu ứng dụng phải được bảo mật hơn với ít công sức lập trình nhất. Kiến trúc sư giải pháp nên làm gì để đáp ứng các yêu cầu này?',
     optionsVi: {
-      A: 'Dùng AWS Key Management Service (AWS KMS) tạo keys. Cấu hình ứng dụng nạp database credentials từ AWS KMS. Bật automatic key rotation.',
-      B: 'Tạo credentials trên RDS for MySQL cho application user và lưu trong AWS Secrets Manager. Cấu hình ứng dụng nạp credentials từ Secrets Manager. Tạo AWS Lambda function xoay credentials trong Secrets Manager.',
-      C: 'Tạo credentials trên RDS for MySQL cho application user và lưu trong AWS Secrets Manager. Cấu hình ứng dụng nạp credentials từ Secrets Manager. Thiết lập rotation schedule cho application user trong RDS for MySQL bằng Secrets Manager.',
-      D: 'Tạo credentials trên RDS for MySQL cho application user và lưu trong AWS Systems Manager Parameter Store. Cấu hình ứng dụng nạp credentials từ Parameter Store. Thiết lập rotation schedule cho application user trong RDS for MySQL bằng Parameter Store.',
+      A: 'Dùng AWS Key Management Service (AWS KMS) để tạo key. Cấu hình ứng dụng nạp thông tin đăng nhập database từ AWS KMS. Bật automatic key rotation.',
+      B: 'Tạo thông tin đăng nhập trên RDS for MySQL database cho application user và lưu thông tin đăng nhập trong AWS Secrets Manager. Cấu hình ứng dụng nạp thông tin đăng nhập database từ Secrets Manager. Tạo AWS Lambda function xoay vòng thông tin đăng nhập trong Secrets Manager.',
+      C: 'Tạo thông tin đăng nhập trên RDS for MySQL database cho application user và lưu thông tin đăng nhập trong AWS Secrets Manager. Cấu hình ứng dụng nạp thông tin đăng nhập database từ Secrets Manager. Thiết lập lịch xoay vòng thông tin đăng nhập cho application user trên RDS for MySQL database bằng Secrets Manager.',
+      D: 'Tạo thông tin đăng nhập trên RDS for MySQL database cho application user và lưu thông tin đăng nhập trong AWS Systems Manager Parameter Store. Cấu hình ứng dụng nạp thông tin đăng nhập database từ Parameter Store. Thiết lập lịch xoay vòng thông tin đăng nhập cho application user trên RDS for MySQL database bằng Parameter Store.',
     },
   },
   340: {
     questionVi:
-      'Một công ty media host website trên AWS. Kiến trúc ứng dụng gồm fleet Amazon EC2 instances sau Application Load Balancer (ALB) và database Amazon Aurora. Đội cybersecurity báo ứng dụng dễ bị SQL injection. Công ty nên xử lý thế nào?',
+      'Một công ty truyền thông host website trên AWS. Kiến trúc ứng dụng website gồm nhóm Amazon EC2 instances phía sau Application Load Balancer (ALB) và database được host trên Amazon Aurora. Đội cybersecurity của công ty báo cáo ứng dụng dễ bị tấn công SQL injection. Công ty nên giải quyết vấn đề này như thế nào?',
     optionsVi: {
-      A: 'Dùng AWS WAF phía trước ALB. Liên kết web ACL phù hợp với AWS WAF.',
-      B: 'Tạo ALB listener rule trả lời SQL injection bằng fixed response.',
-      C: 'Đăng ký AWS Shield Advanced để tự động chặn mọi SQL injection attempt.',
-      D: 'Thiết lập Amazon Inspector để tự động chặn mọi SQL injection attempt.',
+      A: 'Dùng AWS WAF đặt trước ALB. Liên kết web ACLs phù hợp với AWS WAF.',
+      B: 'Tạo ALB listener rule để trả lời các cuộc tấn công SQL injection bằng fixed response.',
+      C: 'Đăng ký AWS Shield Advanced để tự động chặn mọi tấn công SQL injection.',
+      D: 'Thiết lập Amazon Inspector để tự động chặn mọi tấn công SQL injection.',
     },
   },
   341: {
     questionVi:
-      'Một công ty có Amazon S3 data lake được quản trị bởi AWS Lake Formation. Công ty muốn tạo visualization trong Amazon QuickSight bằng cách join dữ liệu data lake với dữ liệu vận hành trong Amazon Aurora MySQL. Công ty muốn column-level authorization để đội marketing chỉ truy cập một tập cột trong database. Giải pháp nào đáp ứng với operational overhead THẤP NHẤT?',
+      'Một công ty có S3 data lake được quản lý bởi AWS Lake Formation. Công ty muốn tạo visualization trong Amazon QuickSight bằng cách join dữ liệu trong data lake với dữ liệu vận hành được lưu trong Amazon Aurora MySQL database. Công ty muốn thực thi phân quyền cấp cột (column-level authorization) để đội marketing của công ty chỉ truy cập được một phần cột trong database. Giải pháp nào đáp ứng các yêu cầu này với công sức vận hành THẤP NHẤT?',
     optionsVi: {
-      A: 'Dùng Amazon EMR ingest dữ liệu trực tiếp từ database sang QuickSight SPICE engine. Chỉ gồm các cột cần thiết.',
-      B: 'Dùng AWS Glue Studio ingest dữ liệu từ database sang S3 data lake. Gắn IAM policy cho QuickSight users để column-level access control. Dùng Amazon S3 làm data source trong QuickSight.',
-      C: 'Dùng AWS Glue Elastic Views tạo materialized view cho database trong Amazon S3. Tạo S3 bucket policy column-level access control cho QuickSight users. Dùng Amazon S3 làm data source trong QuickSight.',
-      D: 'Dùng Lake Formation blueprint ingest dữ liệu từ database sang S3 data lake. Dùng Lake Formation enforce column-level access control cho QuickSight users. Dùng Amazon Athena làm data source trong QuickSight.',
+      A: 'Dùng Amazon EMR để nạp dữ liệu trực tiếp từ database vào QuickSight SPICE engine. Chỉ bao gồm các cột cần thiết.',
+      B: 'Dùng AWS Glue Studio để nạp dữ liệu từ database vào S3 data lake. Gắn IAM policy vào QuickSight users để thực thi kiểm soát truy cập cấp cột. Dùng Amazon S3 làm data source trong QuickSight.',
+      C: 'Dùng AWS Glue Elastic Views để tạo materialized view cho database trong Amazon S3. Tạo S3 bucket policy để thực thi kiểm soát truy cập cấp cột cho QuickSight users. Dùng Amazon S3 làm data source trong QuickSight.',
+      D: 'Dùng Lake Formation blueprint để nạp dữ liệu từ database vào S3 data lake. Dùng Lake Formation để thực thi kiểm soát truy cập cấp cột cho QuickSight users. Dùng Amazon Athena làm data source trong QuickSight.',
     },
   },
   342: {
     questionVi:
-      'Một công ty xử lý giao dịch có batch job script chạy hàng tuần trên Amazon EC2 instances trong Auto Scaling group. Số giao dịch thay đổi nhưng CPU utilization baseline mỗi lần chạy ít nhất 60%. Công ty cần provision capacity 30 phút trước khi job chạy. Hiện engineers sửa thủ công tham số Auto Scaling group. Công ty không có nguồn lực phân tích xu hướng capacity. Công ty cần cách tự động sửa desired capacity của Auto Scaling group. Giải pháp nào đáp ứng với operational overhead THẤP NHẤT?',
+      'Một công ty xử lý giao dịch có batch job scripted chạy hằng tuần trên Amazon EC2 instances. EC2 instances nằm trong Auto Scaling group. Số lượng giao dịch có thể thay đổi, nhưng CPU utilization baseline ghi nhận ở mỗi lần chạy tối thiểu là 60%. Công ty cần cấp phát capacity 30 phút trước khi job chạy. Hiện tại, kỹ sư thực hiện việc này bằng cách sửa thủ công các tham số của Auto Scaling group. Công ty không có nguồn lực để phân tích xu hướng capacity cần thiết cho số lượng Auto Scaling group. Công ty cần cách tự động để sửa desired capacity của Auto Scaling group. Giải pháp nào đáp ứng các yêu cầu này với công sức vận hành THẤP NHẤT?',
     optionsVi: {
-      A: 'Tạo dynamic scaling policy cho Auto Scaling group. Cấu hình policy scale theo CPU utilization metric. Đặt target value 60%.',
-      B: 'Tạo scheduled scaling policy cho Auto Scaling group. Đặt desired capacity, minimum capacity và maximum capacity phù hợp. Đặt recurrence hàng tuần. Đặt start time 30 phút trước khi batch jobs chạy.',
-      C: 'Tạo predictive scaling policy cho Auto Scaling group. Cấu hình policy scale theo forecast. Đặt scaling metric là CPU utilization với target 60%. Trong policy, pre-launch instances 30 phút trước khi jobs chạy.',
-      D: 'Tạo Amazon EventBridge event gọi AWS Lambda khi CPU utilization của Auto Scaling group đạt 60%. Cấu hình Lambda tăng desired capacity và maximum capacity thêm 20%.',
+      A: 'Tạo dynamic scaling policy cho Auto Scaling group. Cấu hình policy scale dựa trên metric CPU utilization. Đặt target value cho metric là 60%.',
+      B: 'Tạo scheduled scaling policy cho Auto Scaling group. Đặt desired capacity, minimum capacity và maximum capacity phù hợp. Đặt recurrence hằng tuần. Đặt start time 30 phút trước khi batch job chạy.',
+      C: 'Tạo predictive scaling policy cho Auto Scaling group. Cấu hình policy scale dựa trên forecast. Đặt scaling metric là CPU utilization. Đặt target value cho metric là 60%. Trong policy, đặt instance pre-launch 30 phút trước khi job chạy.',
+      D: 'Tạo Amazon EventBridge event để gọi AWS Lambda function khi giá trị metric CPU utilization của Auto Scaling group đạt 60%. Cấu hình Lambda function tăng desired capacity và maximum capacity của Auto Scaling group lên 20%.',
     },
   },
   343: {
     questionVi:
-      'Kiến trúc sư giải pháp thiết kế DR architecture cho công ty. Công ty có MySQL database chạy trên Amazon EC2 instance trong private subnet với scheduled backup. DR design cần gồm nhiều AWS Regions. Giải pháp nào đáp ứng với operational overhead THẤP NHẤT?',
+      'Một kiến trúc sư giải pháp đang thiết kế kiến trúc disaster recovery (DR) cho một công ty. Công ty có MySQL database chạy trên Amazon EC2 instance trong private subnet với backup theo lịch. Thiết kế DR cần bao gồm nhiều AWS Regions. Giải pháp nào đáp ứng các yêu cầu này với công sức vận hành THẤP NHẤT?',
     optionsVi: {
-      A: 'Di chuyển MySQL database sang nhiều EC2 instances. Cấu hình standby EC2 instance ở DR Region. Bật replication.',
-      B: 'Di chuyển MySQL database sang Amazon RDS. Dùng Multi-AZ deployment. Bật read replication cho primary DB instance ở các Availability Zone khác nhau.',
-      C: 'Di chuyển MySQL database sang Amazon Aurora global database. Host primary DB cluster ở Region chính. Host secondary DB cluster ở DR Region.',
-      D: 'Lưu scheduled backup MySQL database trong Amazon S3 bucket cấu hình S3 Cross-Region Replication (CRR). Dùng data backup restore database ở DR Region.',
+      A: 'Migrate MySQL database sang nhiều EC2 instances. Cấu hình standby EC2 instance ở Region DR. Bật replication.',
+      B: 'Migrate MySQL database sang Amazon RDS. Dùng Multi-AZ deployment. Bật read replication cho primary DB instance ở các Availability Zone khác nhau.',
+      C: 'Migrate MySQL database sang Amazon Aurora global database. Host primary DB cluster ở Region chính. Host secondary DB cluster ở Region DR.',
+      D: 'Lưu backup theo lịch của MySQL database trong Amazon S3 bucket được cấu hình S3 Cross-Region Replication (CRR). Dùng data backup để khôi phục database ở Region DR.',
     },
   },
   344: {
     questionVi:
-      'Một công ty có ứng dụng Java dùng Amazon Simple Queue Service (Amazon SQS) parse messages. Ứng dụng không parse được message lớn hơn 256 KB. Công ty muốn parse message tới 50 MB. Giải pháp nào đáp ứng với ÍT thay đổi code nhất?',
+      'Một công ty có ứng dụng Java dùng Amazon Simple Queue Service (Amazon SQS) để parse message. Ứng dụng không thể parse các message lớn hơn 256 KB. Công ty muốn triển khai giải pháp giúp ứng dụng có khả năng parse message lớn tới 50 MB. Giải pháp nào đáp ứng các yêu cầu này với ÍT THAY ĐỔI CODE NHẤT?',
     optionsVi: {
-      A: 'Dùng Amazon SQS Extended Client Library for Java host message lớn hơn 256 KB trong Amazon S3.',
-      B: 'Dùng Amazon EventBridge đăng large messages từ ứng dụng thay vì Amazon SQS.',
-      C: 'Thay đổi giới hạn trong Amazon SQS để xử lý message lớn hơn 256 KB.',
-      D: 'Lưu message lớn hơn 256 KB trong Amazon Elastic File System (Amazon EFS). Cấu hình Amazon SQS tham chiếu vị trí này trong messages.',
+      A: 'Dùng Amazon SQS Extended Client Library for Java để lưu các message lớn hơn 256 KB trong Amazon S3.',
+      B: 'Dùng Amazon EventBridge để post các message lớn từ ứng dụng thay cho Amazon SQS.',
+      C: 'Đổi giới hạn trong Amazon SQS để xử lý message lớn hơn 256 KB.',
+      D: 'Lưu các message lớn hơn 256 KB trong Amazon Elastic File System (Amazon EFS). Cấu hình Amazon SQS để tham chiếu tới vị trí này trong message.',
     },
   },
   345: {
     questionVi:
-      'Một công ty muốn hạn chế truy cập nội dung của một web application chính và bảo vệ nội dung bằng authorization techniques trên AWS. Công ty muốn serverless architecture và authentication cho dưới 100 users. Giải pháp cần tích hợp web application chính và phục vụ web content globally. Giải pháp phải scale khi user base tăng đồng thời login latency thấp nhất. Giải pháp nào HIỆU QUẢ CHI PHÍ NHẤT?',
+      'Một công ty muốn giới hạn quyền truy cập nội dung của một trong các ứng dụng web chính và bảo vệ nội dung bằng các kỹ thuật ủy quyền có sẵn trên AWS. Công ty muốn triển khai kiến trúc serverless và giải pháp xác thực cho dưới 100 người dùng. Giải pháp cần tích hợp với ứng dụng web chính và phục vụ nội dung web trên toàn cầu. Giải pháp cũng phải scale khi số người dùng của công ty tăng lên, đồng thời cung cấp độ trễ đăng nhập thấp nhất có thể. Giải pháp nào đáp ứng các yêu cầu này TIẾT KIỆM CHI PHÍ NHẤT?',
     optionsVi: {
-      A: 'Dùng Amazon Cognito cho authentication. Dùng Lambda@Edge cho authorization. Dùng Amazon CloudFront phục vụ web application globally.',
-      B: 'Dùng AWS Directory Service for Microsoft Active Directory cho authentication. Dùng AWS Lambda cho authorization. Dùng Application Load Balancer phục vụ web application globally.',
-      C: 'Dùng Amazon Cognito cho authentication. Dùng AWS Lambda cho authorization. Dùng Amazon S3 Transfer Acceleration phục vụ web application globally.',
-      D: 'Dùng AWS Directory Service for Microsoft Active Directory cho authentication. Dùng Lambda@Edge cho authorization. Dùng AWS Elastic Beanstalk phục vụ web application globally.',
+      A: 'Dùng Amazon Cognito để xác thực. Dùng Lambda@Edge để ủy quyền. Dùng Amazon CloudFront để phục vụ ứng dụng web trên toàn cầu.',
+      B: 'Dùng AWS Directory Service for Microsoft Active Directory để xác thực. Dùng AWS Lambda để ủy quyền. Dùng Application Load Balancer để phục vụ ứng dụng web trên toàn cầu.',
+      C: 'Dùng Amazon Cognito để xác thực. Dùng AWS Lambda để ủy quyền. Dùng Amazon S3 Transfer Acceleration để phục vụ ứng dụng web trên toàn cầu.',
+      D: 'Dùng AWS Directory Service for Microsoft Active Directory để xác thực. Dùng Lambda@Edge để ủy quyền. Dùng AWS Elastic Beanstalk để phục vụ ứng dụng web trên toàn cầu.',
     },
   },
   346: {
     questionVi:
-      'Một công ty có NAS array cũ trong data center. NAS array expose SMB shares và NFS shares cho client workstations. Công ty không muốn mua NAS mới hoặc gia hạn support contract. Một phần dữ liệu truy cập thường xuyên, phần lớn inactive. Kiến trúc sư giải pháp cần migrate dữ liệu lên Amazon S3, dùng S3 Lifecycle policies và giữ look-and-feel cho client workstations. Kiến trúc sư đã xác định AWS Storage Gateway là một phần giải pháp. Nên cấp phát loại storage gateway nào?',
+      'Một công ty có network-attached storage (NAS) array cũ trong data center. NAS array cung cấp SMB shares và NFS shares cho các workstation client. Công ty không muốn mua NAS array mới. Công ty cũng không muốn chịu chi phí gia hạn hợp đồng hỗ trợ của NAS array. Một phần dữ liệu được truy cập thường xuyên, nhưng phần lớn dữ liệu không hoạt động. Kiến trúc sư giải pháp cần triển khai giải pháp migrate dữ liệu sang Amazon S3, dùng S3 Lifecycle policies, và duy trì cách trải nghiệm tương tự cho các workstation client. Kiến trúc sư giải pháp đã xác định AWS Storage Gateway là một phần của giải pháp. Kiến trúc sư giải pháp nên cấp phát loại storage gateway nào để đáp ứng các yêu cầu này?',
     optionsVi: {
       A: 'Volume Gateway',
       B: 'Tape Gateway',
@@ -104,7 +104,7 @@ const T = {
   },
   347: {
     questionVi:
-      'Một công ty có ứng dụng chạy trên Amazon EC2 instances. Kiến trúc sư giải pháp đã chuẩn hóa instance family và các instance sizes theo nhu cầu hiện tại. Công ty muốn tối đa cost savings cho ứng dụng trong 3 năm tới. Công ty phải có thể đổi instance family và sizes trong 6 tháng tới theo độ phổ biến và usage. Giải pháp nào HIỆU QUẢ CHI PHÍ NHẤT?',
+      'Một công ty có ứng dụng chạy trên Amazon EC2 instances. Kiến trúc sư giải pháp đã chuẩn hóa công ty dùng một họ instance cụ thể và nhiều kích thước instance khác nhau dựa trên nhu cầu hiện tại của công ty. Công ty muốn tối đa hóa tiết kiệm chi phí cho ứng dụng trong 3 năm tới. Công ty cần có khả năng đổi họ instance và kích thước trong 6 tháng tới dựa trên độ phổ biến và mức sử dụng ứng dụng. Giải pháp nào đáp ứng các yêu cầu này TIẾT KIỆM CHI PHÍ NHẤT?',
     optionsVi: {
       A: 'Compute Savings Plan',
       B: 'EC2 Instance Savings Plan',
@@ -114,78 +114,78 @@ const T = {
   },
   348: {
     questionVi:
-      'Một công ty thu thập dữ liệu từ số lượng lớn người tham gia dùng wearable devices. Dữ liệu lưu trong bảng Amazon DynamoDB và ứng dụng phân tích dữ liệu. Workload ổn định và dự đoán được. Công ty muốn ở hoặc dưới ngân sách DynamoDB đã forecast. Giải pháp nào HIỆU QUẢ CHI PHÍ NHẤT?',
+      'Một công ty thu thập dữ liệu từ số lượng lớn người tham gia dùng thiết bị đeo (wearable devices). Công ty lưu dữ liệu trong bảng Amazon DynamoDB và dùng ứng dụng để phân tích dữ liệu. Workload dữ liệu ổn định và có thể dự đoán được. Công ty muốn duy trì ở mức bằng hoặc thấp hơn ngân sách dự báo cho DynamoDB. Giải pháp nào đáp ứng các yêu cầu này TIẾT KIỆM CHI PHÍ NHẤT?',
     optionsVi: {
-      A: 'Dùng provisioned mode và DynamoDB Standard-Infrequent Access (DynamoDB Standard-IA). Reserve capacity cho workload đã forecast.',
+      A: 'Dùng provisioned mode và DynamoDB Standard-Infrequent Access (DynamoDB Standard-IA). Đặt reserved capacity cho workload dự báo.',
       B: 'Dùng provisioned mode. Chỉ định read capacity units (RCUs) và write capacity units (WCUs).',
-      C: 'Dùng on-demand mode. Đặt RCUs và WCUs đủ cao cho thay đổi workload.',
-      D: 'Dùng on-demand mode. Chỉ định RCUs và WCUs với reserved capacity.',
+      C: 'Dùng on-demand mode. Đặt read capacity units (RCUs) và write capacity units (WCUs) đủ cao để đáp ứng thay đổi trong workload.',
+      D: 'Dùng on-demand mode. Chỉ định read capacity units (RCUs) và write capacity units (WCUs) với reserved capacity.',
     },
   },
   349: {
     questionVi:
-      'Một công ty lưu dữ liệu bí mật trong Amazon Aurora PostgreSQL database ở Region ap-southeast-3. Database được mã hóa bằng AWS KMS customer managed key. Công ty vừa được mua lại và phải chia sẻ backup database an toàn với AWS account công ty mua ở cùng Region. Kiến trúc sư giải pháp nên làm gì?',
+      'Một công ty lưu dữ liệu bảo mật trong Amazon Aurora PostgreSQL database ở Region ap-southeast-3. Database được mã hóa bằng AWS Key Management Service (AWS KMS) customer managed key. Công ty vừa được mua lại và phải chia sẻ backup database một cách an toàn với tài khoản AWS của công ty mua lại ở ap-southeast-3. Kiến trúc sư giải pháp nên làm gì để đáp ứng các yêu cầu này?',
     optionsVi: {
-      A: 'Tạo database snapshot. Copy snapshot sang snapshot mới không mã hóa. Chia sẻ snapshot mới với AWS account công ty mua.',
-      B: 'Tạo database snapshot. Thêm AWS account công ty mua vào KMS key policy. Chia sẻ snapshot với AWS account công ty mua.',
-      C: 'Tạo database snapshot dùng AWS managed KMS key khác. Thêm AWS account công ty mua vào KMS key alias. Chia sẻ snapshot với AWS account công ty mua.',
-      D: 'Tạo database snapshot. Tải snapshot xuống. Upload snapshot lên Amazon S3 bucket. Cập nhật S3 bucket policy cho phép truy cập từ AWS account công ty mua.',
+      A: 'Tạo database snapshot. Sao chép snapshot sang snapshot mới không mã hóa. Chia sẻ snapshot mới với tài khoản AWS của công ty mua lại.',
+      B: 'Tạo database snapshot. Thêm tài khoản AWS của công ty mua lại vào KMS key policy. Chia sẻ snapshot với tài khoản AWS của công ty mua lại.',
+      C: 'Tạo database snapshot dùng AWS managed KMS key khác. Thêm tài khoản AWS của công ty mua lại vào KMS key alias. Chia sẻ snapshot với tài khoản AWS của công ty mua lại.',
+      D: 'Tạo database snapshot. Download database snapshot. Upload database snapshot lên Amazon S3 bucket. Cập nhật S3 bucket policy để cho phép truy cập từ tài khoản AWS của công ty mua lại.',
     },
   },
   350: {
     questionVi:
-      'Một công ty dùng Amazon RDS for Microsoft SQL Server Single-AZ DB instance 100 GB ở Region us-east-1 lưu giao dịch khách hàng. Công ty cần high availability và automatic recovery cho DB instance. Công ty cũng chạy reports trên RDS database vài lần mỗi năm. Quy trình report làm transactions post chậm hơn bình thường. Công ty cần giải pháp cải thiện hiệu năng report. Nên kết hợp bước nào? (Chọn hai.)',
+      'Một công ty dùng Amazon RDS for Microsoft SQL Server Single-AZ DB instance 100 GB ở Region us-east-1 để lưu giao dịch khách hàng. Công ty cần tính sẵn sàng cao và khôi phục tự động cho DB instance. Công ty cũng phải chạy báo cáo trên RDS database vài lần mỗi năm. Quy trình báo cáo khiến giao dịch mất nhiều thời gian hơn bình thường để ghi vào tài khoản khách hàng. Công ty cần giải pháp cải thiện hiệu năng của quy trình báo cáo. Kết hợp bước nào đáp ứng các yêu cầu này? (Chọn hai.)',
     optionsVi: {
-      A: 'Sửa DB instance từ Single-AZ sang Multi-AZ deployment.',
-      B: 'Chụp snapshot DB instance hiện tại. Restore snapshot sang RDS deployment mới ở Availability Zone khác.',
-      C: 'Tạo read replica DB instance ở Availability Zone khác. Chuyển mọi request reports sang read replica.',
+      A: 'Sửa DB instance từ Single-AZ DB instance sang Multi-AZ deployment.',
+      B: 'Chụp snapshot của DB instance hiện tại. Khôi phục snapshot vào RDS deployment mới ở Availability Zone khác.',
+      C: 'Tạo read replica của DB instance ở Availability Zone khác. Định hướng toàn bộ request báo cáo tới read replica.',
       D: 'Migrate database sang RDS Custom.',
-      E: 'Dùng RDS Proxy giới hạn reporting requests trong maintenance window.',
+      E: 'Dùng RDS Proxy để giới hạn request báo cáo vào maintenance window.',
     },
   },
   351: {
     questionVi:
-      'Một công ty đang chuyển ứng dụng quản lý dữ liệu lên AWS. Công ty muốn chuyển sang event-driven architecture phân tán hơn, dùng serverless concepts khi thực hiện các bước workflow. Công ty cũng muốn tối thiểu operational overhead. Giải pháp nào đáp ứng?',
+      'Một công ty đang migrate ứng dụng quản lý dữ liệu lên AWS. Công ty muốn chuyển sang kiến trúc event-driven. Kiến trúc cần phân tán hơn và dùng khái niệm serverless khi thực hiện các khía cạnh khác nhau của workflow. Công ty cũng muốn giảm tối thiểu công sức vận hành. Giải pháp nào đáp ứng các yêu cầu này?',
     optionsVi: {
-      A: 'Xây workflow trong AWS Glue. Dùng AWS Glue gọi AWS Lambda functions xử lý các bước workflow.',
-      B: 'Xây workflow trong AWS Step Functions. Triển khai ứng dụng trên Amazon EC2 instances. Dùng Step Functions gọi các bước workflow trên EC2 instances.',
-      C: 'Xây workflow trong Amazon EventBridge. Dùng EventBridge gọi AWS Lambda functions theo lịch xử lý các bước workflow.',
-      D: 'Xây workflow trong AWS Step Functions. Dùng Step Functions tạo state machine. Dùng state machine gọi AWS Lambda functions xử lý các bước workflow.',
+      A: 'Xây dựng workflow trong AWS Glue. Dùng AWS Glue để gọi AWS Lambda functions xử lý các bước workflow.',
+      B: 'Xây dựng workflow trong AWS Step Functions. Triển khai ứng dụng trên Amazon EC2 instances. Dùng Step Functions để gọi các bước workflow trên EC2 instances.',
+      C: 'Xây dựng workflow trong Amazon EventBridge. Dùng EventBridge để gọi AWS Lambda functions theo lịch xử lý các bước workflow.',
+      D: 'Xây dựng workflow trong AWS Step Functions. Dùng Step Functions để tạo state machine. Dùng state machine để gọi AWS Lambda functions xử lý các bước workflow.',
     },
   },
   352: {
     questionVi:
-      'Một công ty thiết kế mạng cho game online multiplayer. Game dùng giao thức UDP và triển khai ở tám AWS Regions. Kiến trúc mạng cần tối thiểu latency và packet loss cho trải nghiệm chơi chất lượng cao. Giải pháp nào đáp ứng?',
+      'Một công ty đang thiết kế mạng cho một game online multiplayer. Game dùng networking protocol UDP và sẽ được triển khai ở tám AWS Regions. Kiến trúc mạng cần giảm thiểu độ trễ và mất packet để mang lại trải nghiệm chơi game chất lượng cao cho người dùng cuối. Giải pháp nào đáp ứng các yêu cầu này?',
     optionsVi: {
-      A: 'Thiết lập transit gateway ở mỗi Region. Tạo inter-Region peering attachments giữa các transit gateway.',
+      A: 'Thiết lập transit gateway ở mỗi Region. Tạo inter-Region peering attachment giữa mỗi transit gateway.',
       B: 'Thiết lập AWS Global Accelerator với UDP listeners và endpoint groups ở mỗi Region.',
-      C: 'Thiết lập Amazon CloudFront bật UDP. Cấu hình origin ở mỗi Region.',
+      C: 'Thiết lập Amazon CloudFront với UDP được bật. Cấu hình origin ở mỗi Region.',
       D: 'Thiết lập VPC peering mesh giữa mỗi Region. Bật UDP cho mỗi VPC.',
     },
   },
   353: {
     questionVi:
-      'Một công ty host three-tier web application trên Amazon EC2 instances trong một Availability Zone. Web application dùng self-managed MySQL database trên EC2 instance lưu dữ liệu trong Amazon EBS volume 1 TB Provisioned IOPS SSD (io2). Database cần 1000 IOPS read và write ở peak traffic. Công ty muốn giảm gián đoạn, ổn định hiệu năng, giảm chi phí nhưng giữ capacity gấp đôi IOPS. Công ty muốn chuyển database tier sang fully managed, highly available và fault tolerant. Giải pháp nào HIỆU QUẢ CHI PHÍ NHẤT?',
+      'Một công ty host ứng dụng web ba tầng trên Amazon EC2 instances trong một Availability Zone duy nhất. Ứng dụng web dùng MySQL database tự quản lý được host trên EC2 instance để lưu dữ liệu vào Amazon Elastic Block Store (Amazon EBS) volume. MySQL database hiện dùng Provisioned IOPS SSD (io2) EBS volume 1 TB. Công ty dự đoán traffic 1.000 IOPS cho cả đọc và viết vào giờ cao điểm. Công ty muốn giảm tối thiểu gián đoạn, ổn định hiệu năng và giảm chi phí trong khi vẫn giữ khả năng gấp đôi IOPS. Công ty muốn chuyển tầng database sang giải pháp được quản lý toàn diện, có tính sẵn sàng cao và chịu lỗi. Giải pháp nào đáp ứng các yêu cầu này TIẾT KIỆM CHI PHÍ NHẤT?',
     optionsVi: {
-      A: 'Dùng Multi-AZ deployment Amazon RDS for MySQL DB instance với io2 Block Express EBS volume.',
-      B: 'Dùng Multi-AZ deployment Amazon RDS for MySQL DB instance với General Purpose SSD (gp2) EBS volume.',
+      A: 'Dùng Multi-AZ deployment của Amazon RDS for MySQL DB instance với io2 Block Express EBS volume.',
+      B: 'Dùng Multi-AZ deployment của Amazon RDS for MySQL DB instance với General Purpose SSD (gp2) EBS volume.',
       C: 'Dùng Amazon S3 Intelligent-Tiering access tiers.',
-      D: 'Dùng hai EC2 instances lớn host database ở chế độ active-passive.',
+      D: 'Dùng hai EC2 instances lớn để host database ở chế độ active-passive.',
     },
   },
   354: {
     questionVi:
-      'Một công ty host serverless application trên AWS. Ứng dụng dùng Amazon API Gateway, AWS Lambda và Amazon RDS for PostgreSQL. Công ty thấy lỗi ứng dụng tăng do database connection timeouts khi peak traffic hoặc traffic không dự đoán được. Công ty cần giải pháp giảm application failures với ít thay đổi code nhất. Kiến trúc sư giải pháp nên làm gì?',
+      'Một công ty host ứng dụng serverless trên AWS. Ứng dụng dùng Amazon API Gateway, AWS Lambda và Amazon RDS for PostgreSQL database. Công ty nhận thấy sự gia tăng lỗi ứng dụng do timeout kết nối database trong giờ cao điểm hoặc traffic không thể đoán trước. Công ty cần giải pháp giảm lỗi ứng dụng với lượng thay đổi mã tối thiểu. Kiến trúc sư giải pháp nên làm gì để đáp ứng các yêu cầu này?',
     optionsVi: {
-      A: 'Giảm Lambda concurrency rate.',
+      A: 'Giảm concurrency rate của Lambda.',
       B: 'Bật RDS Proxy trên RDS DB instance.',
-      C: 'Resize RDS DB instance class để chấp nhận thêm connections.',
+      C: 'Đổi kích thước RDS DB instance class để chấp nhận nhiều kết nối hơn.',
       D: 'Migrate database sang Amazon DynamoDB với on-demand scaling.',
     },
   },
   355: {
     questionVi:
-      'Một công ty đang migrate ứng dụng cũ lên AWS. Ứng dụng chạy batch job mỗi giờ và CPU intensive. Batch job mất trung bình 15 phút trên server on-premises có 64 vCPU và 512 GiB memory. Giải pháp nào chạy batch job trong 15 phút với operational overhead THẤP NHẤT?',
+      'Một công ty đang migrate ứng dụng cũ lên AWS. Ứng dụng chạy batch job mỗi giờ và cần nhiều CPU. Batch job trung bình mất 15 phút với server on-premises. Server có 64 virtual CPU (vCPU) và 512 GiB bộ nhớ. Giải pháp nào chạy batch job trong 15 phút với công sức vận hành THẤP NHẤT?',
     optionsVi: {
       A: 'Dùng AWS Lambda với functional scaling.',
       B: 'Dùng Amazon Elastic Container Service (Amazon ECS) với AWS Fargate.',
@@ -195,50 +195,50 @@ const T = {
   },
   356: {
     questionVi:
-      'Một công ty lưu data objects trong Amazon S3 Standard storage. Kiến trúc sư giải pháp phát hiện 75% dữ liệu ít được truy cập sau 30 ngày. Công ty cần mọi dữ liệu vẫn truy cập ngay với high availability và resiliency như cũ, nhưng muốn tối thiểu storage costs. Giải pháp storage nào đáp ứng?',
+      'Một công ty lưu các object dữ liệu trong Amazon S3 Standard storage. Kiến trúc sư giải pháp phát hiện 75% dữ liệu ít được truy cập sau 30 ngày. Công ty cần toàn bộ dữ liệu vẫn sẵn sàng truy cập ngay lập tức với cùng tính sẵn sàng cao và độ bền, nhưng công ty muốn giảm tối thiểu chi phí lưu trữ. Giải pháp lưu trữ nào đáp ứng các yêu cầu này?',
     optionsVi: {
-      A: 'Chuyển data objects sang S3 Glacier Deep Archive sau 30 ngày.',
-      B: 'Chuyển data objects sang S3 Standard-Infrequent Access (S3 Standard-IA) sau 30 ngày.',
-      C: 'Chuyển data objects sang S3 One Zone-Infrequent Access (S3 One Zone-IA) sau 30 ngày.',
-      D: 'Chuyển data objects sang S3 One Zone-Infrequent Access (S3 One Zone-IA) ngay lập tức.',
+      A: 'Chuyển các object dữ liệu sang S3 Glacier Deep Archive sau 30 ngày.',
+      B: 'Chuyển các object dữ liệu sang S3 Standard-Infrequent Access (S3 Standard-IA) sau 30 ngày.',
+      C: 'Chuyển các object dữ liệu sang S3 One Zone-Infrequent Access (S3 One Zone-IA) sau 30 ngày.',
+      D: 'Chuyển các object dữ liệu sang S3 One Zone-Infrequent Access (S3 One Zone-IA) ngay lập tức.',
     },
   },
   357: {
     questionVi:
-      'Một công ty game chuyển public scoreboard từ data center lên AWS Cloud. Công ty dùng Amazon EC2 Windows Server instances sau Application Load Balancer host dynamic application. Công ty cần highly available storage cho ứng dụng gồm static files và dynamic server-side code. Nên kết hợp bước nào? (Chọn hai.)',
+      'Một công ty gaming đang chuyển bảng xếp hạng công khai từ data center sang AWS Cloud. Công ty dùng Amazon EC2 Windows Server instances phía sau Application Load Balancer để host ứng dụng động. Công ty cần giải pháp lưu trữ có tính sẵn sàng cao cho ứng dụng. Ứng dụng gồm các tệp tĩnh và mã server-side động. Kết hợp bước nào kiến trúc sư giải pháp nên thực hiện để đáp ứng các yêu cầu này? (Chọn hai.)',
     optionsVi: {
-      A: 'Lưu static files trên Amazon S3. Dùng Amazon CloudFront cache objects ở edge.',
-      B: 'Lưu static files trên Amazon S3. Dùng Amazon ElastiCache cache objects ở edge.',
-      C: 'Lưu server-side code trên Amazon Elastic File System (Amazon EFS). Mount EFS volume trên mỗi EC2 instance để chia sẻ files.',
-      D: 'Lưu server-side code trên Amazon FSx for Windows File Server. Mount FSx for Windows File Server volume trên mỗi EC2 instance để chia sẻ files.',
-      E: 'Lưu server-side code trên General Purpose SSD (gp2) Amazon EBS volume. Mount EBS volume trên mỗi EC2 instance để chia sẻ files.',
+      A: 'Lưu các tệp tĩnh trên Amazon S3. Dùng Amazon CloudFront để cache object tại edge.',
+      B: 'Lưu các tệp tĩnh trên Amazon S3. Dùng Amazon ElastiCache để cache object tại edge.',
+      C: 'Lưu mã server-side trên Amazon Elastic File System (Amazon EFS). Mount EFS volume trên mỗi EC2 instance để chia sẻ tệp.',
+      D: 'Lưu mã server-side trên Amazon FSx for Windows File Server. Mount FSx for Windows File Server volume trên mỗi EC2 instance để chia sẻ tệp.',
+      E: 'Lưu mã server-side trên General Purpose SSD (gp2) Amazon Elastic Block Store (Amazon EBS) volume. Mount EBS volume trên mỗi EC2 instance để chia sẻ tệp.',
     },
   },
   358: {
     questionVi:
-      'Một công ty social media chạy ứng dụng trên Amazon EC2 instances sau Application Load Balancer (ALB). ALB là origin cho Amazon CloudFront distribution. Ứng dụng có hơn một tỷ ảnh trong Amazon S3 bucket và xử lý hàng nghìn ảnh mỗi giây. Công ty muốn resize ảnh động và phục vụ format phù hợp cho clients. Giải pháp nào đáp ứng với operational overhead THẤP NHẤT?',
+      'Một công ty mạng xã hội chạy ứng dụng trên Amazon EC2 instances phía sau Application Load Balancer (ALB). ALB là origin cho Amazon CloudFront distribution. Ứng dụng có hơn một tỷ ảnh được lưu trong Amazon S3 bucket và xử lý hàng nghìn ảnh mỗi giây. Công ty muốn thay đổi kích thước ảnh động và phục vụ đúng định dạng cho client. Giải pháp nào đáp ứng các yêu cầu này với công sức vận hành THẤP NHẤT?',
     optionsVi: {
-      A: 'Cài external image management library trên EC2 instance. Dùng library xử lý ảnh.',
-      B: 'Tạo CloudFront origin request policy. Dùng policy tự động resize ảnh và phục vụ format phù hợp theo User-Agent HTTP header trong request.',
-      C: 'Dùng Lambda@Edge function với external image management library. Liên kết Lambda@Edge function với CloudFront behaviors phục vụ ảnh.',
-      D: 'Tạo CloudFront response headers policy. Dùng policy tự động resize ảnh và phục vụ format phù hợp theo User-Agent HTTP header trong request.',
+      A: 'Cài thư viện quản lý ảnh bên thứ ba trên EC2 instance. Dùng thư viện quản lý ảnh để xử lý ảnh.',
+      B: 'Tạo CloudFront origin request policy. Dùng policy để tự động resize ảnh và phục vụ định dạng phù hợp dựa trên header User-Agent HTTP trong request.',
+      C: 'Dùng Lambda@Edge function với thư viện quản lý ảnh bên thứ ba. Liên kết Lambda@Edge function với các CloudFront behavior phục vụ ảnh.',
+      D: 'Tạo CloudFront response headers policy. Dùng policy để tự động resize ảnh và phục vụ định dạng phù hợp dựa trên header User-Agent HTTP trong request.',
     },
   },
   359: {
     questionVi:
-      'Một bệnh viện cần lưu hồ sơ bệnh nhân trong Amazon S3 bucket. Đội compliance phải đảm bảo mọi protected health information (PHI) được mã hóa in transit và at rest. Đội compliance phải quản trị encryption key cho data at rest. Giải pháp nào đáp ứng?',
+      'Một bệnh viện cần lưu hồ sơ bệnh nhân trong Amazon S3 bucket. Đội tuân thủ của bệnh viện phải đảm bảo toàn bộ protected health information (PHI) được mã hóa khi truyền (in transit) và khi lưu trữ (at rest). Đội tuân thủ phải quản lý encryption key cho dữ liệu at rest. Giải pháp nào đáp ứng các yêu cầu này?',
     optionsVi: {
-      A: 'Tạo public SSL/TLS certificate trong AWS Certificate Manager (ACM). Liên kết certificate với Amazon S3. Cấu hình default encryption mỗi S3 bucket dùng server-side encryption với AWS KMS keys (SSE-KMS). Giao compliance team quản lý KMS keys.',
-      B: 'Dùng điều kiện aws:SecureTransport trên S3 bucket policies chỉ cho phép kết nối mã hóa qua HTTPS (TLS). Cấu hình default encryption mỗi S3 bucket dùng SSE-S3. Giao compliance team quản lý SSE-S3 keys.',
-      C: 'Dùng điều kiện aws:SecureTransport trên S3 bucket policies chỉ cho phép kết nối mã hóa qua HTTPS (TLS). Cấu hình default encryption mỗi S3 bucket dùng SSE-KMS. Giao compliance team quản lý KMS keys.',
-      D: 'Dùng điều kiện aws:SecureTransport trên S3 bucket policies chỉ cho phép kết nối mã hóa qua HTTPS (TLS). Dùng Amazon Macie bảo vệ sensitive data trong Amazon S3. Giao compliance team quản lý Macie.',
+      A: 'Tạo public SSL/TLS certificate trong AWS Certificate Manager (ACM). Liên kết certificate với Amazon S3. Cấu hình default encryption cho mỗi S3 bucket dùng server-side encryption với AWS KMS keys (SSE-KMS). Giao đội tuân thủ quản lý KMS keys.',
+      B: 'Dùng điều kiện aws:SecureTransport trong S3 bucket policies để chỉ cho phép kết nối mã hóa qua HTTPS (TLS). Cấu hình default encryption cho mỗi S3 bucket dùng server-side encryption với S3 managed encryption keys (SSE-S3). Giao đội tuân thủ quản lý SSE-S3 keys.',
+      C: 'Dùng điều kiện aws:SecureTransport trong S3 bucket policies để chỉ cho phép kết nối mã hóa qua HTTPS (TLS). Cấu hình default encryption cho mỗi S3 bucket dùng server-side encryption với AWS KMS keys (SSE-KMS). Giao đội tuân thủ quản lý KMS keys.',
+      D: 'Dùng điều kiện aws:SecureTransport trong S3 bucket policies để chỉ cho phép kết nối mã hóa qua HTTPS (TLS). Dùng Amazon Macie để bảo vệ dữ liệu nhạy cảm được lưu trong Amazon S3. Giao đội tuân thủ quản lý Macie.',
     },
   },
   360: {
     questionVi:
-      'Một công ty dùng Amazon API Gateway chạy private gateway với hai REST APIs trong cùng VPC. BuyStock RESTful web service gọi CheckFunds RESTful web service để đảm bảo đủ tiền trước khi mua cổ phiếu. VPC flow logs cho thấy BuyStock gọi CheckFunds qua internet thay vì qua VPC. Kiến trúc sư giải pháp phải để APIs giao tiếp qua VPC. Giải pháp nào đáp ứng với ÍT thay đổi code nhất?',
+      'Một công ty dùng Amazon API Gateway để chạy một private gateway với hai REST APIs trong cùng VPC. BuyStock RESTful web service gọi CheckFunds RESTful web service để đảm bảo có đủ tiền trước khi mua cổ phiếu. Công ty phát hiện trong VPC flow logs rằng BuyStock RESTful web service gọi CheckFunds RESTful web service qua internet thay vì qua VPC. Kiến trúc sư giải pháp phải triển khai giải pháp để các API giao tiếp qua VPC. Giải pháp nào đáp ứng các yêu cầu này với ÍT THAY ĐỔI CODE NHẤT?',
     optionsVi: {
-      A: 'Thêm header X-API-Key trong HTTP header cho authorization.',
+      A: 'Thêm header X-API-Key trong HTTP header để ủy quyền.',
       B: 'Dùng interface endpoint.',
       C: 'Dùng gateway endpoint.',
       D: 'Thêm Amazon Simple Queue Service (Amazon SQS) queue giữa hai REST APIs.',
@@ -246,12 +246,12 @@ const T = {
   },
   361: {
     questionVi:
-      'Một công ty host ứng dụng gaming multiplayer trên AWS. Công ty muốn ứng dụng đọc dữ liệu với sub-millisecond latency và chạy one-time queries trên historical data. Giải pháp nào đáp ứng với operational overhead THẤP NHẤT?',
+      'Một công ty host ứng dụng gaming multiplayer trên AWS. Công ty muốn ứng dụng đọc dữ liệu với độ trễ dưới một milli giây và chạy các truy vấn một lần trên dữ liệu lịch sử. Giải pháp nào đáp ứng các yêu cầu này với công sức vận hành THẤP NHẤT?',
     optionsVi: {
-      A: 'Dùng Amazon RDS cho dữ liệu truy cập thường xuyên. Chạy periodic custom script export dữ liệu sang Amazon S3 bucket.',
-      B: 'Lưu dữ liệu trực tiếp trong Amazon S3 bucket. Triển khai S3 Lifecycle policy chuyển dữ liệu cũ sang S3 Glacier Deep Archive. Chạy one-time queries bằng Amazon Athena.',
-      C: 'Dùng Amazon DynamoDB với DynamoDB Accelerator (DAX) cho dữ liệu truy cập thường xuyên. Export dữ liệu sang Amazon S3 bucket bằng DynamoDB table export. Chạy one-time queries bằng Amazon Athena.',
-      D: 'Dùng Amazon DynamoDB cho dữ liệu truy cập thường xuyên. Bật streaming sang Amazon Kinesis Data Streams. Dùng Amazon Kinesis Data Firehose đọc dữ liệu từ Kinesis Data Streams. Lưu records trong Amazon S3 bucket.',
+      A: 'Dùng Amazon RDS cho dữ liệu được truy cập thường xuyên. Chạy script tùy chỉnh định kỳ để export dữ liệu sang Amazon S3 bucket.',
+      B: 'Lưu dữ liệu trực tiếp trong Amazon S3 bucket. Triển khai S3 Lifecycle policy để chuyển dữ liệu cũ sang S3 Glacier Deep Archive để lưu trữ dài hạn. Chạy truy vấn một lần trên dữ liệu trong Amazon S3 bằng Amazon Athena.',
+      C: 'Dùng Amazon DynamoDB với DynamoDB Accelerator (DAX) cho dữ liệu được truy cập thường xuyên. Export dữ liệu sang Amazon S3 bucket bằng DynamoDB table export. Chạy truy vấn một lần trên dữ liệu trong Amazon S3 bằng Amazon Athena.',
+      D: 'Dùng Amazon DynamoDB cho dữ liệu được truy cập thường xuyên. Bật streaming tới Amazon Kinesis Data Streams. Dùng Amazon Kinesis Data Firehose để đọc dữ liệu từ Kinesis Data Streams. Lưu các bản ghi vào Amazon S3 bucket.',
     },
   },
 };
