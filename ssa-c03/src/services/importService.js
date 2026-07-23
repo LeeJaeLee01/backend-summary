@@ -256,11 +256,67 @@ async function getImportStatus(sourceFile) {
   return { job, questionsInDb };
 }
 
-async function listQuestions({ page = 1, limit = 20, source, importStatus } = {}) {
+async function listQuestions({
+  page = 1,
+  limit = 20,
+  source,
+  importStatus,
+  status,
+  bookmarked,
+  flagged,
+  q,
+} = {}) {
   const db = getDb();
   const filter = {};
   if (source) filter.source = source;
   if (importStatus) filter.importStatus = importStatus;
+
+  if (q) {
+    const asNumber = Number(q);
+    if (!Number.isNaN(asNumber) && String(asNumber) === q) {
+      filter.number = asNumber;
+    } else {
+      filter.$or = [
+        { title: { $regex: q, $options: 'i' } },
+        { 'question.en': { $regex: q, $options: 'i' } },
+      ];
+    }
+  }
+
+  const needsStateFilter =
+    Boolean(status) ||
+    bookmarked === true ||
+    bookmarked === 'true' ||
+    flagged === true ||
+    flagged === 'true';
+
+  if (needsStateFilter) {
+    const { getDefaultUserId } = require('./userService');
+    const userId = await getDefaultUserId();
+    const stateFilter = { userId, source: source || config.defaultSource };
+    if (status) stateFilter.status = status;
+    if (bookmarked === true || bookmarked === 'true') stateFilter.bookmarked = true;
+    if (flagged === true || flagged === 'true') stateFilter.flagged = true;
+
+    const states = await db
+      .collection('user_question_state')
+      .find(stateFilter)
+      .project({ questionNumber: 1 })
+      .toArray();
+    const numbers = states.map((s) => s.questionNumber);
+
+    if (numbers.length === 0) {
+      return { items: [], total: 0, page, limit };
+    }
+
+    if (typeof filter.number === 'number') {
+      if (!numbers.includes(filter.number)) {
+        return { items: [], total: 0, page, limit };
+      }
+    } else {
+      filter.number = { $in: numbers };
+    }
+  }
 
   const skip = (page - 1) * limit;
   const [items, total] = await Promise.all([
@@ -273,6 +329,28 @@ async function listQuestions({ page = 1, limit = 20, source, importStatus } = {}
       .toArray(),
     db.collection('questions').countDocuments(filter),
   ]);
+
+  try {
+    const { getDefaultUserId } = require('./userService');
+    const userId = await getDefaultUserId();
+    const numbers = items.map((i) => i.number);
+    const states = numbers.length
+      ? await db
+          .collection('user_question_state')
+          .find({
+            userId,
+            source: source || config.defaultSource,
+            questionNumber: { $in: numbers },
+          })
+          .toArray()
+      : [];
+    const byNumber = new Map(states.map((s) => [s.questionNumber, s]));
+    for (const item of items) {
+      item.userState = byNumber.get(item.number) || null;
+    }
+  } catch {
+    // ignore
+  }
 
   return { items, total, page, limit };
 }

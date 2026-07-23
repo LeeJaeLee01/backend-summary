@@ -2,3 +2,6 @@ node_modules/
 .env
 data/
 *.log
+.superpowers/
+web/node_modules/
+web/build/

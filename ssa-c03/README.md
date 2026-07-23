@@ -142,8 +142,8 @@ docker exec ssa-c03-mongo mongorestore --drop --gzip --archive=/tmp/restore.arch
 ## Chạy API
 
 ```bash
-npm run dev
-# http://localhost:3010
+yarn start
+# http://localhost:3030
 ```
 
 | Method | Path |
@@ -152,7 +152,45 @@ npm run dev
 | POST | `/import/one` |
 | POST | `/import/batch` |
 | POST | `/import/run-all` |
-| GET | `/questions/1` |
+| GET | `/questions` |
+| GET | `/questions/1?include=state,note` |
+| GET | `/me` |
+| PATCH | `/me/preferences` |
+| GET/PUT | `/notes/:number` |
+| GET/PATCH | `/progress/:number` |
+| POST | `/sessions` |
+| GET | `/sessions/:id` |
+| PATCH | `/sessions/:id/answer` |
+| POST | `/sessions/:id/reveal` |
+| POST | `/sessions/:id/finish` |
+
+---
+
+## Frontend (CRA + yarn)
+
+```bash
+# Terminal 1 — API
+cd ssa-c03
+yarn start
+# http://localhost:3030
+
+# Terminal 2 — FE
+cd ssa-c03/web
+yarn start
+# http://localhost:3001  → API http://localhost:3030
+```
+
+Tính năng: Practice / Study / Exam, song ngữ EN nổi + VI phụ, notes autosave, bookmark/flag, filters, stats.
+
+Điền giải thích đúng/sai cho mọi option:
+
+```bash
+yarn explain:fill-all
+yarn explain:status
+yarn db:backup
+```
+
+Spec: `docs/superpowers/specs/2026-07-23-ssa-c03-web-design.md`
 
 ---
 

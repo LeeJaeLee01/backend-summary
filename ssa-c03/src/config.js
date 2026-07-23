@@ -1,8 +1,13 @@
 require('dotenv').config();
 
 module.exports = {
-  port: Number(process.env.PORT) || 3010,
+  port: Number(process.env.PORT) || 3030,
   mongodbUri: process.env.MONGODB_URI || 'mongodb://localhost:27017/ssa_c03',
+  corsOrigin: process.env.CORS_ORIGIN || 'http://localhost:3001',
+  corsOrigins: (process.env.CORS_ORIGINS || 'http://localhost:3001')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean),
   sourceFile:
     process.env.SOURCE_FILE ||
     '../AWS Certified Solutions Architect Associate SAA-C03.pdf',
