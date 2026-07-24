@@ -4,12 +4,14 @@
 
 OOP (Object-Oriented Programming) có **4 tính chất cốt lõi**:
 
-| Tính chất | Tiếng Anh | Ý nghĩa |
-|-----------|-----------|---------|
-| **Đóng gói** | Encapsulation | Ẩn dữ liệu bên trong object, chỉ expose qua method public |
-| **Kế thừa** | Inheritance | Class con nhận thuộc tính/hành vi từ class cha |
-| **Đa hình** | Polymorphism | Cùng interface/method, hành vi khác nhau tùy object |
-| **Trừu tượng** | Abstraction | Ẩn chi tiết phức tạp, chỉ hiện chức năng cần thiết |
+
+| Tính chất      | Tiếng Anh     | Ý nghĩa                                                   |
+| -------------- | ------------- | --------------------------------------------------------- |
+| **Đóng gói**   | Encapsulation | Ẩn dữ liệu bên trong object, chỉ expose qua method public |
+| **Kế thừa**    | Inheritance   | Class con nhận thuộc tính/hành vi từ class cha            |
+| **Đa hình**    | Polymorphism  | Cùng interface/method, hành vi khác nhau tùy object       |
+| **Trừu tượng** | Abstraction   | Ẩn chi tiết phức tạp, chỉ hiện chức năng cần thiết        |
+
 
 ### 1. Đóng gói (Encapsulation)
 
@@ -71,13 +73,15 @@ function checkout(payment: Payment, amount: number) {
 
 **Phân biệt ghi đè (Override) và nạp chồng (Overload):**
 
-| | **Ghi đè (Override)** | **Nạp chồng (Overload)** |
-|---|----------------------|--------------------------|
-| **Xảy ra ở** | Quan hệ **kế thừa** — class con ↔ class cha | **Cùng một class** — nhiều method cùng tên |
-| **Chữ ký method** | **Giống hệt** tên + tham số | **Cùng tên**, **khác tham số** (số lượng/kiểu) |
-| **Mục đích** | Class con **thay đổi hành vi** method cha | Một tên method, **xử lý nhiều kiểu input** |
-| **Thời điểm** | **Runtime** — gọi method của object thực tế | **Compile-time** — compiler chọn method phù hợp |
-| **Liên quan đa hình** | **Đa hình runtime** (subtype polymorphism) | **Đa hình compile-time** |
+
+|                       | **Ghi đè (Override)**                       | **Nạp chồng (Overload)**                        |
+| --------------------- | ------------------------------------------- | ----------------------------------------------- |
+| **Xảy ra ở**          | Quan hệ **kế thừa** — class con ↔ class cha | **Cùng một class** — nhiều method cùng tên      |
+| **Chữ ký method**     | **Giống hệt** tên + tham số                 | **Cùng tên**, **khác tham số** (số lượng/kiểu)  |
+| **Mục đích**          | Class con **thay đổi hành vi** method cha   | Một tên method, **xử lý nhiều kiểu input**      |
+| **Thời điểm**         | **Runtime** — gọi method của object thực tế | **Compile-time** — compiler chọn method phù hợp |
+| **Liên quan đa hình** | **Đa hình runtime** (subtype polymorphism)  | **Đa hình compile-time**                        |
+
 
 **Ghi đè (Override):**
 
@@ -132,14 +136,16 @@ abstract class Notification {
 
 **Phân biệt `interface` và `abstract class`:**
 
-| | **Interface** | **Abstract class** |
-|---|---------------|-------------------|
-| **Bản chất** | **Hợp đồng** — khai báo method/property class phải có | **Class không hoàn chỉnh** — vừa có method trừu tượng, vừa có code thực thi |
-| **Implementation** | **Không** chứa body method (TS: trừ default trong một số case) | Có thể có **method đã implement sẵn** |
-| **Kế thừa** | Class **implements** nhiều interface | Class **extends** một abstract class (single inheritance) |
-| **Constructor** | **Không có** | **Có** constructor |
-| **Biến/field** | Chỉ khai báo kiểu (TS) — không khởi tạo state | Có thể có **property, state** |
-| **Khi nào dùng** | Định nghĩa **capability** — `Flyable`, `Payable` | Chia sẻ **logic chung** + bắt buộc override phần riêng |
+
+|                    | **Interface**                                                  | **Abstract class**                                                          |
+| ------------------ | -------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| **Bản chất**       | **Hợp đồng** — khai báo method/property class phải có          | **Class không hoàn chỉnh** — vừa có method trừu tượng, vừa có code thực thi |
+| **Implementation** | **Không** chứa body method (TS: trừ default trong một số case) | Có thể có **method đã implement sẵn**                                       |
+| **Kế thừa**        | Class **implements** nhiều interface                           | Class **extends** một abstract class (single inheritance)                   |
+| **Constructor**    | **Không có**                                                   | **Có** constructor                                                          |
+| **Biến/field**     | Chỉ khai báo kiểu (TS) — không khởi tạo state                  | Có thể có **property, state**                                               |
+| **Khi nào dùng**   | Định nghĩa **capability** — `Flyable`, `Payable`               | Chia sẻ **logic chung** + bắt buộc override phần riêng                      |
+
 
 **Interface:**
 
@@ -186,11 +192,13 @@ class Dog extends Animal {
 
 ## 2. Từ khóa `this` và `super`
 
-| | **`this`** | **`super`** |
-|---|-----------|-------------|
-| **Ý nghĩa** | Tham chiếu tới **object hiện tại** | Tham chiếu tới **class cha** |
-| **Dùng ở đâu** | Trong method, constructor, property của class | Trong class con (`extends`) |
-| **Mục đích** | Truy cập field/method của **chính instance đó** | Gọi constructor hoặc method **của cha** |
+
+|                | `**this`**                                      | `**super`**                             |
+| -------------- | ----------------------------------------------- | --------------------------------------- |
+| **Ý nghĩa**    | Tham chiếu tới **object hiện tại**              | Tham chiếu tới **class cha**            |
+| **Dùng ở đâu** | Trong method, constructor, property của class   | Trong class con (`extends`)             |
+| **Mục đích**   | Truy cập field/method của **chính instance đó** | Gọi constructor hoặc method **của cha** |
+
 
 ### `this`
 
@@ -254,7 +262,7 @@ class Dog extends Animal {
 - Trong constructor class con — **phải gọi `super()`** trước khi dùng `this`.
 - `super.method()` thường dùng khi **ghi đè (override)** nhưng vẫn muốn giữ logic cha.
 
-> **`this`** = "chính tôi" (instance hiện tại). **`super`** = "cha tôi" (class cha) — dùng khi kế thừa.
+> `**this`** = "chính tôi" (instance hiện tại). `**super`** = "cha tôi" (class cha) — dùng khi kế thừa.
 
 ## 3. Interview Questions (Easy → Hard)
 
@@ -265,6 +273,7 @@ Trả lời bằng **tiếng Anh**. Dưới mỗi câu có **ý chính (tiếng 
 **Q1.** What is Object-Oriented Programming (OOP)?
 
 > **Ý chính:**
+>
 > - Paradigm lập trình dựa trên **object** (data + behavior)
 > - Tổ chức code quanh **class / object**, không chỉ function thuần
 > - Mục tiêu: tái sử dụng, mở rộng, bảo trì dễ hơn
@@ -288,6 +297,7 @@ The four main principles are encapsulation, inheritance, polymorphism, and abstr
 **Q3.** What is a class? What is an object? How are they related?
 
 > **Ý chính:**
+>
 > - **Class** = blueprint / template (định nghĩa structure + behavior)
 > - **Object** = instance cụ thể tạo từ class (có state riêng)
 > - Quan hệ: class → nhiều object; object thuộc về một class
@@ -302,9 +312,10 @@ The four main principles are encapsulation, inheritance, polymorphism, and abstr
 
 A **class** is a blueprint that defines the structure and behavior of something. An **object** is a concrete instance created from that class, with its own state. One class can create many objects, and each object belongs to that class. For example, `class User` → `new User('Alice')`.
 
-**Q4.** What is  (đóng gói)? Why is it useful?
+**Q4.** What is **Encapsulation** (đóng gói)? Why is it useful?
 
 > **Ý chính:**
+>
 > - Gom data + method liên quan vào class
 > - Ẩn field (`private`), chỉ truy cập qua method/getter có kiểm soát
 > - **Lợi ích:** bảo vệ invariant(bất biến), giảm coupling, dễ thay đổi nội bộ mà không phá caller
@@ -317,10 +328,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 - **Useful:** protects invariants, reduces coupling, and lets you change internals without breaking callers.
 - Example: `BankAccount` — don't set `balance` directly; use `deposit`.
 
-
 **Q5.** What is the difference between `public`, `private`, and `protected`?
 
 > **Ý chính:**
+>
 > - **public** — ai cũng truy cập được
 > - **private** — chỉ trong class đó
 > - **protected** — class đó + class con (subclass)
@@ -328,11 +339,15 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
+- **public** — accessible from anywhere
+- **private** — accessible only inside that class
+- **protected** — accessible inside that class and its subclasses
+- Choose by the rule: expose the minimum necessary
 
 **Q6.** What is inheritance? Give a simple real-world example.
 
 > **Ý chính:**
+>
 > - Class con **extends** class cha → tái sử dụng + mở rộng
 > - Quan hệ **"is-a"** (Dog is an Animal)
 > - Ví dụ: `Animal` → `Dog` / `Cat`; hoặc `Employee` → `Manager`
@@ -340,23 +355,31 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
+- A subclass **extends** a parent class → reuse + extend behavior
+- Relationship: **"is-a"** (Dog is an Animal)
+- Examples: `Animal` → `Dog` / `Cat`; or `Employee` → `Manager`
+- Note: don't overuse inheritance — prefer **composition** when the relationship is not is-a
 
 **Q7.** What do `this` and `super` mean in a class?
 
 > **Ý chính:**
-> - **`this`** — tham chiếu instance hiện tại (field/method của chính object)
-> - **`super`** — tham chiếu class cha (gọi constructor/method cha)
+>
+> - `**this`** — tham chiếu instance hiện tại (field/method của chính object)
+> - `**super`** — tham chiếu class cha (gọi constructor/method cha)
 > - Constructor con: phải `super(...)` trước khi dùng `this`
 > - Override: `super.method()` giữ logic cha rồi mở rộng
 >
 > **Your answer:**
 
-
+- `**this`** — reference to the current instance (its own fields/methods)
+- `**super`** — reference to the parent class (call parent constructor/methods)
+- In a child constructor: call `super(...)` before using `this`
+- When overriding: use `super.method()` to keep the parent logic, then extend it
 
 **Q8.** What is a constructor? When is it called?
 
 > **Ý chính:**
+>
 > - Method đặc biệt khởi tạo object (set initial state)
 > - Gọi **một lần** khi `new Class(...)`
 > - Có thể overload (nhiều chữ ký) tùy ngôn ngữ
@@ -364,13 +387,17 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
+- A special method that initializes an object (sets its initial state)
+- Called **once** when you use `new Class(...)`
+- Can be overloaded (multiple signatures), depending on the language
+- A child class usually calls `super(...)` to initialize the parent part
 
 ### Medium
 
 **Q9.** What is polymorphism? Explain with an example.
 
 > **Ý chính:**
+>
 > - Cùng type/interface, hành vi khác nhau tùy object thật
 > - Thường qua override / implement interface
 > - Ví dụ: `Payment.pay()` — CreditCard vs PayPal
@@ -378,11 +405,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q10.** What is the difference between method overriding and method overloading?
 
 > **Ý chính:**
+>
 > - **Override:** class con ghi đè method cha — **cùng chữ ký**, runtime
 > - **Overload:** cùng class, **cùng tên, khác tham số** — compile-time
 > - Override → subtype polymorphism; Overload → chọn method theo signature
@@ -390,11 +416,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q11.** What is abstraction? How is it different from encapsulation?
 
 > **Ý chính:**
+>
 > - **Abstraction** — ẩn complexity, chỉ expose "làm gì" (interface/abstract)
 > - **Encapsulation** — ẩn & bảo vệ data/implementation bên trong object
 > - Abstraction = mức thiết kế / contract; Encapsulation = cơ chế bảo vệ chi tiết
@@ -402,11 +427,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q12.** What is the difference between an interface and an abstract class? When would you use each?
 
 > **Ý chính:**
+>
 > - **Interface** = contract thuần (capability), implement nhiều cái được
 > - **Abstract class** = khung + có thể có code/state chung, thường single inheritance
 > - Dùng interface khi chỉ cần hành vi; abstract khi cần share logic
@@ -414,11 +438,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q13.** What is the difference between composition and inheritance? Which one do you prefer and why?
 
 > **Ý chính:**
+>
 > - **Inheritance** = is-a (kế thừa hierarchy)
 > - **Composition** = has-a (object chứa object khác)
 > - Composition linh hoạt hơn, giảm coupling hierarchy sâu
@@ -426,11 +449,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q14.** What is coupling and cohesion in OOP? Why do they matter?
 
 > **Ý chính:**
+>
 > - **Coupling** — mức phụ thuộc giữa module/class (thấp = tốt)
 > - **Cohesion** — mức liên quan của thành phần trong một class (cao = tốt)
 > - Mục tiêu: **low coupling, high cohesion**
@@ -438,11 +460,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q15.** Can you explain the SOLID principles? Give a short explanation of each.
 
 > **Ý chính:**
+>
 > - **S** — Single Responsibility: một class một lý do thay đổi
 > - **O** — Open/Closed: mở để mở rộng, đóng để sửa
 > - **L** — Liskov Substitution: subclass thay thế base an toàn
@@ -451,11 +472,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q16.** What is the Liskov Substitution Principle (LSP)? Give an example of a violation.
 
 > **Ý chính:**
+>
 > - Object subclass phải thay thế được base type mà không phá kỳ vọng
 > - Vi phạm classic: `Square extends Rectangle` (set width/height phá invariant)
 > - Hoặc subclass throw unexpected / làm yếu pre/post-condition
@@ -463,11 +483,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q17.** What is the difference between association, aggregation, and composition?
 
 > **Ý chính:**
+>
 > - **Association** — quan hệ dùng nhau (A dùng B), lifetime độc lập
 > - **Aggregation** — has-a yếu; part có thể sống độc lập (Team–Player)
 > - **Composition** — has-a mạnh; part chết theo whole (House–Room)
@@ -475,11 +494,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q18.** What is multiple inheritance? Does your language support it? How do you work around it if not?
 
 > **Ý chính:**
+>
 > - Một class kế thừa nhiều class cha cùng lúc
 > - Java/C#/TS: **không** MI class; C++ có
 > - Workaround: implement nhiều **interface** + composition
@@ -487,13 +505,12 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 ### Hard
 
 **Q19.** Explain runtime polymorphism vs compile-time polymorphism. How does each work under the hood?
 
 > **Ý chính:**
+>
 > - **Runtime** — override / virtual dispatch; chọn method theo object thật lúc chạy (vtable)
 > - **Compile-time** — overload / generics; compiler chọn theo signature
 > - Runtime linh hoạt hơn; compile-time sớm, type-safe hơn
@@ -501,11 +518,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q20.** What is the Diamond Problem in multiple inheritance? How do languages like Java, C#, or TypeScript avoid it?
 
 > **Ý chính:**
+>
 > - Hai nhánh cha cùng gốc → class cháu nhận method/field trùng, mơ hồ
 > - Java/C#/TS: chỉ kế thừa **một** class → tránh diamond class
 > - Cho phép nhiều interface; conflict method phải resolve rõ
@@ -513,11 +529,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q21.** When would you choose composition over inheritance in a real production system? Walk through a design decision.
 
 > **Ý chính:**
+>
 > - Khi quan hệ là **has-a / can-do**, không phải is-a ổn định
 > - Hierarchy sâu, thay đổi cha phá nhiều con → chọn composition
 > - Ví dụ: `Order` có `PaymentProcessor`, `Notifier` — inject behavior
@@ -525,11 +540,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q22.** How do you design for the Open/Closed Principle without over-engineering?
 
 > **Ý chính:**
+>
 > - Mở rộng qua interface/plugin/strategy, không sửa core mỗi loại mới
 > - Chỉ abstraction hóa **điểm thay đổi thật sự** (thấy pattern lặp)
 > - Tránh interface/factory cho mọi thứ sớm (YAGNI)
@@ -537,11 +551,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q23.** Explain Dependency Inversion. How does it relate to Dependency Injection?
 
 > **Ý chính:**
+>
 > - **DIP:** high-level không phụ thuộc low-level concrete; cả hai phụ thuộc abstraction
 > - **DI:** kỹ thuật inject dependency từ ngoài (constructor/setter)
 > - DI giúp **thực thi** DIP (truyền interface implementation)
@@ -549,11 +562,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q24.** What are value objects vs entities (from Domain-Driven Design)? How does OOP modeling differ for each?
 
 > **Ý chính:**
+>
 > - **Entity** — có identity (id); bằng nhau theo id, state có thể đổi
 > - **Value Object** — không identity; bằng nhau theo **giá trị**, thường immutable
 > - Entity: User, Order; Value Object: Money, Email, Address
@@ -561,11 +573,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q25.** How would you model a payment system (credit card, PayPal, bank transfer) using OOP? Discuss trade-offs of your design.
 
 > **Ý chính:**
+>
 > - `PaymentMethod` / `PaymentGateway` interface + `pay()` / `refund()`
 > - Concrete: CreditCard, PayPal, BankTransfer
 > - Service checkout phụ thuộc interface (DIP + Strategy)
@@ -573,11 +584,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q26.** What is the Law of Demeter (principle of least knowledge)? Why can "train wreck" method chains be a smell?
 
 > **Ý chính:**
+>
 > - Object chỉ nói chuyện với "bạn gần" (friends), không đào sâu chain
 > - Smell: `a.getB().getC().do()` — coupling chặt, biết cấu trúc nội bộ
 > - Phá encapsulation; thay đổi middle object dễ vỡ caller
@@ -585,11 +595,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q27.** How do immutability and OOP work together? When would you prefer immutable objects?
 
 > **Ý chính:**
+>
 > - Object không đổi state sau tạo; thay đổi = tạo bản mới
 > - Kết hợp tốt với Value Object, thread-safety, dễ suy luận
 > - Prefer khi: shared data, concurrent, domain value (Money, DateRange)
@@ -597,11 +606,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q28.** In TypeScript/JavaScript, how does `this` binding differ between regular methods and arrow functions? How does that affect OOP design?
 
 > **Ý chính:**
+>
 > - Method thường: `this` phụ thuộc **cách gọi** (có thể mất khi pass callback)
 > - Arrow: `this` lexical — giữ `this` của class/scope ngoài
 > - Callback/event handler: arrow hoặc `.bind` để không mất context
@@ -609,11 +617,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q29.** How would you refactor a large "God class" that violates Single Responsibility? Describe your approach step by step.
 
 > **Ý chính:**
+>
 > - Xác định nhiều lý do thay đổi / nhóm trách nhiệm
 > - Tách dần: extract class/service theo domain (validate, persist, notify…)
 > - Giữ facade mỏng nếu cần API cũ; inject dependency mới
@@ -621,11 +628,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q30.** Compare OOP and functional programming for the same business feature. When is OOP the better fit, and when is it not?
 
 > **Ý chính:**
+>
 > - OOP: model domain bằng object, state + behavior, polymorphism
 > - FP: function thuần, immutable data, compose pipeline
 > - OOP hợp: domain phong phú, nhiều behavior theo type, stateful lifecycle
@@ -633,11 +639,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q31.** What is the difference between shallow copy and deep copy of an object? When does each matter?
 
 > **Ý chính:**
+>
 > - **Shallow** — copy object ngoài; nested vẫn share reference
 > - **Deep** — copy đệ quy toàn bộ graph lồng nhau
 > - Shallow đủ khi nested immutable / không mutate chung
@@ -645,11 +650,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q32.** What is a static method or static property? When should you use them, and when should you avoid them?
 
 > **Ý chính:**
+>
 > - Thuộc về **class**, không cần instance; không dùng state instance
 > - Dùng: util thuần, factory, constant dùng chung
 > - Tránh: logic cần polymorphism / phụ thuộc state / khó mock test
@@ -657,11 +661,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q33.** Explain the Template Method and Strategy patterns. How are they similar, and how do they differ in OOP design?
 
 > **Ý chính:**
+>
 > - Cả hai: tách phần cố định vs phần thay đổi của thuật toán
 > - **Template Method** — inheritance: base định skeleton, subclass override bước
 > - **Strategy** — composition: inject algorithm object qua interface
@@ -669,11 +672,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q34.** What is object identity vs object equality? How would you implement `equals` / value comparison correctly?
 
 > **Ý chính:**
+>
 > - **Identity** — cùng instance (cùng reference / id)
 > - **Equality** — cùng giá trị (field so sánh)
 > - Entity: so sánh theo id; Value Object: so sánh theo field
@@ -681,11 +683,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q35.** How do you handle shared mutable state across objects safely (concurrency / multi-threading)? What OOP techniques help?
 
 > **Ý chính:**
+>
 > - Giảm shared mutable state; ưu tiên immutable / message passing
 > - Đồng bộ: lock/mutex, concurrent collection (nếu bắt buộc share)
 > - Encapsulation giúp ẩn sync bên trong class
@@ -693,11 +694,10 @@ A **class** is a blueprint that defines the structure and behavior of something.
 >
 > **Your answer:**
 
-
-
 **Q36.** Design an extensible notification system (email, SMS, push) that can add new channels without changing existing code. Walk through classes, interfaces, and SOLID trade-offs.
 
 > **Ý chính:**
+>
 > - `Notifier` / `NotificationChannel` interface: `send(message)`
 > - Concrete: EmailChannel, SmsChannel, PushChannel
 > - `NotificationService` phụ thuộc list/interface (OCP + DIP)
