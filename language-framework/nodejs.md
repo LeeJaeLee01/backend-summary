@@ -1,6 +1,6 @@
 # Node.js
 
-## 1. Node.js là gì?
+## 1. Node.js là gì? 
 
 **Node.js** là môi trường **runtime mã nguồn mở** cho phép chạy **JavaScript bên ngoài trình duyệt**, dùng để xây dựng backend, API, và ứng dụng real-time.
 
@@ -10,7 +10,17 @@
 
 > Node.js không phải ngôn ngữ mới — nó là nền tảng runtime để chạy JavaScript phía server.
 
-## 2. Cơ chế hoạt động của Node.js
+Eng-sub:
+
+## 1. What is NodeJS?
+
+NodeJS is an opensource runtime environment that allows you to run JS outside the browser, NodeJS used to build BEs, APIs and real-time applications
+
+- NodeJS uses **V8 Engine** (from Chrome) to compile and execute JS.
+- NodeJS handles asynchronous work via the Event Loop and Non-blocking I/O — suitable for workloads with many concurrent request 
+- **Single-threaded** - a main thread handles JS
+
+## 2. Cơ chế hoạt động của Node.js 
 
 Node.js gồm 3 thành phần chính: **V8 Engine**, **libuv**, và **Event Loop**.
 
@@ -31,6 +41,38 @@ Request → đăng ký I/O (non-blocking) → tiếp tục xử lý request khá
 
 > Tóm lại: Node.js dùng một luồng chính chạy JS, ủy thác I/O cho libuv, rồi Event Loop điều phối callback khi có kết quả — phù hợp tác vụ I/O-bound, kém hơn với tác vụ CPU-intensive.
 
+Eng-sub:
+
+## 2. How does Node.js work? (Explain how Node.js works under the hood)
+
+Node.js has three main components: **V8 Engine**, **libuv**, and **Event Loop**.
+
+1. **V8 Engine** — compiles JS into machine code and executes it on the main thread (single-threaded)
+2. **libuv** — a C++ libarary that handles async I/O (file reads, DB, network) via a **Thread Pool**, without blocking the main thread
+3. **Event Loop** - continously checks the queue; when I/O completes,  it puts the callback and executes on the main thread
+
+**Luồng xử lý một request:**
+
+```
+Request → đăng ký I/O (non-blocking) → tiếp tục xử lý request khác
+                ↓
+         I/O hoàn tất → callback vào Event Loop → thực thi → trả response
+```
+
+- **Non-blocking I/O**: không chờ I/O xong mới làm việc khác — tận dụng thời gian chờ để xử lý request khác.
+- **Event-driven**: mọi thao tác dựa trên sự kiện và callback (hoặc Promise/`async-await`).
+
+**The thread handle a request:**
+
+```
+Request → Register I/O (non-blocking) → continue handling other requests
+                ↓
+         I/O completes  → callback enters the Event Loop → execute → return response
+```
+
+- **Non-blocking I/O**: It doesn't wait for I/O to complete before doing other work — it uses the waiting time to handle other requests
+- **Event-driven**: all actions based on event and callback (hoặc Promise/`async-await`).
+
 ## 3. Node.js đơn luồng, tại sao xử lý được nhiều request?
 
 **Đơn luồng** chỉ áp dụng cho luồng chạy **JavaScript** — không có nghĩa là chỉ xử lý được một request tại một thời điểm.
@@ -47,6 +89,27 @@ Node.js (single-thread):  Request 1 gửi DB → nhận Request 2, 3... → DB t
 ```
 
 > Tóm lại: Node.js xử lý nhiều request nhờ **bất đồng bộ + Event Loop** — tận dụng thời gian chờ I/O để phục vụ request khác. Lưu ý: tác vụ **CPU nặng** vẫn block luồng chính, làm chậm toàn bộ request.
+
+Eng-sub:
+
+## 3. Node.js is single-thread, why can it handle many requests (Why can NodeJS handle many requests if it is single threaded) 
+
+**Single-threaded** only applies to the thread that runs JS - it does not mean NodeJS can handle only one request at a time 
+
+Reasons it can handle many requests:
+
+1. **Non-blocking I/O** — when calling the DB, reading a file, calling an API, NodeJS doesn't wait for the result, it moves on to accept other requests. I/O is offloaded to the OS / libuv (thread pool).
+2. **Event Loop** — When I/O finishes, the callback is pushed into the queue and executed one by one on the main thread. One thread can manage thousands of connections because the sever spends most of its time waiting for I/O, not burning CPU
+3. **Compared to the blocking model** (one thread per request) - Node.js doesn't create a new thread for each request, So it avoids high memory use and context-switching cost.
+
+```
+Blocking (multi-thread): the first request is waiting for DB -> first thread is blocked
+Node.js (single-thread): the first request is sending to DB -> Receiving request 2, 3... -> DB return -> callback
+```
+
+> Tóm lại: Node.js xử lý nhiều request nhờ **bất đồng bộ + Event Loop** — tận dụng thời gian chờ I/O để phục vụ request khác. Lưu ý: tác vụ **CPU nặng** vẫn block luồng chính, làm chậm toàn bộ request.
+
+> Summary: Node.js can handles many request by (async + event loop) - It makes use of time spent waiting for I/O to process other request. Keep in mind the CPU intensive work still blocks the main thread and slows down every request
 
 ## 4. Phân biệt `let`, `var`, `const`
 
@@ -78,6 +141,10 @@ user = {};       // Error
 ```
 
 > Nên dùng **`const` mặc định**, `let` khi cần gán lại, **tránh `var`** (dễ gây bug do function scope và hoisting).
+
+> **Tóm lại:** `var` là function scope, hoist thành `undefined`, cho phép gán lại và khai báo lại nên dễ bug; `let` và `const` là block scope, cũng hoist nhưng nằm trong TDZ nên không dùng trước khi khai báo. `let` gán lại được còn `const` thì không — với object/array `const` chỉ khóa reference, vẫn sửa được nội dung. Thực tế: mặc định `const`, cần gán lại thì `let`, tránh `var`.
+
+> Summary: `var` is function-scoped, hoisted as `undefined`, and allows both reassignment and redeclaration - so it easily causes bugs. `Let` allows reassignment but `const` is doesn't - with objects/arrays `const` only locks the reference, the content can still be updated. In fact, defauto to `const`, use `let` when you need reassignment, and avoid `var`.
 
 ## 5. Phân biệt `async/await` và `Promise`
 
@@ -119,6 +186,10 @@ async function getOrders(id) {
 - `async/await` bên dưới vẫn là Promise — có thể mix: `await somePromise` hoặc `asyncFn().then(...)`.
 
 > **Promise** là cơ chế xử lý bất đồng bộ; **async/await** là cách viết gọn, dễ đọc hơn trên Promise. Thực tế nên dùng **async/await** cho flow tuần tự, **Promise.all()** khi chạy song song.
+
+> **Tóm lại:** Promise là object đại diện kết quả tương lai của tác vụ async (`.then` / `.catch`); async/await chỉ là cú pháp sugar trên Promise giúp code đọc như đồng bộ, hàm `async` luôn trả về Promise, lỗi bắt bằng `try/catch`. `await` tạm dừng hàm async đến khi Promise xong nhưng không block Event Loop. Flow tuần tự dùng async/await; chạy song song dùng `Promise.all()`.
+
+> Summary: a Promise is an object that represents the future result of an async task (.then / .catch). async/await is just syntactic sugar over Promises that makes code read like synchronous code; an `async` function always returns a Promise, and errors are handled with try/catch. `await` pauses async function until the Promise settles, but it doesnot block the Event loop. Use async/await for sequential flow, use Promise.all() for parallel work
 
 ## 6. Phân biệt `Promise.all`, `Promise.race`, `Promise.allSettled`
 
